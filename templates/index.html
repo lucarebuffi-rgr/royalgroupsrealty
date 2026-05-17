@@ -587,8 +587,8 @@
 <script>
   // ── FAQ DATA ──
   const faqs = [
-    { q: "What can Royal Groups Realty do for you?", a: "Luca specializes in purchasing homes that need updates or have deferred maintenance for fix-and-flips or rental properties. You deal with the actual end buyer directly — not a middleman. We help homeowners sell quickly and efficiently, regardless of the condition." },
-    { q: "How does the process work?", a: "1. Contact us via the form or phone. 2. We evaluate your property. 3. You receive a no-obligation cash offer — usually the same day. 4. If you accept, we handle all paperwork. 5. We close in 7–28 days through a trusted 3rd-party title company. You don't even need to be present at closing!" },
+    { q: "What can Royal Groups Realty do for you?", a: "We specialize in purchasing homes that need updates or have deferred maintenance for fix-and-flips or rental properties. You deal with the actual end buyer directly — not a middleman. We help homeowners sell quickly and efficiently, regardless of the condition." },
+    { q: "How does the process work?", a: "1. Contact us via the form or phone.<br>2. We evaluate your property.<br>3. You receive a no-obligation cash offer — usually the same day.<br>4. If you accept, we handle all paperwork.<br>5. We close in 7–28 days through a trusted 3rd-party title company. You don't even need to be present at closing!" },
     { q: "Can I sell my house in pre-foreclosure?", a: "Yes. We specialize in helping homeowners in challenging situations, including pre-foreclosure. Selling quickly can help you avoid foreclosure and protect your credit." },
     { q: "Do I need to make repairs before selling?", a: "No. We buy properties as-is, in any condition. No costly repairs or renovations needed." },
     { q: "How do you determine the cash offer?", a: "We consider the property's condition, location, market trends, and comparable sales. We openly share all this data with you so you can make the best decision for your home." },
@@ -605,7 +605,7 @@
         <button class="faq-q" onclick="toggleFaq(${i})">
           ${f.q} <span>+</span>
         </button>
-        <div class="faq-a" id="faq-${i}"><p>${f.a}</p></div>
+        <div class="faq-a" id="faq-${i}"><p>${f.a.replace(/\\n/g, '<br>')}</p></div>
       </div>`;
   });
 
