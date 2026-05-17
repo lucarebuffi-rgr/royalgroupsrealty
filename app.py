@@ -1,9 +1,9 @@
 import requests
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 
 app = Flask(__name__)
 
-# ── Paste your Make.com webhook URL here ──
+# ── Make.com webhook URL ──
 MAKE_WEBHOOK = "https://hook.us2.make.com/xa7uddev8m89ceqd97d9iurxyquirtn7"
 
 @app.route("/")
@@ -17,6 +17,10 @@ def privacy():
 @app.route("/terms")
 def terms():
     return render_template("terms.html")
+
+@app.route("/sitemap.xml")
+def sitemap():
+    return send_from_directory('.', 'sitemap.xml')
 
 @app.route("/submit", methods=["POST"])
 def submit():
