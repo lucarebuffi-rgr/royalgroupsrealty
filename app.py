@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 # ── Paste your Make.com webhook URL here ──
-MAKE_WEBHOOK = https://hook.us2.make.com/xa7uddev8m89ceqd97d9iurxyquirtn7
+MAKE_WEBHOOK = "https://hook.us2.make.com/xa7uddev8m89ceqd97d9iurxyquirtn7"
 
 @app.route("/")
 def index():
