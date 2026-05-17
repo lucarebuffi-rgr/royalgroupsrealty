@@ -10,6 +10,14 @@ MAKE_WEBHOOK = "https://hook.us2.make.com/xa7uddev8m89ceqd97d9iurxyquirtn7"
 def index():
     return render_template("index.html")
 
+@app.route("/privacy")
+def privacy():
+    return render_template("privacy.html")
+
+@app.route("/terms")
+def terms():
+    return render_template("terms.html")
+
 @app.route("/submit", methods=["POST"])
 def submit():
     data    = request.get_json()
