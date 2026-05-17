@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>That Investor Guy – We Buy Houses Fast in Texas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1b2a;
+      --gold: #c8932a;
+      --gold-light: #e8b84b;
+      --cream: #faf8f3;
+      --white: #ffffff;
+      --gray: #6b7280;
+      --light-gray: #f3f4f6;
+      --red: #c0392b;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--navy);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+    }
+    .topbar a { color: var(--gold-light); text-decoration: none; font-weight: 600; }
+
+    /* ── HEADER / NAV ── */
+    header {
+      background: var(--white);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: var(--navy);
+      text-decoration: none;
+      line-height: 1.2;
+    }
+    .logo span { color: var(--gold); }
+    nav ul { list-style: none; display: flex; gap: 28px; }
+    nav ul a {
+      text-decoration: none;
+      color: var(--navy);
+      font-weight: 500;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--white) !important;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 25px; height: 2px; background: var(--navy); display: block; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a3050 60%, #0d2035 100%);
+      color: var(--white);
+      padding: 80px 24px 60px;
+    }
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .hero-text h1 em { color: var(--gold-light); font-style: normal; }
+    .hero-text p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 28px;
+    }
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .badge {
+      background: rgba(200,147,42,0.2);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── LEAD FORM ── */
+    .lead-form {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 36px 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+    .lead-form h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--navy);
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+    }
+    .lead-form p { color: var(--gray); font-size: 0.88rem; margin-bottom: 20px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group input {
+      width: 100%;
+      border: 1.5px solid #d1d5db;
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      font-family: 'DM Sans', sans-serif;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus { border-color: var(--gold); }
+    .consent {
+      font-size: 0.75rem;
+      color: var(--gray);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .consent label { display: flex; gap: 8px; margin-bottom: 10px; cursor: pointer; }
+    .consent a { color: var(--gold); }
+    .btn-submit {
+      width: 100%;
+      background: var(--gold);
+      color: var(--white);
+      border: none;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--gold-light); color: var(--navy); }
+    #form-msg { margin-top: 12px; font-size: 0.9rem; font-weight: 600; text-align: center; }
+    #form-msg.success { color: #16a34a; }
+    #form-msg.error { color: var(--red); }
+
+    /* ── SECTIONS ── */
+    section { padding: 72px 24px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .section-sub { color: var(--gray); font-size: 1rem; max-width: 580px; }
+
+    /* ── HOW IT WORKS ── */
+    .how-bg { background: var(--cream); }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+      margin-top: 48px;
+    }
+    .step {
+      text-align: center;
+      padding: 36px 28px;
+      background: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+    }
+    .step:hover { transform: translateY(-4px); }
+    .step-num {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--white);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .step h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .step p { font-size: 0.92rem; color: var(--gray); }
+
+    /* ── WHY US ── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-top: 48px;
+    }
+    .why-img img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      max-height: 380px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+    }
+    .why-features { display: grid; gap: 24px; }
+    .feature { display: flex; gap: 18px; align-items: flex-start; }
+    .feature-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 8px;
+      background: rgba(200,147,42,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .feature h4 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .feature p { font-size: 0.9rem; color: var(--gray); }
+
+    /* ── COMPARISON ── */
+    .compare-bg { background: var(--navy); color: var(--white); }
+    .compare-bg .section-title { color: var(--white); }
+    .compare-bg .section-label { color: var(--gold-light); }
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .compare-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 32px 28px;
+    }
+    .compare-card.highlight {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+    .compare-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+    .compare-card.highlight h3 { border-color: rgba(255,255,255,0.4); }
+    .compare-card ul { list-style: none; display: grid; gap: 12px; }
+    .compare-card li { display: flex; gap: 10px; font-size: 0.9rem; align-items: flex-start; }
+    .compare-card li .icon { font-size: 1rem; flex-shrink: 0; }
+
+    /* ── FAQ ── */
+    .faq-list { margin-top: 48px; display: grid; gap: 12px; }
+    .faq-item {
+      border: 1.5px solid #e5e7eb;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 18px 20px;
+      text-align: left;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.97rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--navy);
+    }
+    .faq-q span { font-size: 1.2rem; color: var(--gold); transition: transform 0.3s; }
+    .faq-q.open span { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.2s;
+      background: var(--cream);
+    }
+    .faq-a.open { max-height: 400px; padding: 0 20px 18px; }
+    .faq-a p { font-size: 0.93rem; color: var(--gray); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.6);
+      padding: 60px 24px 30px;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+    .footer-brand .logo { color: var(--white); display: block; margin-bottom: 12px; }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.7; }
+    footer h4 {
+      color: var(--white);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+    footer ul { list-style: none; display: grid; gap: 10px; }
+    footer ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.9rem; }
+    footer ul a:hover { color: var(--gold-light); }
+    footer .phone { color: var(--gold-light); font-size: 1.15rem; font-weight: 600; }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 24px;
+      text-align: center;
+      font-size: 0.83rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      nav ul { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 580px) {
+      .footer-inner { grid-template-columns: 1fr; }
+      .hero { padding: 48px 20px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  ⭐ Trusted Home Buyer Since 2012 &nbsp;|&nbsp; Call or Text: <a href="tel:2142714722">214-271-4722</a>
+</div>
+
+<!-- HEADER -->
+<header>
+  <nav>
+    <a href="/" class="logo">That <span>Investor</span> Guy</a>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#why-us">About Us</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#offer" class="nav-cta">Get an Offer</a></li>
+    </ul>
+    <div class="hamburger" onclick="this.classList.toggle('active')">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="offer">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>Need To Sell Your House <em>Fast?</em></h1>
+      <p>We buy houses in any condition — no repairs, no fees, no commissions. Get a fair cash offer within 24 hours.</p>
+      <div class="badges">
+        <span class="badge">★ Guaranteed Close</span>
+        <span class="badge">★ 14-Day Free Stay</span>
+        <span class="badge">★ No Repairs</span>
+        <span class="badge">★ No Fees</span>
+      </div>
+    </div>
+
+    <div class="lead-form">
+      <h2>Get My Cash Offer</h2>
+      <p>Fill out the form below — we'll respond within 24 hours.</p>
+      <div class="form-group"><input type="text" id="name" placeholder="Full Name" /></div>
+      <div class="form-group"><input type="tel" id="phone" placeholder="Phone Number" /></div>
+      <div class="form-group"><input type="text" id="address" placeholder="Property Address" /></div>
+      <div class="form-group"><input type="email" id="email" placeholder="Email Address" /></div>
+      <div class="consent">
+        <label><input type="checkbox" id="terms" /> I agree to the <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>.</label>
+        <label><input type="checkbox" id="sms" /> I agree to receive communications from Nathan Oddo – That Investor Guy via text, phone, and email. Msg &amp; data rates may apply. Reply STOP to opt out.</label>
+      </div>
+      <button class="btn-submit" onclick="submitForm()">Get My Offer →</button>
+      <div id="form-msg"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-bg" id="how-it-works">
+  <div class="section-inner">
+    <div class="section-label">Simple Process</div>
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-sub">Three easy steps to sell your home fast — no stress, no surprises.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Submit Your Property</h3>
+        <p>Fill out our quick form with your property details. We review every submission and make a fair, no-obligation cash offer — or just call us!</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Receive Your Cash Offer</h3>
+        <p>Within 24 hours, you'll receive a competitive cash offer. No hidden fees, no commissions, no obligations — just a fair price.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Close on Your Schedule</h3>
+        <p>Choose a closing date that works for you. We handle all the paperwork, making the process smooth and stress-free.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why-us">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div class="why-img">
+        <!-- Replace with your actual image -->
+        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80" alt="House we buy" />
+      </div>
+      <div>
+        <div class="section-label">Why Choose Us</div>
+        <h2 class="section-title">Your Trusted Solution for a Quick, Stress-Free Sale</h2>
+        <p class="section-sub" style="margin-bottom:32px;">We're a small business — not a huge corporate monster. With 15 years and over 1,100 closings, Nathan helps you net more money for your property.</p>
+        <div class="why-features">
+          <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <div>
+              <h4>Fast Closings</h4>
+              <p>Cash offer within 24 hours. Close in as little as 7–28 days, saving you time and stress.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🏠</div>
+            <div>
+              <h4>Sell As-Is</h4>
+              <p>No repairs or cleaning needed. We buy homes in any condition — no costly renovations.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">💰</div>
+            <div>
+              <h4>No Fees or Commissions</h4>
+              <p>Avoid agent fees, commissions, and closing costs. Keep more of your home's value.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="compare-bg">
+  <div class="section-inner">
+    <div class="section-label">The Better Option</div>
+    <h2 class="section-title" style="color:white;">Find Out Why Selling To Us Makes Sense</h2>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <h3>Traditional House Sale</h3>
+        <ul>
+          <li><span class="icon">❌</span> Uncertain closing, no guarantees</li>
+          <li><span class="icon">❌</span> Pay 6% in agent commissions + fees</li>
+          <li><span class="icon">❌</span> Long timeline — often 3+ months</li>
+          <li><span class="icon">❌</span> Repairs, renovations &amp; upgrades required</li>
+        </ul>
+      </div>
+      <div class="compare-card highlight">
+        <h3>That Investor Guy ⭐</h3>
+        <ul>
+          <li><span class="icon">✅</span> Quick closing guaranteed</li>
+          <li><span class="icon">✅</span> No finance or appraisal contingencies</li>
+          <li><span class="icon">✅</span> No repairs or renovations needed</li>
+          <li><span class="icon">✅</span> No commissions or fees</li>
+          <li><span class="icon">✅</span> Trusted, reliable real estate brand</li>
+          <li><span class="icon">✅</span> Little to no inspection period needed</li>
+        </ul>
+      </div>
+      <div class="compare-card">
+        <h3>Real Estate Investors</h3>
+        <ul>
+          <li><span class="icon">❌</span> Small-scale operators, not a trusted brand</li>
+          <li><span class="icon">❌</span> Low transparency</li>
+          <li><span class="icon">❌</span> Limited funding for cash offers</li>
+          <li><span class="icon">❌</span> Limited resources &amp; required repairs</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="section-label">Have Questions?</div>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <!-- FAQ items generated by JS below -->
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="logo">That <span style="color:var(--gold)">Investor</span> Guy</a>
+      <p>Nathan Oddo offers a seamless, stress-free selling experience with easy-to-understand cash offers, no fees, and a flexible closing. 15 years experience. 1,100+ closings.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#why-us">About Us</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Get In Touch</h4>
+      <p class="phone"><a href="tel:2142714722" style="color:inherit;text-decoration:none;">📞 214-271-4722</a></p>
+      <p style="margin-top:12px;font-size:0.88rem;">We serve homeowners across the DFW area and all of Texas.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 Nathan Oddo – That Investor Guy. All Rights Reserved.
+  </div>
+</footer>
+
+<script>
+  // ── FAQ DATA ──
+  const faqs = [
+    { q: "What can That Investor Guy do for you?", a: "Nathan specializes in purchasing homes that need updates or have deferred maintenance for fix-and-flips or rental properties. You deal with the actual end buyer directly — not a middleman. We help homeowners sell quickly and efficiently, regardless of the condition." },
+    { q: "How does the process work?", a: "1. Contact us via the form or phone. 2. We evaluate your property. 3. You receive a no-obligation cash offer — usually the same day. 4. If you accept, we handle all paperwork. 5. We close in 7–28 days through a trusted 3rd-party title company. You don't even need to be present at closing!" },
+    { q: "Can I sell my house in pre-foreclosure?", a: "Yes. We specialize in helping homeowners in challenging situations, including pre-foreclosure. Selling quickly can help you avoid foreclosure and protect your credit." },
+    { q: "Do I need to make repairs before selling?", a: "No. We buy properties as-is, in any condition. No costly repairs or renovations needed." },
+    { q: "How do you determine the cash offer?", a: "We consider the property's condition, location, market trends, and comparable sales. We openly share all this data with you so you can make the best decision for your home." },
+    { q: "How quickly can you close the deal?", a: "We can close in as little as 7–28 days. If you need proceeds from the sale to facilitate your move-out, we can accommodate that at zero charge. Ask us how." },
+    { q: "Are there any fees or commissions?", a: "None. We cover all closing costs, ensuring you receive the full amount of our offer." },
+    { q: "Should I empty my house before selling?", a: "No need. Take what you want and leave the rest. We buy as-is and take care of everything." },
+    { q: "What types of properties do you buy?", a: "Single-family homes, multi-family units, condos, townhouses, vacant land, lots, tear-downs, and more — regardless of condition or situation." }
+  ];
+
+  const faqList = document.querySelector('.faq-list');
+  faqs.forEach((f, i) => {
+    faqList.innerHTML += `
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(${i})">
+          ${f.q} <span>+</span>
+        </button>
+        <div class="faq-a" id="faq-${i}"><p>${f.a}</p></div>
+      </div>`;
+  });
+
+  function toggleFaq(i) {
+    const btn = document.querySelectorAll('.faq-q')[i];
+    const ans = document.getElementById('faq-' + i);
+    btn.classList.toggle('open');
+    ans.classList.toggle('open');
+  }
+
+  // ── FORM SUBMIT ──
+  async function submitForm() {
+    const msg = document.getElementById('form-msg');
+    const terms = document.getElementById('terms').checked;
+    if (!terms) {
+      msg.className = 'error';
+      msg.textContent = 'Please agree to the Terms & Conditions.';
+      return;
+    }
+    const body = {
+      name: document.getElementById('name').value,
+      phone: document.getElementById('phone').value,
+      address: document.getElementById('address').value,
+      email: document.getElementById('email').value
+    };
+    msg.className = '';
+    msg.textContent = 'Submitting…';
+    try {
+      const res = await fetch('/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const data = await res.json();
+      msg.className = data.success ? 'success' : 'error';
+      msg.textContent = data.message;
+    } catch {
+      msg.className = 'error';
+      msg.textContent = 'Something went wrong. Please call us directly.';
+    }
+  }
+</script>
+</body>
+</html>
