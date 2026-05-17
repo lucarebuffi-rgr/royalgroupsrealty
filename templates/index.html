@@ -278,37 +278,37 @@
   </div>
 </section>
 
-<!-- REVIEWS CAROUSEL -->
-<section style="background: var(--navy); padding: 72px 24px; overflow: hidden;">
+<!-- REVIEWS MARQUEE -->
+<section style="background: var(--navy); padding: 72px 24px 60px; overflow: hidden;">
   <div class="section-inner">
     <div class="section-label" style="color: var(--gold-light);">Real Client Experiences</div>
     <h2 class="section-title" style="color: white;">What Our Sellers Say</h2>
-    <div style="display:flex; align-items:center; gap:16px; margin-bottom:8px; margin-top:6px;">
+    <div style="display:flex; align-items:center; gap:16px; margin-top:6px; margin-bottom:40px;">
       <span style="color:#f59e0b; font-size:1.3rem;">★★★★★</span>
       <span style="color:rgba(255,255,255,0.8); font-size:0.95rem;">5.0 · 20 reviews on Google</span>
       <a href="https://maps.app.goo.gl/XWQqP5hjR3JsaJzWA" target="_blank" style="color:var(--gold-light); font-size:0.85rem; margin-left:8px;">Leave a Review →</a>
     </div>
+  </div>
 
-    <!-- Carousel wrapper -->
-    <div style="position:relative; margin-top:40px;">
-      <div id="review-track" style="display:flex; gap:24px; transition: transform 0.5s ease; will-change: transform;">
-        <!-- Cards injected by JS -->
+  <!-- Marquee track -->
+  <div style="position:relative;">
+    <!-- Fade edges -->
+    <div style="position:absolute; left:0; top:0; bottom:0; width:120px; background:linear-gradient(to right, var(--navy), transparent); z-index:2; pointer-events:none;"></div>
+    <div style="position:absolute; right:0; top:0; bottom:0; width:120px; background:linear-gradient(to left, var(--navy), transparent); z-index:2; pointer-events:none;"></div>
+
+    <div id="marquee-outer" style="overflow:hidden;">
+      <div id="marquee-track" style="display:flex; gap:24px; width:max-content;">
+        <!-- Cards injected by JS, duplicated for infinite loop -->
       </div>
-      <!-- Arrows -->
-      <button onclick="moveCarousel(-1)" style="position:absolute; left:-20px; top:50%; transform:translateY(-50%); background:var(--gold); border:none; color:white; width:42px; height:42px; border-radius:50%; font-size:1.2rem; cursor:pointer; z-index:10;">‹</button>
-      <button onclick="moveCarousel(1)" style="position:absolute; right:-20px; top:50%; transform:translateY(-50%); background:var(--gold); border:none; color:white; width:42px; height:42px; border-radius:50%; font-size:1.2rem; cursor:pointer; z-index:10;">›</button>
     </div>
-
-    <!-- Dots -->
-    <div id="review-dots" style="display:flex; justify-content:center; gap:8px; margin-top:28px;"></div>
   </div>
 </section>
 
 <script>
-  const reviews = [
+  const marqueeReviews = [
     { name: "Shantaveous Cole", text: "Communication with Luca was awesome. He answered all of my questions. From the beginning to the end." },
     { name: "dlwilks", text: "Was easy to work with Luca on sale of estate property. Everything was handled seamlessly and we were able to close promptly. Overall excellent experience." },
-    { name: "Virginia Little", text: "Communication with Luca was fantastic. Any time I had questions or needed anything he'd return my call or respond to text or email right away. He was easy to talk to, respectful and his focus was always on making sure I was happy. Would highly recommend." },
+    { name: "Virginia Little", text: "Communication with Luca was fantastic. Any time I had questions he'd respond right away. He was easy to talk to, respectful and focused on making sure I was happy. Would highly recommend." },
     { name: "Carla Beene", text: "Luca and his team were great to work with. Communication was clear and the entire process went smoothly. I highly recommend them if you have a property to sell!" },
     { name: "Montrel Fuller", text: "Great experience and customer service. Knowledgeable company with solid expertise of the real estate market. Punctual and kept good communication throughout the entire escrow process." },
     { name: "David Stermer", text: "Luca was fantastic to work with, very transparent and honest!" },
@@ -317,84 +317,64 @@
     { name: "Kerri Berry", text: "So friendly and easy to work with! Made my experience a breeze!" },
     { name: "Denisha Scott", text: "I enjoy working with Luca. He has great communication skills. He kept me in the loop and was very helpful." },
     { name: "Sean Warren", text: "Luca is the man! Smooth process and completely hassle free. We closed quick and were able to focus on our new house." },
-    { name: "Matt Kemp", text: "Great experience working with Luca. We agreed on price and closed in timely manner. He stayed in contact with me through the whole process and closing. Would definitely recommend." },
+    { name: "Matt Kemp", text: "Great experience working with Luca. We agreed on price and closed in timely manner. He stayed in contact with me through the whole process. Would definitely recommend." },
     { name: "Robin Griffin", text: "Very easy to work with and very professional. Would work with them again." },
     { name: "Frank Iglesias", text: "Good Buyer. Performed on the transaction and stayed closely in touch throughout the process. Very uncommon to see people in this business communicate well but these guys do it. Highly recommended." },
     { name: "Joshua Daymean", text: "Luca was great. I highly recommend this team for your real estate needs." },
-    { name: "Ted Morgan", text: "Luca and his team were super professional and courteous from start to finish. They really stay on top of their work — closed ahead of the closing date! I look forward to doing business with them in the future." },
+    { name: "Ted Morgan", text: "Luca and his team were super professional and courteous from start to finish. Closed ahead of the closing date! I look forward to doing business with them in the future." },
     { name: "Kevin Tran", text: "Luca is your guy! You have to appreciate someone who is over communicative and professional. Looking forward to getting more deals done. Thank you Royal Groups!" }
   ];
 
-  const VISIBLE = 3;
-  let current = 0;
-  let autoTimer;
+  const mColors = ['#c8932a','#1a3050','#16a34a','#7c3aed','#dc2626','#0891b2'];
 
-  function getInitial(name) {
+  function getInitials(name) {
     return name.trim().split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
   }
 
-  const colors = ['#c8932a','#1a3050','#16a34a','#7c3aed','#dc2626','#0891b2'];
-
-  function buildCards() {
-    const track = document.getElementById('review-track');
-    track.innerHTML = '';
-    reviews.forEach((r, i) => {
-      const color = colors[i % colors.length];
-      track.innerHTML += `
-        <div class="rcard" style="min-width:calc((100% - 48px) / ${VISIBLE}); background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:28px; flex-shrink:0;">
-          <div style="display:flex; align-items:center; gap:14px; margin-bottom:16px;">
-            <div style="width:44px; height:44px; border-radius:50%; background:${color}; display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:0.9rem; flex-shrink:0;">${getInitial(r.name)}</div>
-            <div>
-              <div style="color:white; font-weight:600; font-size:0.95rem;">${r.name}</div>
-              <div style="color:#f59e0b; font-size:0.85rem;">★★★★★</div>
-            </div>
+  function buildCard(r, i) {
+    const color = mColors[i % mColors.length];
+    return `
+      <div style="min-width:320px; max-width:320px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:24px; flex-shrink:0;">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
+          <div style="width:40px; height:40px; border-radius:50%; background:${color}; display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:0.85rem; flex-shrink:0;">${getInitials(r.name)}</div>
+          <div>
+            <div style="color:white; font-weight:600; font-size:0.9rem;">${r.name}</div>
+            <div style="color:#f59e0b; font-size:0.8rem;">★★★★★</div>
           </div>
-          <p style="color:rgba(255,255,255,0.75); font-size:0.9rem; line-height:1.6;">"${r.text}"</p>
-        </div>`;
-    });
+        </div>
+        <p style="color:rgba(255,255,255,0.75); font-size:0.88rem; line-height:1.6;">"${r.text}"</p>
+      </div>`;
   }
 
-  function buildDots() {
-    const dots = document.getElementById('review-dots');
-    const total = reviews.length - VISIBLE + 1;
-    dots.innerHTML = '';
-    for (let i = 0; i < total; i++) {
-      dots.innerHTML += `<div onclick="goTo(${i})" style="width:8px; height:8px; border-radius:50%; background:${i === 0 ? 'var(--gold)' : 'rgba(255,255,255,0.3)'}; cursor:pointer; transition:background 0.3s;"></div>`;
+  // Build cards and duplicate for seamless infinite loop
+  const track = document.getElementById('marquee-track');
+  let html = '';
+  marqueeReviews.forEach((r, i) => html += buildCard(r, i));
+  marqueeReviews.forEach((r, i) => html += buildCard(r, i)); // duplicate
+  track.innerHTML = html;
+
+  // Animation
+  let pos = 0;
+  let paused = false;
+  const speed = 0.5; // pixels per frame — increase for faster
+
+  const halfWidth = track.scrollWidth / 2;
+
+  function animate() {
+    if (!paused) {
+      pos += speed;
+      if (pos >= halfWidth) pos = 0;
+      track.style.transform = `translateX(-${pos}px)`;
     }
+    requestAnimationFrame(animate);
   }
 
-  function updateDots() {
-    const dots = document.getElementById('review-dots').children;
-    for (let i = 0; i < dots.length; i++) {
-      dots[i].style.background = i === current ? 'var(--gold)' : 'rgba(255,255,255,0.3)';
-    }
-  }
+  // Pause on hover
+  track.addEventListener('mouseenter', () => paused = true);
+  track.addEventListener('mouseleave', () => paused = false);
 
-  function goTo(index) {
-    const max = reviews.length - VISIBLE;
-    current = Math.max(0, Math.min(index, max));
-    const cardWidth = document.querySelector('.rcard').offsetWidth + 24;
-    document.getElementById('review-track').style.transform = `translateX(-${current * cardWidth}px)`;
-    updateDots();
-    resetTimer();
-  }
-
-  function moveCarousel(dir) {
-    goTo(current + dir);
-  }
-
-  function resetTimer() {
-    clearInterval(autoTimer);
-    autoTimer = setInterval(() => {
-      const max = reviews.length - VISIBLE;
-      goTo(current >= max ? 0 : current + 1);
-    }, 4000);
-  }
-
-  buildCards();
-  buildDots();
-  resetTimer();
-</script>  
+  animate();
+</script>
   
 <section id="faq">
   <div class="section-inner">
