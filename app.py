@@ -371,7 +371,10 @@ def blog_sell_house_problem_tenants_landlord():
 
 @app.route("/submit", methods=["POST"])
 def submit():
-    data    = request.get_json()
+    data     = request.get_json()
+    honeypot = data.get("website", "").strip()
+    if honeypot:
+    return jsonify({"success": False, "message": "Invalid submission."}), 400
     name    = data.get("name", "").strip()
     phone   = data.get("phone", "").strip()
     address = data.get("address", "").strip()
