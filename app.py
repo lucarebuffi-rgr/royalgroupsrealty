@@ -26,7 +26,6 @@ def blog():
 def sitemap():
     return send_from_directory(".", "sitemap.xml")
 
-
 @app.route("/counties/cooke-county-tx")
 def cooke_county_tx():
     return render_template("counties/cooke-county-tx.html")
@@ -307,7 +306,6 @@ def emanuel_county_ga():
 def liberty_county_ga():
     return render_template("counties/liberty-county-ga.html")
 
-
 @app.route("/blog/sell-house-fast-dallas-tx")
 def blog_sell_house_fast_dallas_tx():
     return render_template("blog/sell-house-fast-dallas-tx.html")
@@ -367,14 +365,13 @@ def blog_sell_house_code_violations():
 @app.route("/blog/sell-house-problem-tenants-landlord")
 def blog_sell_house_problem_tenants_landlord():
     return render_template("blog/sell-house-problem-tenants-landlord.html")
-    
 
 @app.route("/submit", methods=["POST"])
 def submit():
     data     = request.get_json()
     honeypot = data.get("website", "").strip()
     if honeypot:
-    return jsonify({"success": False, "message": "Invalid submission."}), 400
+        return jsonify({"success": False, "message": "Invalid submission."}), 400
     name    = data.get("name", "").strip()
     phone   = data.get("phone", "").strip()
     address = data.get("address", "").strip()
@@ -393,7 +390,7 @@ def submit():
     except Exception as e:
         print(f"Make.com error: {e}")
 
-    return jsonify({"success": True, "message": "Thanks! We\'ll be in touch within 24 hours."})
+    return jsonify({"success": True, "message": "Thanks! We'll be in touch within 24 hours."})
 
 if __name__ == "__main__":
     app.run(debug=True)
