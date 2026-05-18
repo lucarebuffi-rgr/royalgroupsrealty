@@ -31,17 +31,50 @@
     body { font-family: 'DM Sans', sans-serif; color: var(--navy); background: var(--white); line-height: 1.6; }
     .topbar { background: var(--navy); color: var(--white); text-align: center; padding: 8px 16px; font-size: 0.85rem; letter-spacing: 0.03em; }
     .topbar a { color: var(--gold-light); text-decoration: none; font-weight: 600; }
-    header { background: var(--white); box-shadow: 0 2px 12px rgba(0,0,0,0.07); position: relative; top: 0; z-index: 100; }
+    header { background: var(--white); box-shadow: 0 2px 12px rgba(0,0,0,0.07); position: relative; top: 0; z-index: 200; }
     nav { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; }
     .logo { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 900; color: var(--navy); text-decoration: none; line-height: 1.2; }
     .logo span { color: var(--gold); }
-    nav ul { list-style: none; display: flex; gap: 28px; }
+    nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
     nav ul a { text-decoration: none; color: var(--navy); font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; transition: color 0.2s; }
     nav ul a:hover { color: var(--gold); }
     .nav-cta { background: var(--gold); color: var(--white) !important; padding: 10px 20px; border-radius: 4px; font-weight: 600 !important; transition: background 0.2s !important; }
     .nav-cta:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
     .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
     .hamburger span { width: 25px; height: 2px; background: var(--navy); display: block; }
+
+    /* ── DROPDOWN ── */
+    nav ul li.dropdown { position: relative; }
+    nav ul li.dropdown > a { display: flex; align-items: center; gap: 4px; cursor: pointer; }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      background: var(--white);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+      border-radius: 8px;
+      min-width: 200px;
+      padding: 8px 0;
+      z-index: 300;
+      max-height: 420px;
+      overflow-y: auto;
+      flex-direction: column;
+    }
+    nav ul li.dropdown:hover .dropdown-menu { display: flex; }
+    .dropdown-menu li { width: 100%; list-style: none; }
+    .dropdown-menu a {
+      display: block;
+      padding: 9px 18px;
+      font-size: 0.85rem;
+      color: var(--navy) !important;
+      text-transform: none !important;
+      letter-spacing: 0 !important;
+      font-weight: 400 !important;
+      white-space: nowrap;
+    }
+    .dropdown-menu a:hover { background: var(--cream); color: var(--gold) !important; }
+
     .hero { background: linear-gradient(135deg, var(--navy) 0%, #1a3050 60%, #0d2035 100%); color: var(--white); padding: 80px 24px 60px; }
     .hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: center; }
     .hero-text h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; line-height: 1.15; margin-bottom: 16px; }
@@ -139,6 +172,87 @@
       <li><a href="/">Home</a></li>
       <li><a href="#how-it-works">How It Works</a></li>
       <li><a href="#why-us">About Us</a></li>
+      <li class="dropdown">
+        <a href="#" onclick="return false;">Texas ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="/counties/cooke-county-tx">Cooke County</a></li>
+          <li><a href="/counties/grayson-county-tx">Grayson County</a></li>
+          <li><a href="/counties/fannin-county-tx">Fannin County</a></li>
+          <li><a href="/counties/lamar-county-tx">Lamar County</a></li>
+          <li><a href="/counties/hopkins-county-tx">Hopkins County</a></li>
+          <li><a href="/counties/hunt-county-tx">Hunt County</a></li>
+          <li><a href="/counties/collin-county-tx">Collin County</a></li>
+          <li><a href="/counties/denton-county-tx">Denton County</a></li>
+          <li><a href="/counties/wise-county-tx">Wise County</a></li>
+          <li><a href="/counties/jack-county-tx">Jack County</a></li>
+          <li><a href="/counties/parker-county-tx">Parker County</a></li>
+          <li><a href="/counties/tarrant-county-tx">Tarrant County</a></li>
+          <li><a href="/counties/dallas-county-tx">Dallas County</a></li>
+          <li><a href="/counties/rockwall-county-tx">Rockwall County</a></li>
+          <li><a href="/counties/kaufman-county-tx">Kaufman County</a></li>
+          <li><a href="/counties/gregg-county-tx">Gregg County</a></li>
+          <li><a href="/counties/wood-county-tx">Wood County</a></li>
+          <li><a href="/counties/smith-county-tx">Smith County</a></li>
+          <li><a href="/counties/henderson-county-tx">Henderson County</a></li>
+          <li><a href="/counties/navarro-county-tx">Navarro County</a></li>
+          <li><a href="/counties/ellis-county-tx">Ellis County</a></li>
+          <li><a href="/counties/hill-county-tx">Hill County</a></li>
+          <li><a href="/counties/johnson-county-tx">Johnson County</a></li>
+          <li><a href="/counties/hood-county-tx">Hood County</a></li>
+          <li><a href="/counties/mclennan-county-tx">McLennan County</a></li>
+          <li><a href="/counties/bell-county-tx">Bell County</a></li>
+          <li><a href="/counties/bee-county-tx">Bee County</a></li>
+          <li><a href="/counties/williamson-county-tx">Williamson County</a></li>
+          <li><a href="/counties/orange-county-tx">Orange County</a></li>
+          <li><a href="/counties/jefferson-county-tx">Jefferson County</a></li>
+          <li><a href="/counties/angelina-county-tx">Angelina County</a></li>
+          <li><a href="/counties/victoria-county-tx">Victoria County</a></li>
+          <li><a href="/counties/bexar-county-tx">Bexar County</a></li>
+          <li><a href="/counties/harris-county-tx">Harris County</a></li>
+          <li><a href="/counties/comal-county-tx">Comal County</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" onclick="return false;">Georgia ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="/counties/dawson-county-ga">Dawson County</a></li>
+          <li><a href="/counties/floyd-county-ga">Floyd County</a></li>
+          <li><a href="/counties/bartow-county-ga">Bartow County</a></li>
+          <li><a href="/counties/cherokee-county-ga">Cherokee County</a></li>
+          <li><a href="/counties/forsyth-county-ga">Forsyth County</a></li>
+          <li><a href="/counties/hall-county-ga">Hall County</a></li>
+          <li><a href="/counties/jackson-county-ga">Jackson County</a></li>
+          <li><a href="/counties/barrow-county-ga">Barrow County</a></li>
+          <li><a href="/counties/gwinnett-county-ga">Gwinnett County</a></li>
+          <li><a href="/counties/dekalb-county-ga">DeKalb County</a></li>
+          <li><a href="/counties/cobb-county-ga">Cobb County</a></li>
+          <li><a href="/counties/fulton-county-ga">Fulton County</a></li>
+          <li><a href="/counties/douglas-county-ga">Douglas County</a></li>
+          <li><a href="/counties/polk-county-ga">Polk County</a></li>
+          <li><a href="/counties/paulding-county-ga">Paulding County</a></li>
+          <li><a href="/counties/carroll-county-ga">Carroll County</a></li>
+          <li><a href="/counties/clayton-county-ga">Clayton County</a></li>
+          <li><a href="/counties/rockdale-county-ga">Rockdale County</a></li>
+          <li><a href="/counties/walton-county-ga">Walton County</a></li>
+          <li><a href="/counties/fayette-county-ga">Fayette County</a></li>
+          <li><a href="/counties/coweta-county-ga">Coweta County</a></li>
+          <li><a href="/counties/henry-county-ga">Henry County</a></li>
+          <li><a href="/counties/newton-county-ga">Newton County</a></li>
+          <li><a href="/counties/spalding-county-ga">Spalding County</a></li>
+          <li><a href="/counties/pike-county-ga">Pike County</a></li>
+          <li><a href="/counties/troup-county-ga">Troup County</a></li>
+          <li><a href="/counties/meriwether-county-ga">Meriwether County</a></li>
+          <li><a href="/counties/lamar-county-ga">Lamar County</a></li>
+          <li><a href="/counties/monroe-county-ga">Monroe County</a></li>
+          <li><a href="/counties/butts-county-ga">Butts County</a></li>
+          <li><a href="/counties/upson-county-ga">Upson County</a></li>
+          <li><a href="/counties/houston-county-ga">Houston County</a></li>
+          <li><a href="/counties/richmond-county-ga">Richmond County</a></li>
+          <li><a href="/counties/emanuel-county-ga">Emanuel County</a></li>
+          <li><a href="/counties/liberty-county-ga">Liberty County</a></li>
+        </ul>
+      </li>
+      <li><a href="/blog">Blog</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#offer" class="nav-cta">Get an Offer</a></li>
     </ul>
@@ -289,17 +403,11 @@
       <a href="https://maps.app.goo.gl/XWQqP5hjR3JsaJzWA" target="_blank" style="color:var(--gold-light); font-size:0.85rem; margin-left:8px;">Leave a Review →</a>
     </div>
   </div>
-
-  <!-- Marquee track -->
   <div style="position:relative;">
-    <!-- Fade edges -->
     <div style="position:absolute; left:0; top:0; bottom:0; width:120px; background:linear-gradient(to right, var(--navy), transparent); z-index:2; pointer-events:none;"></div>
     <div style="position:absolute; right:0; top:0; bottom:0; width:120px; background:linear-gradient(to left, var(--navy), transparent); z-index:2; pointer-events:none;"></div>
-
     <div id="marquee-outer" style="overflow:hidden;">
-      <div id="marquee-track" style="display:flex; gap:24px; width:max-content;">
-        <!-- Cards injected by JS, duplicated for infinite loop -->
-      </div>
+      <div id="marquee-track" style="display:flex; gap:24px; width:max-content;"></div>
     </div>
   </div>
 </section>
@@ -324,58 +432,35 @@
     { name: "Ted Morgan", text: "Luca and his team were super professional and courteous from start to finish. Closed ahead of the closing date! I look forward to doing business with them in the future." },
     { name: "Kevin Tran", text: "Luca is your guy! You have to appreciate someone who is over communicative and professional. Looking forward to getting more deals done. Thank you Royal Groups!" }
   ];
-
   const mColors = ['#c8932a','#1a3050','#16a34a','#7c3aed','#dc2626','#0891b2'];
-
-  function getInitials(name) {
-    return name.trim().split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
-  }
-
+  function getInitials(name) { return name.trim().split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase(); }
   function buildCard(r, i) {
     const color = mColors[i % mColors.length];
-    return `
-      <div style="min-width:320px; max-width:320px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:24px; flex-shrink:0;">
-        <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
-          <div style="width:40px; height:40px; border-radius:50%; background:${color}; display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:0.85rem; flex-shrink:0;">${getInitials(r.name)}</div>
-          <div>
-            <div style="color:white; font-weight:600; font-size:0.9rem;">${r.name}</div>
-            <div style="color:#f59e0b; font-size:0.8rem;">★★★★★</div>
-          </div>
-        </div>
-        <p style="color:rgba(255,255,255,0.75); font-size:0.88rem; line-height:1.6;">"${r.text}"</p>
-      </div>`;
+    return `<div style="min-width:320px; max-width:320px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:24px; flex-shrink:0;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
+        <div style="width:40px; height:40px; border-radius:50%; background:${color}; display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:0.85rem; flex-shrink:0;">${getInitials(r.name)}</div>
+        <div><div style="color:white; font-weight:600; font-size:0.9rem;">${r.name}</div><div style="color:#f59e0b; font-size:0.8rem;">★★★★★</div></div>
+      </div>
+      <p style="color:rgba(255,255,255,0.75); font-size:0.88rem; line-height:1.6;">"${r.text}"</p>
+    </div>`;
   }
-
-  // Build cards and duplicate for seamless infinite loop
   const track = document.getElementById('marquee-track');
   let html = '';
   marqueeReviews.forEach((r, i) => html += buildCard(r, i));
-  marqueeReviews.forEach((r, i) => html += buildCard(r, i)); // duplicate
+  marqueeReviews.forEach((r, i) => html += buildCard(r, i));
   track.innerHTML = html;
-
-  // Animation
-  let pos = 0;
-  let paused = false;
-  const speed = 0.5; // pixels per frame — increase for faster
-
+  let pos = 0, paused = false;
+  const speed = 0.5;
   const halfWidth = track.scrollWidth / 2;
-
   function animate() {
-    if (!paused) {
-      pos += speed;
-      if (pos >= halfWidth) pos = 0;
-      track.style.transform = `translateX(-${pos}px)`;
-    }
+    if (!paused) { pos += speed; if (pos >= halfWidth) pos = 0; track.style.transform = `translateX(-${pos}px)`; }
     requestAnimationFrame(animate);
   }
-
-  // Pause on hover
   track.addEventListener('mouseenter', () => paused = true);
   track.addEventListener('mouseleave', () => paused = false);
-
   animate();
 </script>
-  
+
 <section id="faq">
   <div class="section-inner">
     <div class="section-label">Have Questions?</div>
@@ -397,6 +482,7 @@
         <li><a href="#how-it-works">How It Works</a></li>
         <li><a href="#why-us">About Us</a></li>
         <li><a href="#faq">FAQ</a></li>
+        <li><a href="/blog">Blog</a></li>
         <li><a href="/privacy">Privacy Policy</a></li>
         <li><a href="/terms">Terms &amp; Conditions</a></li>
       </ul>
@@ -407,9 +493,7 @@
       <p style="margin-top:12px;font-size:0.88rem;">We serve homeowners across all of Texas and Georgia.</p>
     </div>
   </div>
-  <div class="footer-bottom">
-    © 2025 Luca Rebuffi – Royal Groups Realty. All Rights Reserved.
-  </div>
+  <div class="footer-bottom">© 2025 Luca Rebuffi – Royal Groups Realty. All Rights Reserved.</div>
 </footer>
 
 <script>
@@ -424,49 +508,25 @@
     { q: "Should I empty my house before selling?", a: "No need. Take what you want and leave the rest. We buy as-is and take care of everything." },
     { q: "What types of properties do you buy?", a: "Single-family homes, multi-family units, condos, townhouses, vacant land, lots, tear-downs, and more — regardless of condition or situation." }
   ];
-
   const faqList = document.querySelector('.faq-list');
   faqs.forEach((f, i) => {
-    faqList.innerHTML += `
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(${i})">${f.q} <span>+</span></button>
-        <div class="faq-a" id="faq-${i}"><p>${f.a.replace(/\\n/g, '<br>')}</p></div>
-      </div>`;
+    faqList.innerHTML += `<div class="faq-item"><button class="faq-q" onclick="toggleFaq(${i})">${f.q} <span>+</span></button><div class="faq-a" id="faq-${i}"><p>${f.a.replace(/\\n/g, '<br>')}</p></div></div>`;
   });
-
   function toggleFaq(i) {
     document.querySelectorAll('.faq-q')[i].classList.toggle('open');
     document.getElementById('faq-' + i).classList.toggle('open');
   }
-
   async function submitForm() {
     const msg = document.getElementById('form-msg');
-    if (!document.getElementById('terms').checked) {
-      msg.className = 'error';
-      msg.textContent = 'Please agree to the Terms & Conditions.';
-      return;
-    }
-    const body = {
-      name: document.getElementById('name').value,
-      phone: document.getElementById('phone').value,
-      address: document.getElementById('address').value,
-      email: document.getElementById('email').value
-    };
-    msg.className = '';
-    msg.textContent = 'Submitting…';
+    if (!document.getElementById('terms').checked) { msg.className = 'error'; msg.textContent = 'Please agree to the Terms & Conditions.'; return; }
+    const body = { name: document.getElementById('name').value, phone: document.getElementById('phone').value, address: document.getElementById('address').value, email: document.getElementById('email').value };
+    msg.className = ''; msg.textContent = 'Submitting…';
     try {
-      const res = await fetch('/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
+      const res = await fetch('/submit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
       const data = await res.json();
       msg.className = data.success ? 'success' : 'error';
       msg.textContent = data.message;
-    } catch {
-      msg.className = 'error';
-      msg.textContent = 'Something went wrong. Please call us directly.';
-    }
+    } catch { msg.className = 'error'; msg.textContent = 'Something went wrong. Please call us directly.'; }
   }
 </script>
 
@@ -482,6 +542,14 @@
   "email": "info@royalgroupsrealty.com",
   "founder": "Luca Rebuffi",
   "foundingDate": "2020",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "3343 Peachtree Rd NE, Ste 145-193",
+    "addressLocality": "Atlanta",
+    "addressRegion": "GA",
+    "postalCode": "30326",
+    "addressCountry": "US"
+  },
   "areaServed": [
     "Dallas, TX", "Fort Worth, TX", "Arlington, TX", "Plano, TX",
     "Irving, TX", "Garland, TX", "Frisco, TX", "McKinney, TX",
