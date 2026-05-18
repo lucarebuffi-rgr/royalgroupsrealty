@@ -21,6 +21,7 @@
   <meta name="google-site-verification" content="Cacw5NZs4u1IBjESWQEtmjGTay2Gp-uvzSigy2zR_I4" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  .nav-list.open { display: flex !important; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); padding: 20px 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); z-index: 400; gap: 16px; }
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -268,7 +269,7 @@
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#offer" class="nav-cta">Get an Offer</a></li>
     </ul>
-    <div class="hamburger" onclick="this.classList.toggle('active')">
+    <div class="hamburger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </div>
   </nav>
@@ -596,5 +597,19 @@
 }
 </script>
 
+<script>
+  function toggleMenu() {
+    const navList = document.querySelector('.nav-list');
+    navList.classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const navList = document.querySelector('.nav-list');
+    const hamburger = document.querySelector('.hamburger');
+    if (!hamburger.contains(e.target) && !navList.contains(e.target)) {
+      navList.classList.remove('open');
+    }
+  });
+</script>
+  
 </body>
 </html>
