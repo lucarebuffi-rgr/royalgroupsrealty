@@ -21,7 +21,6 @@
   <meta name="google-site-verification" content="Cacw5NZs4u1IBjESWQEtmjGTay2Gp-uvzSigy2zR_I4" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-  .nav-list.open { display: flex !important; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); padding: 20px 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); z-index: 400; gap: 16px; }
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -38,12 +37,11 @@
     nav { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 10px 24px; }
     .nav-list { list-style: none !important; display: flex; gap: 20px; align-items: center; }
     .nav-list > li { list-style: none !important; position: relative; padding-bottom: 8px; }
-    .nav-list > li > a { padding-top: 8px; }
-    .nav-list > li > a { text-decoration: none; color: var(--navy); font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; transition: color 0.2s; display: flex; align-items: center; gap: 3px; }
+    .nav-list > li > a { padding-top: 8px; text-decoration: none; color: var(--navy); font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; transition: color 0.2s; display: flex; align-items: center; gap: 3px; }
     .nav-list > li > a:hover { color: var(--gold); }
     .nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 10px 20px !important; border-radius: 4px !important; font-weight: 600 !important; }
     .nav-cta:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 300; }
     .hamburger span { width: 25px; height: 2px; background: var(--navy); display: block; }
 
     /* ── DROPDOWN ── */
@@ -164,6 +162,23 @@
       .compare-grid { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr 1fr; }
       .nav-list { display: none; }
+      .nav-list.open {
+        display: flex !important;
+        flex-direction: column !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: var(--white) !important;
+        padding: 20px 24px !important;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12) !important;
+        z-index: 400 !important;
+        gap: 16px !important;
+        align-items: flex-start !important;
+      }
+      .nav-list.open > li { width: 100%; }
+      .nav-list.open > li > a { font-size: 1rem !important; padding: 8px 0 !important; }
+      .nav-list.open .dropdown-menu { position: static !important; box-shadow: none !important; max-height: 200px !important; border-radius: 0 !important; padding: 4px 0 4px 16px !important; }
       .hamburger { display: flex; }
     }
     @media (max-width: 580px) {
@@ -542,6 +557,17 @@
       msg.textContent = data.message;
     } catch { msg.className = 'error'; msg.textContent = 'Something went wrong. Please call us directly.'; }
   }
+  function toggleMenu() {
+    const navList = document.querySelector('.nav-list');
+    navList.classList.toggle('open');
+  }
+  document.addEventListener('click', function(e) {
+    const navList = document.querySelector('.nav-list');
+    const hamburger = document.querySelector('.hamburger');
+    if (!hamburger.contains(e.target) && !navList.contains(e.target)) {
+      navList.classList.remove('open');
+    }
+  });
 </script>
 
 <script type="application/ld+json">
@@ -597,19 +623,5 @@
 }
 </script>
 
-<script>
-  function toggleMenu() {
-    const navList = document.querySelector('.nav-list');
-    navList.classList.toggle('open');
-  }
-  document.addEventListener('click', function(e) {
-    const navList = document.querySelector('.nav-list');
-    const hamburger = document.querySelector('.hamburger');
-    if (!hamburger.contains(e.target) && !navList.contains(e.target)) {
-      navList.classList.remove('open');
-    }
-  });
-</script>
-  
 </body>
 </html>
