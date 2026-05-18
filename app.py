@@ -344,6 +344,30 @@ def blog_probate_real_estate_texas_georgia():
 def blog_selling_partial_interest_property():
     return render_template("blog/selling-partial-interest-property.html")
 
+@app.route("/blog/sell-house-property-tax-delinquency")
+def blog_sell_house_property_tax_delinquency():
+    return render_template("blog/sell-house-property-tax-delinquency.html")
+
+@app.route("/blog/sell-house-financial-hardship-bankruptcy")
+def blog_sell_house_financial_hardship_bankruptcy():
+    return render_template("blog/sell-house-financial-hardship-bankruptcy.html")
+
+@app.route("/blog/sell-house-with-liens")
+def blog_sell_house_with_liens():
+    return render_template("blog/sell-house-with-liens.html")
+
+@app.route("/blog/sell-fire-damaged-house")
+def blog_sell_fire_damaged_house():
+    return render_template("blog/sell-fire-damaged-house.html")
+
+@app.route("/blog/sell-house-code-violations")
+def blog_sell_house_code_violations():
+    return render_template("blog/sell-house-code-violations.html")
+
+@app.route("/blog/sell-house-problem-tenants-landlord")
+def blog_sell_house_problem_tenants_landlord():
+    return render_template("blog/sell-house-problem-tenants-landlord.html")
+    
 
 @app.route("/submit", methods=["POST"])
 def submit():
