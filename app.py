@@ -336,6 +336,14 @@ def blog_sell_house_as_is_dfw():
 def blog_selling_house_during_divorce_texas():
     return render_template("blog/selling-house-during-divorce-texas.html")
 
+@app.route("/blog/probate-real-estate-texas-georgia")
+def blog_probate_real_estate_texas_georgia():
+    return render_template("blog/probate-real-estate-texas-georgia.html")
+
+@app.route("/blog/selling-partial-interest-property")
+def blog_selling_partial_interest_property():
+    return render_template("blog/selling-partial-interest-property.html")
+
 
 @app.route("/submit", methods=["POST"])
 def submit():
