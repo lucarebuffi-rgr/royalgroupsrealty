@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.royalgroupsrealty.com/</loc><priority>1.0</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.royalgroupsrealty.com/about</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.royalgroupsrealty.com/blog</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.royalgroupsrealty.com/privacy</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
   <url><loc>https://www.royalgroupsrealty.com/terms</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
@@ -13,6 +14,12 @@
   <url><loc>https://www.royalgroupsrealty.com/blog/selling-house-during-divorce-texas</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.royalgroupsrealty.com/blog/probate-real-estate-texas-georgia</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.royalgroupsrealty.com/blog/selling-partial-interest-property</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.royalgroupsrealty.com/blog/sell-house-property-tax-delinquency</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.royalgroupsrealty.com/blog/sell-house-financial-hardship-bankruptcy</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.royalgroupsrealty.com/blog/sell-house-with-liens</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.royalgroupsrealty.com/blog/sell-fire-damaged-house</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.royalgroupsrealty.com/blog/sell-house-code-violations</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://www.royalgroupsrealty.com/blog/sell-house-problem-tenants-landlord</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.royalgroupsrealty.com/counties/cooke-county-tx</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.royalgroupsrealty.com/counties/grayson-county-tx</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.royalgroupsrealty.com/counties/fannin-county-tx</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
@@ -83,10 +90,4 @@
   <url><loc>https://www.royalgroupsrealty.com/counties/richmond-county-ga</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.royalgroupsrealty.com/counties/emanuel-county-ga</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://www.royalgroupsrealty.com/counties/liberty-county-ga</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.royalgroupsrealty.com/blog/sell-house-property-tax-delinquency</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.royalgroupsrealty.com/blog/sell-house-financial-hardship-bankruptcy</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.royalgroupsrealty.com/blog/sell-house-with-liens</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.royalgroupsrealty.com/blog/sell-fire-damaged-house</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.royalgroupsrealty.com/blog/sell-house-code-violations</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://www.royalgroupsrealty.com/blog/sell-house-problem-tenants-landlord</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
 </urlset>
