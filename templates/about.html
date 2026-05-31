@@ -100,9 +100,6 @@
     nav {
       background: var(--white);
       border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
       box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
     .nav-inner {
@@ -112,7 +109,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 72px;
+      height: 90px;
     }
     .nav-logo img { height: 110px; width: auto; }
     .nav-list {
@@ -135,7 +132,7 @@
     .nav-list a:hover { background: var(--cream); color: var(--gold); }
     .nav-list a.active { color: var(--gold); }
     .nav-dropdown { position: relative; }
-    .nav-dropdown > a::after { content: ' ▾'; font-size: 0.7rem; }
+    .nav-dropdown > a::after { content: ''; }
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -671,7 +668,7 @@
         <li><a href="/#how-it-works">How It Works</a></li>
         <li><a href="/about" class="active">About Us</a></li>
         <li class="nav-dropdown">
-          <a href="#">Texas ▾</a>
+          <a href="#">Texas</a>
           <div class="dropdown-menu">
             <a href="/counties/angelina-county-tx">Angelina County</a>
             <a href="/counties/bee-county-tx">Bee County</a>
@@ -711,7 +708,7 @@
           </div>
         </li>
         <li class="nav-dropdown">
-          <a href="#">Georgia ▾</a>
+          <a href="#">Georgia</a>
           <div class="dropdown-menu">
             <a href="/counties/barrow-county-ga">Barrow County</a>
             <a href="/counties/bartow-county-ga">Bartow County</a>
