@@ -374,6 +374,10 @@ def blog_sell_house_code_violations():
 def blog_sell_house_problem_tenants_landlord():
     return render_template("blog/sell-house-problem-tenants-landlord.html")
 
+@app.route("/blog/sell-house-fast-marietta-ga")
+def blog_sell_house_fast_marietta_ga():
+    return render_template("blog/sell-house-fast-marietta-ga.html")
+
 @app.route("/submit", methods=["POST"])
 def submit():
     data     = request.get_json()
