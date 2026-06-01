@@ -34,7 +34,7 @@
 
     /* ── HEADER & NAV ── */
     header { background: var(--white); box-shadow: 0 2px 12px rgba(0,0,0,0.07); position: relative; z-index: 200; }
-    nav { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 10px 24px; }
+    nav { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; min-height: 110px; }
     .nav-list { list-style: none !important; display: flex; gap: 20px; align-items: center; }
     .nav-list > li { list-style: none !important; position: relative; padding-bottom: 8px; }
     .nav-list > li > a { padding-top: 8px; text-decoration: none; color: var(--navy); font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; transition: color 0.2s; display: flex; align-items: center; gap: 3px; }
@@ -241,7 +241,7 @@
         </ul>
       </li>
       <li>
-        <a href="#" onclick="return false;">Georgia ▾</a>
+        <a href="#" onclick="return false;">Georgia</a>
         <ul class="dropdown-menu">
           <li><a href="/counties/barrow-county-ga">Barrow County</a></li>
           <li><a href="/counties/bartow-county-ga">Bartow County</a></li>
@@ -282,7 +282,6 @@
       </li>
       <li><a href="/blog">Resources</a></li>
       <li><a href="/contact">Contact</a></li>
-      <li><a href="#faq">FAQ</a></li>
       <li><a href="#offer" class="nav-cta">Get an Offer</a></li>
     </ul>
     <div class="hamburger" onclick="toggleMenu()">
