@@ -378,6 +378,10 @@ def blog_sell_house_problem_tenants_landlord():
 def blog_sell_house_fast_marietta_ga():
     return render_template("blog/sell-house-fast-marietta-ga.html")
 
+@app.route('/blog/sell-house-fast-fort-worth-tx')
+def blog_fort_worth():
+    return render_template('blog/sell-house-fast-fort-worth-tx.html')
+
 @app.route("/submit", methods=["POST"])
 def submit():
     data     = request.get_json()
