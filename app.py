@@ -1,11 +1,29 @@
 import requests
-from flask import Flask, render_template, request, jsonify, send_from_directory
+from flask import Flask, render_template, request, jsonify, send_from_directory, redirect
 
 app = Flask(__name__)
 
 # ── Make.com webhook URL ──
 MAKE_WEBHOOK = "https://hook.us2.make.com/xa7uddev8m89ceqd97d9iurxyquirtn7"
 
+# ── 301 Redirects from old Squarespace URLs ──
+@app.route("/how-it-works")
+def how_it_works_redirect():
+    return redirect("/#how-it-works", code=301)
+
+@app.route("/about-us")
+def about_us_redirect():
+    return redirect("/about", code=301)
+
+@app.route("/contact-us")
+def contact_us_redirect():
+    return redirect("/contact", code=301)
+
+@app.route("/privacy-policy")
+def privacy_policy_redirect():
+    return redirect("/privacy", code=301)
+
+# ── Core Pages ──
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -34,6 +52,7 @@ def blog():
 def sitemap():
     return send_from_directory(".", "sitemap.xml")
 
+# ── Texas County Pages ──
 @app.route("/counties/cooke-county-tx")
 def cooke_county_tx():
     return render_template("counties/cooke-county-tx.html")
@@ -174,6 +193,7 @@ def harris_county_tx():
 def comal_county_tx():
     return render_template("counties/comal-county-tx.html")
 
+# ── Georgia County Pages ──
 @app.route("/counties/dawson-county-ga")
 def dawson_county_ga():
     return render_template("counties/dawson-county-ga.html")
@@ -314,6 +334,7 @@ def emanuel_county_ga():
 def liberty_county_ga():
     return render_template("counties/liberty-county-ga.html")
 
+# ── Blog Posts ──
 @app.route("/blog/sell-house-fast-dallas-tx")
 def blog_sell_house_fast_dallas_tx():
     return render_template("blog/sell-house-fast-dallas-tx.html")
@@ -378,10 +399,11 @@ def blog_sell_house_problem_tenants_landlord():
 def blog_sell_house_fast_marietta_ga():
     return render_template("blog/sell-house-fast-marietta-ga.html")
 
-@app.route('/blog/sell-house-fast-fort-worth-tx')
+@app.route("/blog/sell-house-fast-fort-worth-tx")
 def blog_fort_worth():
-    return render_template('blog/sell-house-fast-fort-worth-tx.html')
+    return render_template("blog/sell-house-fast-fort-worth-tx.html")
 
+# ── Lead Form Submission ──
 @app.route("/submit", methods=["POST"])
 def submit():
     data     = request.get_json()
