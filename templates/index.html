@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- ── PERFORMANCE: preconnect + preload ── -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preload" as="image" href="/static/logo.webp" type="image/webp" fetchpriority="high" />
 
@@ -33,6 +33,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --navy: #0d1b2a; --gold: #c8932a; --gold-light: #e8b84b;
+      --gold-accessible: #a06c1a; /* darker gold — passes WCAG AA on white (#fff) */
       --cream: #faf8f3; --white: #ffffff; --gray: #6b7280;
       --light-gray: #f3f4f6; --red: #c0392b;
     }
@@ -49,7 +50,7 @@
     .nav-list > li > a:hover { color: var(--gold); }
     .nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 10px 20px !important; border-radius: 4px !important; font-weight: 600 !important; text-align: center !important; justify-content: center !important; width: 100%; }
     .nav-cta:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 300; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 300; background: none; border: none; padding: 4px; }
     .hamburger span { width: 25px; height: 2px; background: var(--navy); display: block; }
 
     /* ── DROPDOWN ── */
@@ -104,9 +105,9 @@
     .form-group input:focus { border-color: var(--gold); }
     .consent { font-size: 0.75rem; color: var(--gray); margin-bottom: 16px; line-height: 1.5; }
     .consent label { display: flex; gap: 8px; margin-bottom: 10px; cursor: pointer; }
-    .consent a { color: var(--gold); }
-    .btn-submit { width: 100%; background: var(--gold); color: var(--white); border: none; padding: 15px; border-radius: 6px; font-size: 1.05rem; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; letter-spacing: 0.03em; transition: background 0.2s; }
-    .btn-submit:hover { background: var(--gold-light); color: var(--navy); }
+    .consent a { color: var(--gold-accessible); }
+    .btn-submit { width: 100%; background: var(--gold-accessible); color: var(--white); border: none; padding: 15px; border-radius: 6px; font-size: 1.05rem; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; letter-spacing: 0.03em; transition: background 0.2s; }
+    .btn-submit:hover { background: var(--gold); color: var(--white); }
     #form-msg { margin-top: 12px; font-size: 0.9rem; font-weight: 600; text-align: center; }
     #form-msg.success { color: #16a34a; }
     #form-msg.error { color: var(--red); }
@@ -114,7 +115,7 @@
     /* ── SECTIONS ── */
     section { padding: 72px 24px; }
     .section-inner { max-width: 1100px; margin: 0 auto; }
-    .section-label { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; font-weight: 600; color: var(--gold); margin-bottom: 10px; }
+    .section-label { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; font-weight: 600; color: var(--gold-accessible); margin-bottom: 10px; }
     .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
     .section-sub { color: var(--gray); font-size: 1rem; max-width: 580px; }
     .how-bg { background: var(--cream); }
@@ -133,23 +134,27 @@
     .feature p { font-size: 0.9rem; color: var(--gray); }
     .compare-bg { background: var(--navy); color: var(--white); }
     .compare-bg .section-title { color: var(--white); }
-    .compare-bg .section-label { color: var(--gold-light); }
+    .compare-bg .section-label { color: #f0d080; } /* brightened for navy background - passes WCAG AA */
     .compare-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 48px; }
     .compare-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 32px 28px; }
-    .compare-card.highlight { background: var(--gold); border-color: var(--gold); }
+    .compare-card.highlight { background: var(--gold); border-color: var(--gold); color: var(--navy); }
     .compare-card h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.2); }
-    .compare-card.highlight h3 { border-color: rgba(255,255,255,0.4); }
+    .compare-card.highlight h3 { border-color: rgba(0,0,0,0.2); color: var(--navy); }
+    .compare-card.highlight li { color: var(--navy); }
     .compare-card ul { list-style: none; display: grid; gap: 12px; }
     .compare-card li { display: flex; gap: 10px; font-size: 0.9rem; align-items: flex-start; }
     .compare-card li .icon { font-size: 1rem; flex-shrink: 0; }
     .faq-list { margin-top: 48px; display: grid; gap: 12px; }
     .faq-item { border: 1.5px solid #e5e7eb; border-radius: 8px; overflow: hidden; }
     .faq-q { width: 100%; background: none; border: none; padding: 18px 20px; text-align: left; font-family: 'DM Sans', sans-serif; font-size: 0.97rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--navy); }
-    .faq-q span { font-size: 1.2rem; color: var(--gold); transition: transform 0.3s; }
+    .faq-q span { font-size: 1.2rem; color: var(--gold-accessible); transition: transform 0.3s; }
     .faq-q.open span { transform: rotate(45deg); }
     .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.2s; background: var(--cream); }
     .faq-a.open { max-height: 400px; padding: 0 20px 18px; }
     .faq-a p { font-size: 0.93rem; color: var(--gray); }
+
+    /* ── ACCESSIBILITY: screen-reader only utility ── */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
     /* ── FOOTER ── */
     footer { background: var(--navy); color: rgba(255,255,255,0.6); padding: 60px 24px 30px; }
@@ -298,9 +303,9 @@
       <li><a href="/contact">Contact</a></li>
       <li><a href="#offer" class="nav-cta">Get an Offer</a></li>
     </ul>
-    <div class="hamburger" onclick="toggleMenu()">
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Open navigation menu" aria-expanded="false">
       <span></span><span></span><span></span>
-    </div>
+    </button>
   </nav>
 </header>
 
@@ -319,10 +324,22 @@
     <div class="lead-form">
       <h2>Get My Cash Offer</h2>
       <p>Fill out the form below — we'll respond within 24 hours.</p>
-      <div class="form-group"><input type="text" id="name" placeholder="Full Name" /></div>
-      <div class="form-group"><input type="tel" id="phone" placeholder="Phone Number" /></div>
-      <div class="form-group"><input type="text" id="address" placeholder="Property Address" /></div>
-      <div class="form-group"><input type="email" id="email" placeholder="Email Address" /></div>
+      <div class="form-group">
+        <label for="name" class="sr-only">Full Name</label>
+        <input type="text" id="name" placeholder="Full Name" />
+      </div>
+      <div class="form-group">
+        <label for="phone" class="sr-only">Phone Number</label>
+        <input type="tel" id="phone" placeholder="Phone Number" />
+      </div>
+      <div class="form-group">
+        <label for="address" class="sr-only">Property Address</label>
+        <input type="text" id="address" placeholder="Property Address" />
+      </div>
+      <div class="form-group">
+        <label for="email" class="sr-only">Email Address</label>
+        <input type="email" id="email" placeholder="Email Address" />
+      </div>
       <div class="consent">
         <label><input type="checkbox" id="terms" /> I agree to the <a href="/terms">Terms &amp; Conditions</a> and <a href="/privacy">Privacy Policy</a>.</label>
         <label><input type="checkbox" id="sms" /> I agree to receive communications from Luca Rebuffi – Royal Groups Realty via text, phone, and email. Msg &amp; data rates may apply. Reply STOP to opt out.</label>
@@ -377,7 +394,7 @@
                  width="260" height="220"
                  style="width:100%; border-radius:10px; object-fit:cover; object-position:center 30%; height:220px;"
                  loading="lazy" />
-            <div style="position:absolute; bottom:10px; left:10px; background:var(--gold); color:white; font-size:0.75rem; font-weight:700; padding:4px 12px; border-radius:20px; letter-spacing:0.06em; text-transform:uppercase;">After</div>
+            <div style="position:absolute; bottom:10px; left:10px; background:var(--gold-accessible); color:white; font-size:0.75rem; font-weight:700; padding:4px 12px; border-radius:20px; letter-spacing:0.06em; text-transform:uppercase;">After</div>
           </div>
         </div>
         <p style="text-align:center; font-size:0.82rem; color:var(--gray); margin-top:10px;">Real property purchased & renovated by Royal Groups Realty in Texas</p>
@@ -455,7 +472,7 @@
 <!-- REVIEWS MARQUEE -->
 <section style="background: var(--navy); padding: 72px 24px 60px; overflow: hidden;">
   <div class="section-inner">
-    <div class="section-label" style="color: var(--gold-light);">Real Client Experiences</div>
+    <div class="section-label" style="color:#f0d080;">Real Client Experiences</div>
     <h2 class="section-title" style="color: white;">What Our Sellers Say</h2>
     <div style="display:flex; align-items:center; gap:16px; margin-top:6px; margin-bottom:40px;">
       <span style="color:#f59e0b; font-size:1.3rem;">★★★★★</span>
@@ -598,13 +615,19 @@
     } catch { msg.className = 'error'; msg.textContent = 'Something went wrong. Please call us directly.'; }
   }
   function toggleMenu() {
-    document.querySelector('.nav-list').classList.toggle('open');
+    const navList = document.querySelector('.nav-list');
+    const hamburger = document.querySelector('.hamburger');
+    const isOpen = navList.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    hamburger.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
   }
   document.addEventListener('click', function(e) {
     const navList = document.querySelector('.nav-list');
     const hamburger = document.querySelector('.hamburger');
     if (!hamburger.contains(e.target) && !navList.contains(e.target)) {
       navList.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Open navigation menu');
     }
   });
 </script>
