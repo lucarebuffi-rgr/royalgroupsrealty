@@ -74,7 +74,7 @@
     .form-group input { width: 100%; border: 1.5px solid #d1d5db; border-radius: 6px; padding: 12px 14px; font-size: 0.95rem; font-family: 'DM Sans', sans-serif; transition: border-color 0.2s; outline: none; }
     .form-group input:focus { border-color: var(--gold); }
     .consent { font-size: 0.75rem; color: var(--gray); margin-bottom: 16px; line-height: 1.5; }
-    .consent label { display: flex; gap: 8px; margin-bottom: 10px; cursor: pointer; }
+    .consent label { display: grid; grid-template-columns: 16px 1fr; gap: 8px; margin-bottom: 10px; cursor: pointer; align-items: start; }
     /* FIX: nowrap prevents "Terms &" from orphaning on its own line */
     .consent a { color: var(--gold-accessible); }
     .btn-submit { width: 100%; background: var(--gold-accessible); color: var(--white); border: none; padding: 15px; border-radius: 6px; font-size: 1.05rem; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; letter-spacing: 0.03em; transition: background 0.2s; }
@@ -291,7 +291,7 @@
         <input type="email" id="email" placeholder="Email Address" />
       </div>
       <div class="consent">
-        <label><input type="checkbox" id="terms" /> I agree to the <a href="/terms">Terms &amp; Conditions</a> and <a href="/privacy">Privacy&nbsp;Policy</a>.</label>
+        <label><input type="checkbox" id="terms" /><span>I agree to the <a href="/terms">Terms &amp; Conditions</a> and <a href="/privacy">Privacy Policy</a>.</span></label>
         <label><input type="checkbox" id="sms" /> I agree to receive communications from Luca Rebuffi &ndash; Royal Groups Realty via text, phone, and email. Msg &amp; data rates may apply. Reply STOP to opt out.</label>
       </div>
       <input type="text" name="website" id="honeypot" style="display:none;" tabindex="-1" autocomplete="off" />
