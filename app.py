@@ -23,6 +23,10 @@ def contact_us_redirect():
 def privacy_policy_redirect():
     return redirect("/privacy", code=301)
 
+@app.route("/home")
+def home_redirect():
+    return redirect("/", code=301)
+
 # ── Core Pages ──
 @app.route("/")
 def index():
