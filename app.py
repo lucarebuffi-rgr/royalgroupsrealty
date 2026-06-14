@@ -403,6 +403,10 @@ def blog_sell_house_fast_marietta_ga():
 def blog_fort_worth():
     return render_template("blog/sell-house-fast-fort-worth-tx.html")
 
+@app.route('/blog/cash-offers-real-estate-agents')
+def blog_agents():
+    return render_template('blog/cash-offers-real-estate-agents.html')
+
 # ── Lead Form Submission ──
 @app.route("/submit", methods=["POST"])
 def submit():
