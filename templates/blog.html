@@ -2,9 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Real Estate Resources | Royal Groups Realty</title>
   <meta name="description" content="Tips, guides, and resources for homeowners looking to sell fast in Texas and Georgia. Covering foreclosure, inherited homes, divorce sales, cash offers, and more." />
@@ -15,7 +12,7 @@
   <meta property="og:url" content="https://www.royalgroupsrealty.com/blog" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://www.royalgroupsrealty.com/static/og-banner.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,8 +20,6 @@
     body { font-family: "DM Sans", sans-serif; color: var(--navy); background: var(--white); line-height: 1.6; }
     .topbar { background: var(--navy); color: var(--white); text-align: center; padding: 8px 16px; font-size: 0.85rem; }
     .topbar a { color: var(--gold-light); text-decoration: none; font-weight: 600; }
-
-    /* ── NAV ── */
     header { background: var(--white); box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
     nav { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; min-height: 110px; }
     nav > ul { list-style: none; display: flex; gap: 20px; align-items: center; }
@@ -43,13 +38,9 @@
     .mobile-menu.open { display: block; }
     .mobile-menu a { display: block; padding: 0.6rem 0; font-size: 0.95rem; font-weight: 600; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--border); }
     .mobile-menu .mobile-cta { margin-top: 1rem; background: var(--gold); color: var(--white); text-align: center; padding: 0.75rem; border-radius: 8px; font-weight: 700; border-bottom: none; }
-
-    /* ── HERO ── */
     .hero { background: linear-gradient(135deg, var(--navy) 0%, #1a3050 100%); color: var(--white); padding: 60px 24px; text-align: center; }
     .hero h1 { font-family: "Playfair Display", serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; margin-bottom: 12px; }
     .hero p { color: rgba(255,255,255,0.7); font-size: 1rem; max-width: 500px; margin: 0 auto; }
-
-    /* ── BLOG GRID ── */
     .blog-grid { max-width: 1100px; margin: 0 auto; padding: 60px 24px 80px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
     .blog-card { text-decoration: none; color: inherit; background: white; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.07); overflow: hidden; transition: transform 0.2s; display: block; }
     .blog-card:hover { transform: translateY(-4px); }
@@ -59,8 +50,6 @@
     .card-body h3 { font-family: "Playfair Display", serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
     .card-body p { color: var(--gray); font-size: 0.88rem; line-height: 1.6; margin-bottom: 16px; }
     .card-body span { color: var(--gold); font-size: 0.85rem; font-weight: 600; }
-
-    /* ── FOOTER ── */
     footer { background: var(--navy); color: rgba(255,255,255,0.6); padding: 48px 24px 28px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 32px; }
     .footer-desc { font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.45); max-width: 280px; }
@@ -69,7 +58,6 @@
     footer ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.88rem; }
     footer ul a:hover { color: var(--gold-light); }
     .footer-bottom { max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; font-size: 0.83rem; }
-
     @media (max-width: 900px) {
       .blog-grid { grid-template-columns: 1fr 1fr; }
       nav > ul { display: none; }
@@ -87,7 +75,7 @@
 
 <header>
   <nav>
-    <a href="/"><picture><source srcset="/static/logo.webp" type="image/webp" /><img src="/static/logo.png" alt="Royal Groups Realty" width="220" height="110" style="height:110px;width:auto;" /></picture></a>
+    <a href="/"><img src="/static/logo.png" alt="Royal Groups Realty" style="height:110px;" /></a>
     <ul>
       <li><a href="/">Home</a></li>
       <li><a href="/#how-it-works">How It Works</a></li>
@@ -197,7 +185,15 @@
 
 <div class="blog-grid">
 
-  <!-- ── WEEK 2 — ADD NEW POSTS AT THE TOP ── -->
+  <a href="/blog/cash-offers-real-estate-agents" class="blog-card">
+    <div class="card-top"><span class="card-label">For Agents</span></div>
+    <div class="card-body">
+      <h3>Cash Offers for Real Estate Agents — Fixer-Uppers & Off-Market Listings</h3>
+      <p>Agents in Texas & Georgia: get fast cash offers on fixer-upper listings, off-market properties, and difficult sellers. Commission always protected.</p>
+      <span>Read More →</span>
+    </div>
+  </a>
+
   <a href="/blog/sell-house-fast-fort-worth-tx" class="blog-card">
     <div class="card-top"><span class="card-label">Fort Worth, TX</span></div>
     <div class="card-body">
@@ -207,7 +203,6 @@
     </div>
   </a>
 
-  <!-- ── WEEK 1 ── -->
   <a href="/blog/sell-house-fast-marietta-ga" class="blog-card">
     <div class="card-top"><span class="card-label">Marietta, GA</span></div>
     <div class="card-body">
