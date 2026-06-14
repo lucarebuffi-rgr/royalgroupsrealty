@@ -75,7 +75,8 @@
     .form-group input:focus { border-color: var(--gold); }
     .consent { font-size: 0.75rem; color: var(--gray); margin-bottom: 16px; line-height: 1.5; }
     .consent label { display: flex; gap: 8px; margin-bottom: 10px; cursor: pointer; }
-    .consent a { color: var(--gold-accessible); }
+    /* FIX: nowrap prevents "Terms &" from orphaning on its own line */
+    .consent a { color: var(--gold-accessible); white-space: nowrap; }
     .btn-submit { width: 100%; background: var(--gold-accessible); color: var(--white); border: none; padding: 15px; border-radius: 6px; font-size: 1.05rem; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; letter-spacing: 0.03em; transition: background 0.2s; }
     .btn-submit:hover { background: var(--gold); color: var(--white); }
     #form-msg { margin-top: 12px; font-size: 0.9rem; font-weight: 600; text-align: center; }
