@@ -411,6 +411,10 @@ def blog_fort_worth():
 def blog_agents():
     return render_template('blog/cash-offers-real-estate-agents.html')
 
+@app.route('/blog/selling-inherited-home-texas')
+def blog_inherited_texas():
+    return render_template('blog/selling-inherited-home-texas.html')
+
 # ── Lead Form Submission ──
 @app.route("/submit", methods=["POST"])
 def submit():
