@@ -419,6 +419,10 @@ def blog_inherited_texas():
 def blog_hoarder():
     return render_template('blog/sell-hoarder-house.html')
 
+@app.route('/blog/sell-vacant-land-fast')
+def blog_vacant_land():
+    return render_template('blog/sell-vacant-land-fast.html')
+
 # ── Lead Form Submission ──
 @app.route("/submit", methods=["POST"])
 def submit():
