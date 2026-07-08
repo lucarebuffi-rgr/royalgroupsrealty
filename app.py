@@ -423,6 +423,10 @@ def blog_hoarder():
 def blog_vacant_land():
     return render_template('blog/sell-vacant-land-fast.html')
 
+@app.route("/blog/sell-house-fast-houston-tx")
+def blog_sell_house_fast_houston_tx():
+    return render_template("blog/sell-house-fast-houston-tx.html")
+
 # ── Lead Form Submission ──
 @app.route("/submit", methods=["POST"])
 def submit():
