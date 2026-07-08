@@ -7,20 +7,24 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Real Estate Resources | Royal Groups Realty</title>
-  <meta name="description" content="Tips, guides, and resources for homeowners and landowners looking to sell fast in Texas and Georgia. Covering foreclosure, inherited homes, land sales, and cash offers." />
+  <meta name="description" content="Tips, guides, and resources for homeowners looking to sell fast in Texas and Georgia. Covering foreclosure, inherited homes, cash offers, and more." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.royalgroupsrealty.com/blog" />
+  <meta property="og:title" content="Real Estate Resources | Royal Groups Realty" />
+  <meta property="og:description" content="Tips, guides, and resources for homeowners looking to sell fast in Texas and Georgia." />
   <meta property="og:image" content="https://www.royalgroupsrealty.com/static/og-banner.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.royalgroupsrealty.com/blog" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://www.royalgroupsrealty.com/static/og-banner.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>@font-face{font-family:'Playfair Display';font-weight:700;font-style:normal;font-display:swap;src:url('/static/fonts/playfair-display-latin-700-normal.woff2') format('woff2');}@font-face{font-family:'Playfair Display';font-weight:900;font-style:normal;font-display:swap;src:url('/static/fonts/playfair-display-latin-900-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:400;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:500;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:600;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-600-normal.woff2') format('woff2');}</style>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --navy: #0d1b2a; --gold: #c8932a; --gold-light: #e8b84b; --cream: #faf8f3; --white: #ffffff; --gray: #6b7280; --border: #e2e8f0; }
+    :root { --navy: #0d1b2a; --gold: #c8932a; --gold-light: #e8b84b; --gold-accessible: #8a5c14; --cream: #faf8f3; --white: #ffffff; --gray: #6b7280; --border: #e2e8f0; }
     body { font-family: "DM Sans", sans-serif; color: var(--navy); background: var(--white); line-height: 1.6; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
     .topbar { background: var(--navy); color: var(--white); text-align: center; padding: 8px 16px; font-size: 0.85rem; }
     .topbar a { color: var(--gold-light); text-decoration: none; font-weight: 600; }
     header { background: var(--white); box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
@@ -29,7 +33,7 @@
     nav > ul > li { position: relative; padding-bottom: 8px; }
     nav > ul > li > a { padding-top: 8px; text-decoration: none; color: var(--navy); font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.06em; transition: color 0.2s; display: flex; align-items: center; gap: 3px; }
     nav > ul > li > a:hover { color: var(--gold); }
-    .nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 10px 20px !important; border-radius: 4px !important; font-weight: 600 !important; }
+    .nav-cta { background: var(--gold-accessible) !important; color: var(--white) !important; padding: 10px 20px !important; border-radius: 4px !important; font-weight: 600 !important; }
     .nav-cta:hover { background: var(--gold-light) !important; color: var(--navy) !important; }
     .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: var(--white); box-shadow: 0 8px 32px rgba(0,0,0,0.14); border-radius: 8px; min-width: 210px; padding: 8px 0; z-index: 500; max-height: 400px; overflow-y: auto; list-style: none; }
     nav > ul > li:hover > .dropdown-menu { display: block; }
@@ -40,7 +44,7 @@
     .mobile-menu { display: none; background: var(--white); border-top: 1px solid var(--border); padding: 1rem 1.5rem 1.5rem; }
     .mobile-menu.open { display: block; }
     .mobile-menu a { display: block; padding: 0.6rem 0; font-size: 0.95rem; font-weight: 600; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--border); }
-    .mobile-menu .mobile-cta { margin-top: 1rem; background: var(--gold); color: var(--white); text-align: center; padding: 0.75rem; border-radius: 8px; font-weight: 700; border-bottom: none; }
+    .mobile-menu .mobile-cta { margin-top: 1rem; background: var(--gold-accessible); color: var(--white); text-align: center; padding: 0.75rem; border-radius: 8px; font-weight: 700; border-bottom: none; }
     .hero { background: linear-gradient(135deg, var(--navy) 0%, #1a3050 100%); color: var(--white); padding: 60px 24px; text-align: center; }
     .hero h1 { font-family: "Playfair Display", serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; margin-bottom: 12px; }
     .hero p { color: rgba(255,255,255,0.7); font-size: 1rem; max-width: 500px; margin: 0 auto; }
@@ -52,11 +56,11 @@
     .card-body { padding: 24px; }
     .card-body h3 { font-family: "Playfair Display", serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
     .card-body p { color: var(--gray); font-size: 0.88rem; line-height: 1.6; margin-bottom: 16px; }
-    .card-body span { color: var(--gold); font-size: 0.85rem; font-weight: 600; }
+    .card-body span { color: var(--gold-accessible); font-size: 0.85rem; font-weight: 600; }
     footer { background: var(--navy); color: rgba(255,255,255,0.6); padding: 48px 24px 28px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 32px; }
     .footer-desc { font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.45); max-width: 280px; }
-    footer h4 { color: var(--white); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+    footer h3 { color: var(--white); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
     footer ul { list-style: none; display: grid; gap: 10px; }
     footer ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.88rem; }
     footer ul a:hover { color: var(--gold-light); }
@@ -73,18 +77,23 @@
 <body>
 
 <div class="topbar">
-  ⭐ Trusted Home Buyer Since 2020 &nbsp;|&nbsp; Call or Text: <a href="tel:4696658481">469-665-8481</a>
+  &#11088; Trusted Home Buyer Since 2020 &nbsp;|&nbsp; Call or Text: <a href="tel:4696658481">469-665-8481</a>
 </div>
 
 <header>
   <nav>
-    <a href="/"><img src="/static/logo.png" alt="Royal Groups Realty" style="height:110px;" /></a>
+    <a href="/">
+      <picture>
+        <source srcset="/static/logo.webp" type="image/webp" />
+        <img src="/static/logo.png" alt="Royal Groups Realty" width="220" height="110" style="height:110px;width:auto;" fetchpriority="high" />
+      </picture>
+    </a>
     <ul>
       <li><a href="/">Home</a></li>
       <li><a href="/#how-it-works">How It Works</a></li>
       <li><a href="/about">About Us</a></li>
       <li>
-        <a href="#" onclick="return false;">Texas ▾</a>
+        <a href="#" onclick="return false;">Texas &#9662;</a>
         <ul class="dropdown-menu">
           <li><a href="/counties/angelina-county-tx">Angelina County</a></li>
           <li><a href="/counties/bee-county-tx">Bee County</a></li>
@@ -124,7 +133,7 @@
         </ul>
       </li>
       <li>
-        <a href="#" onclick="return false;">Georgia ▾</a>
+        <a href="#" onclick="return false;">Georgia &#9662;</a>
         <ul class="dropdown-menu">
           <li><a href="/counties/barrow-county-ga">Barrow County</a></li>
           <li><a href="/counties/bartow-county-ga">Bartow County</a></li>
@@ -167,7 +176,7 @@
       <li><a href="/contact">Contact</a></li>
       <li><a href="/" class="nav-cta">Get an Offer</a></li>
     </ul>
-    <button class="hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')" aria-label="Menu">
+    <button class="hamburger" onclick="document.querySelector('.mobile-menu').classList.toggle('open')" aria-label="Open navigation menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
@@ -176,24 +185,35 @@
     <a href="/#how-it-works">How It Works</a>
     <a href="/about">About Us</a>
     <a href="/blog">Resources</a>
-    <a href="/#faq">FAQ</a>
+    <a href="/contact">Contact</a>
     <a href="/" class="mobile-cta">Get an Offer</a>
   </div>
 </header>
 
+<main>
+
 <div class="hero">
   <h1>Real Estate Resources</h1>
-  <p>Tips, guides, and insights for homeowners and landowners looking to sell fast in Texas and Georgia.</p>
+  <p>Tips, guides, and insights for homeowners looking to sell fast in Texas and Georgia.</p>
 </div>
 
 <div class="blog-grid">
+
+  <a href="/blog/sell-house-fast-houston-tx" class="blog-card">
+    <div class="card-top"><span class="card-label">Houston, TX</span></div>
+    <div class="card-body">
+      <h3>How to Sell a House Fast in Houston, TX</h3>
+      <p>Need to sell your Houston home fast? Learn how cash buyers work in Harris County — no repairs, no fees, close in as little as 7 days.</p>
+      <span>Read More &rarr;</span>
+    </div>
+  </a>
 
   <a href="/blog/sell-vacant-land-fast" class="blog-card">
     <div class="card-top"><span class="card-label">Vacant Land</span></div>
     <div class="card-body">
       <h3>How to Sell Vacant Land Fast for Cash in Texas or Georgia</h3>
       <p>We buy raw land, lots, acreage, rural property, and inherited land across TX and GA. No commissions, no surveys, cash offer in 24 hours.</p>
-      <span>Read More →</span>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
@@ -202,25 +222,25 @@
     <div class="card-body">
       <h3>How to Sell a Hoarder House Fast in Texas or Georgia</h3>
       <p>We buy hoarder homes as-is across Texas and Georgia. No cleanup. No judgment. No repairs. Cash offer in 24 hours, close in 7 days.</p>
-      <span>Read More →</span>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
   <a href="/blog/selling-inherited-home-texas" class="blog-card">
-    <div class="card-top"><span class="card-label">Inherited Property · Texas</span></div>
+    <div class="card-top"><span class="card-label">Inherited Property &middot; Texas</span></div>
     <div class="card-body">
-      <h3>Selling an Inherited Home in Texas — Probate, Taxes & What You Net</h3>
+      <h3>Selling an Inherited Home in Texas &mdash; Probate, Taxes &amp; What You Net</h3>
       <p>Inherited a home in Texas? Learn how probate works, what taxes apply, and the real net comparison between MLS and a cash sale.</p>
-      <span>Read More →</span>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
   <a href="/blog/cash-offers-real-estate-agents" class="blog-card">
     <div class="card-top"><span class="card-label">For Agents</span></div>
     <div class="card-body">
-      <h3>Cash Offers for Real Estate Agents — Fixer-Uppers & Off-Market Listings</h3>
-      <p>Agents in Texas & Georgia: get fast cash offers on fixer-upper listings, off-market properties, and difficult sellers. Commission always protected.</p>
-      <span>Read More →</span>
+      <h3>Cash Offers for Real Estate Agents &mdash; Fixer-Uppers &amp; Off-Market Listings</h3>
+      <p>Agents in Texas &amp; Georgia: get fast cash offers on fixer-upper listings, off-market properties, and difficult sellers. Commission always protected.</p>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
@@ -228,8 +248,8 @@
     <div class="card-top"><span class="card-label">Fort Worth, TX</span></div>
     <div class="card-body">
       <h3>How to Sell a House Fast in Fort Worth, TX</h3>
-      <p>Need to sell your Fort Worth home fast? Learn how cash buyers work in Tarrant County — no repairs, no fees, close in as little as 7 days.</p>
-      <span>Read More →</span>
+      <p>Need to sell your Fort Worth home fast? Learn how cash buyers work in Tarrant County &mdash; no repairs, no fees, close in as little as 7 days.</p>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
@@ -237,8 +257,8 @@
     <div class="card-top"><span class="card-label">Marietta, GA</span></div>
     <div class="card-body">
       <h3>How to Sell a House Fast in Marietta, GA</h3>
-      <p>Need to sell your Marietta home fast? Learn how cash buyers work in Cobb County — no repairs, no fees, close in 7 days.</p>
-      <span>Read More →</span>
+      <p>Need to sell your Marietta home fast? Learn how cash buyers work in Cobb County &mdash; no repairs, no fees, close in 7 days.</p>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
@@ -246,8 +266,8 @@
     <div class="card-top"><span class="card-label">Dallas, TX</span></div>
     <div class="card-body">
       <h3>How to Sell a House Fast in Dallas, TX</h3>
-      <p>Need to sell your house fast in Dallas TX? Learn the fastest, easiest ways — including how cash buyers work and how to get a fair offer in 24 hours.</p>
-      <span>Read More →</span>
+      <p>Need to sell your house fast in Dallas TX? Learn the fastest, easiest ways &mdash; including how cash buyers work and how to get a fair offer in 24 hours.</p>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
@@ -255,8 +275,8 @@
     <div class="card-top"><span class="card-label">Atlanta, GA</span></div>
     <div class="card-body">
       <h3>How to Sell a House Fast in Atlanta, GA</h3>
-      <p>Need to sell your house fast in Atlanta GA? Discover the fastest ways to sell your Atlanta home for cash — no repairs, no fees, no commissions.</p>
-      <span>Read More →</span>
+      <p>Need to sell your house fast in Atlanta GA? Discover the fastest ways to sell your Atlanta home for cash &mdash; no repairs, no fees, no commissions.</p>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
@@ -264,8 +284,8 @@
     <div class="card-top"><span class="card-label">Texas</span></div>
     <div class="card-body">
       <h3>How to Avoid Foreclosure in Texas</h3>
-      <p>Facing foreclosure in Texas? Learn your options — including how selling fast for cash can stop foreclosure and protect your credit.</p>
-      <span>Read More →</span>
+      <p>Facing foreclosure in Texas? Learn your options &mdash; including how selling fast for cash can stop foreclosure and protect your credit.</p>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
@@ -274,25 +294,25 @@
     <div class="card-body">
       <h3>Selling an Inherited Home in Georgia</h3>
       <p>Inherited a home in Georgia? Learn everything about probate, taxes, title issues, and the fastest way to sell without hassle.</p>
-      <span>Read More →</span>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
   <a href="/blog/cash-offer-vs-traditional-home-sale" class="blog-card">
     <div class="card-top"><span class="card-label">Home Selling Tips</span></div>
     <div class="card-body">
-      <h3>Cash Offer vs Traditional Home Sale — Which is Better?</h3>
-      <p>A complete side-by-side comparison of cash offers vs listing with a Realtor — costs, timelines, and tradeoffs explained.</p>
-      <span>Read More →</span>
+      <h3>Cash Offer vs Traditional Home Sale &mdash; Which is Better?</h3>
+      <p>A complete side-by-side comparison of cash offers vs listing with a Realtor &mdash; costs, timelines, and tradeoffs explained.</p>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
   <a href="/blog/sell-house-as-is-dfw" class="blog-card">
     <div class="card-top"><span class="card-label">DFW, Texas</span></div>
     <div class="card-body">
-      <h3>Selling Your House As-Is in DFW — What to Expect</h3>
+      <h3>Selling Your House As-Is in DFW &mdash; What to Expect</h3>
       <p>Thinking about selling your DFW home as-is? Learn exactly what it means and the fastest way to sell without making a single repair.</p>
-      <span>Read More →</span>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
@@ -301,25 +321,25 @@
     <div class="card-body">
       <h3>How to Sell a House During Divorce in Texas</h3>
       <p>Going through a divorce in Texas? Learn how community property laws affect your home sale and the fastest way to close.</p>
-      <span>Read More →</span>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
   <a href="/blog/probate-real-estate-texas-georgia" class="blog-card">
     <div class="card-top"><span class="card-label">Probate Real Estate</span></div>
     <div class="card-body">
-      <h3>Probate Real Estate in Texas & Georgia — Seller's Options</h3>
-      <p>Dealing with probate real estate? Learn your options as an heir or executor — including how to sell fast for cash without the hassle.</p>
-      <span>Read More →</span>
+      <h3>Probate Real Estate in Texas &amp; Georgia &mdash; Seller's Options</h3>
+      <p>Dealing with probate real estate? Learn your options as an heir or executor &mdash; including how to sell fast for cash without the hassle.</p>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
   <a href="/blog/selling-partial-interest-property" class="blog-card">
-    <div class="card-top"><span class="card-label">Partial Interest & Title Issues</span></div>
+    <div class="card-top"><span class="card-label">Partial Interest &amp; Title Issues</span></div>
     <div class="card-body">
       <h3>Selling Your Partial Interest in a Property</h3>
       <p>Own a fraction of a property and want out? We specialize in buying partial interests and clearing title complications so you can move on.</p>
-      <span>Read More →</span>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
@@ -327,26 +347,26 @@
     <div class="card-top"><span class="card-label">Property Tax Delinquency</span></div>
     <div class="card-body">
       <h3>Sell Your House With Delinquent Property Taxes</h3>
-      <p>Behind on property taxes in Texas or Georgia? Learn how to sell fast before the county forecloses — and walk away with cash.</p>
-      <span>Read More →</span>
+      <p>Behind on property taxes in Texas or Georgia? Learn how to sell fast before the county forecloses &mdash; and walk away with cash.</p>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
   <a href="/blog/sell-house-financial-hardship-bankruptcy" class="blog-card">
     <div class="card-top"><span class="card-label">Financial Hardship</span></div>
     <div class="card-body">
-      <h3>Selling During Bankruptcy, Debt & Financial Hardship</h3>
+      <h3>Selling During Bankruptcy, Debt &amp; Financial Hardship</h3>
       <p>Dealing with bankruptcy, IRS liens, or serious debt? A fast cash sale may be your clearest path to a fresh financial start.</p>
-      <span>Read More →</span>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
   <a href="/blog/sell-house-with-liens" class="blog-card">
     <div class="card-top"><span class="card-label">Property Liens</span></div>
     <div class="card-body">
-      <h3>Selling a House With Liens — HOA, City, Contractor & More</h3>
+      <h3>Selling a House With Liens &mdash; HOA, City, Contractor &amp; More</h3>
       <p>Have liens on your property? Learn how they get resolved at closing and how to sell fast without paying them off first.</p>
-      <span>Read More →</span>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
@@ -354,8 +374,8 @@
     <div class="card-top"><span class="card-label">Fire Damaged Property</span></div>
     <div class="card-body">
       <h3>How to Sell a Fire Damaged House in Texas or Georgia</h3>
-      <p>Own a fire damaged property? Learn your options — from insurance to repairs to selling as-is for cash without fixing anything.</p>
-      <span>Read More →</span>
+      <p>Own a fire damaged property? Learn your options &mdash; from insurance to repairs to selling as-is for cash without fixing anything.</p>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
@@ -364,29 +384,36 @@
     <div class="card-body">
       <h3>Selling a House With Code Violations</h3>
       <p>Facing code enforcement violations and daily fines? Learn how to sell your property fast without fixing anything first.</p>
-      <span>Read More →</span>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
   <a href="/blog/sell-house-problem-tenants-landlord" class="blog-card">
-    <div class="card-top"><span class="card-label">Landlord & Tenant Issues</span></div>
+    <div class="card-top"><span class="card-label">Landlord &amp; Tenant Issues</span></div>
     <div class="card-body">
       <h3>Tired Landlord? Sell With Problem Tenants Still In Place</h3>
-      <p>Dealing with non-paying tenants, evictions, or property damage? We buy rental properties as-is — tenants and all.</p>
-      <span>Read More →</span>
+      <p>Dealing with non-paying tenants, evictions, or property damage? We buy rental properties as-is &mdash; tenants and all.</p>
+      <span>Read More &rarr;</span>
     </div>
   </a>
 
 </div>
 
+</main>
+
 <footer>
   <div class="footer-inner">
     <div>
-      <a href="/"><img src="/static/logo.png" alt="Royal Groups Realty" style="height:100px; margin-bottom:16px; display:block;" /></a>
+      <a href="/">
+        <picture>
+          <source srcset="/static/logo.webp" type="image/webp" />
+          <img src="/static/logo.png" alt="Royal Groups Realty" width="320" height="160" style="height:100px;width:auto;margin-bottom:16px;display:block;" loading="lazy" />
+        </picture>
+      </a>
       <p class="footer-desc">Luca Rebuffi offers a seamless, stress-free selling experience with easy-to-understand cash offers, no fees, and a flexible closing. 6 years experience. 250+ closings across Texas and Georgia.</p>
     </div>
     <div>
-      <h4>Quick Links</h4>
+      <h3>Quick Links</h3>
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/#how-it-works">How It Works</a></li>
@@ -398,22 +425,22 @@
       </ul>
     </div>
     <div>
-      <h4>Get In Touch</h4>
+      <h3>Get In Touch</h3>
       <ul>
-        <li><a href="tel:4696658481">📞 469-665-8481</a></li>
-        <li><a href="mailto:info@royalgroupsrealty.com">✉️ info@royalgroupsrealty.com</a></li>
+        <li><a href="tel:4696658481">&#128222; 469-665-8481</a></li>
+        <li><a href="mailto:info@royalgroupsrealty.com">&#9993;&#65039; info@royalgroupsrealty.com</a></li>
       </ul>
       <p style="margin-top:16px; font-size:0.82rem; color:rgba(255,255,255,0.35);">Serving all of Texas and Georgia.</p>
     </div>
   </div>
-  <div class="footer-bottom">© 2025 Luca Rebuffi – Royal Groups Realty. All Rights Reserved.</div>
+  <div class="footer-bottom">&copy; 2025 Luca Rebuffi &ndash; Royal Groups Realty. All Rights Reserved.</div>
 </footer>
 
 <script>
   document.addEventListener('click', function(e) {
-    const hamburger = document.querySelector('.hamburger');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    if (hamburger && !hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+    var hamburger = document.querySelector('.hamburger');
+    var mobileMenu = document.querySelector('.mobile-menu');
+    if (hamburger && !hamburger.contains(e.target) && mobileMenu && !mobileMenu.contains(e.target)) {
       mobileMenu.classList.remove('open');
     }
   });
