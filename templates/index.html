@@ -7,9 +7,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- PERFORMANCE: preconnect + preload -->
-  
-  
+  <!-- PERFORMANCE: preload logo -->
   <link rel="preload" as="image" href="/static/logo.webp" type="image/webp" fetchpriority="high" />
 
   <title>We Buy Houses Fast in Texas &amp; Georgia | Royal Groups Realty</title>
@@ -29,7 +27,6 @@
   <meta name="twitter:image" content="https://www.royalgroupsrealty.com/static/og-banner.png" />
   <meta name="google-site-verification" content="Cacw5NZs4u1IBjESWQEtmjGTay2Gp-uvzSigy2zR_I4" />
 
-  <!-- FONTS: gstatic preconnect, display=swap -->
   <style>@font-face{font-family:'Playfair Display';font-weight:700;font-style:normal;font-display:swap;src:url('/static/fonts/playfair-display-latin-700-normal.woff2') format('woff2');}@font-face{font-family:'Playfair Display';font-weight:900;font-style:normal;font-display:swap;src:url('/static/fonts/playfair-display-latin-900-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:400;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:500;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:600;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-600-normal.woff2') format('woff2');}</style>
 
   <style>
@@ -75,8 +72,7 @@
     .form-group input:focus { border-color: var(--gold); }
     .consent { font-size: 0.75rem; color: var(--gray); margin-bottom: 16px; line-height: 1.5; }
     .consent label { display: grid; grid-template-columns: 16px 1fr; gap: 8px; margin-bottom: 10px; cursor: pointer; align-items: start; }
-    /* FIX: nowrap prevents "Terms &" from orphaning on its own line */
-    .consent a { color: var(--gold-accessible); }
+    .consent a { color: var(--gold-accessible); white-space: nowrap; }
     .btn-submit { width: 100%; background: var(--gold-accessible); color: var(--white); border: none; padding: 15px; border-radius: 6px; font-size: 1.05rem; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; letter-spacing: 0.03em; transition: background 0.2s; }
     .btn-submit:hover { background: var(--gold); color: var(--white); }
     #form-msg { margin-top: 12px; font-size: 0.9rem; font-weight: 600; text-align: center; }
@@ -291,8 +287,8 @@
         <input type="email" id="email" placeholder="Email Address" />
       </div>
       <div class="consent">
-        <label><input type="checkbox" id="terms" /><span>I agree to the <a href="/terms">Terms &amp; Conditions</a> and <a href="/privacy">Privacy Policy</a>.</span></label>
-        <label><input type="checkbox" id="sms" /> I agree to receive communications from Luca Rebuffi &ndash; Royal Groups Realty via text, phone, and email. Msg &amp; data rates may apply. Reply STOP to opt out.</label>
+        <label><input type="checkbox" id="terms" /><span>I agree to the <a href="/terms">Terms &amp; Conditions</a> and <a href="/privacy">Privacy&nbsp;Policy</a>.</span></label>
+        <label><input type="checkbox" id="sms" /><span>I agree to receive communications from Luca Rebuffi &ndash; Royal Groups Realty via text, phone, and email. Msg &amp; data rates may apply. Reply STOP to opt out.</span></label>
       </div>
       <input type="text" name="website" id="honeypot" style="display:none;" tabindex="-1" autocomplete="off" />
       <button class="btn-submit" onclick="submitForm()">Get My Offer &rarr;</button>
@@ -322,6 +318,26 @@
         <h3>Close on Your Schedule</h3>
         <p>Choose a closing date that works for you. We handle all the paperwork, making the process smooth and stress-free.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO SECTION -->
+<section style="background:var(--navy); padding:72px 24px; text-align:center;">
+  <div style="max-width:800px; margin:0 auto;">
+    <div class="section-label" style="color:#f0d080;">Watch</div>
+    <h2 class="section-title" style="color:var(--white); margin-bottom:12px;">See How Royal Groups Realty Works</h2>
+    <p style="color:rgba(255,255,255,0.7); margin-bottom:32px; font-size:1rem;">We buy houses fast across Texas and Georgia &mdash; no repairs, no fees, no commissions.</p>
+    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,0.4);">
+      <iframe
+        src="https://www.youtube.com/embed/Pcax7oxHYvw"
+        title="How to Sell Your House Fast in Texas and Georgia | Royal Groups Realty"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+        style="position:absolute; top:0; left:0; width:100%; height:100%;">
+      </iframe>
     </div>
   </div>
 </section>
@@ -475,7 +491,7 @@
 </footer>
 
 <script>
-  const marqueeReviews = [
+  var marqueeReviews = [
     { name: "Shantaveous Cole", text: "Communication with Luca was awesome. He answered all of my questions. From the beginning to the end." },
     { name: "dlwilks", text: "Was easy to work with Luca on sale of estate property. Everything was handled seamlessly and we were able to close promptly. Overall excellent experience." },
     { name: "Virginia Little", text: "Communication with Luca was fantastic. Any time I had questions he'd respond right away. He was easy to talk to, respectful and focused on making sure I was happy. Would highly recommend." },
@@ -494,20 +510,20 @@
     { name: "Ted Morgan", text: "Luca and his team were super professional and courteous from start to finish. Closed ahead of the closing date! I look forward to doing business with them in the future." },
     { name: "Kevin Tran", text: "Luca is your guy! You have to appreciate someone who is over communicative and professional. Looking forward to getting more deals done. Thank you Royal Groups!" }
   ];
-  const mColors = ['#c8932a','#1a3050','#166534','#6b21a8','#991b1b','#0e7490'];
-  function getInitials(name) { return name.trim().split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase(); }
+  var mColors = ['#c8932a','#1a3050','#166534','#6b21a8','#991b1b','#0e7490'];
+  function getInitials(name) { return name.trim().split(' ').map(function(w){return w[0];}).join('').substring(0, 2).toUpperCase(); }
   function buildCard(r, i) {
-    const color = mColors[i % mColors.length];
+    var color = mColors[i % mColors.length];
     return '<div style="min-width:320px; max-width:320px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; padding:24px; flex-shrink:0;"><div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><div style="width:40px; height:40px; border-radius:50%; background:' + color + '; display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:0.85rem; flex-shrink:0;">' + getInitials(r.name) + '</div><div><div style="color:white; font-weight:600; font-size:0.9rem;">' + r.name + '</div><div style="color:#f59e0b; font-size:0.8rem;">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div></div><p style="color:rgba(255,255,255,0.75); font-size:0.88rem; line-height:1.6;">"' + r.text + '"</p></div>';
   }
-  const track = document.getElementById('marquee-track');
-  let html = '';
+  var track = document.getElementById('marquee-track');
+  var html = '';
   marqueeReviews.forEach(function(r, i) { html += buildCard(r, i); });
   marqueeReviews.forEach(function(r, i) { html += buildCard(r, i); });
   track.innerHTML = html;
-  let pos = 0, paused = false;
-  const speed = 0.5;
-  const halfWidth = track.scrollWidth / 2;
+  var pos = 0, paused = false;
+  var speed = 0.5;
+  var halfWidth = track.scrollWidth / 2;
   function animate() {
     if (!paused) { pos += speed; if (pos >= halfWidth) pos = 0; track.style.transform = 'translateX(-' + pos + 'px)'; }
     requestAnimationFrame(animate);
