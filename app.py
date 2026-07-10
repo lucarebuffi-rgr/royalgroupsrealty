@@ -427,6 +427,10 @@ def blog_vacant_land():
 def blog_sell_house_fast_houston_tx():
     return render_template("blog/sell-house-fast-houston-tx.html")
 
+@app.route('/blog/sell-house-foundation-issues')
+def blog_foundation():
+    return render_template('blog/sell-house-foundation-issues.html')
+
 # ── Lead Form Submission ──
 @app.route("/submit", methods=["POST"])
 def submit():
