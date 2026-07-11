@@ -61,37 +61,76 @@
     .mobile-menu.open { display: block; }
     .mobile-menu a { display: block; padding: 0.6rem 0; font-size: 0.95rem; font-weight: 600; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--border); }
     .mobile-menu .mobile-cta { margin-top: 1rem; background: var(--gold-accessible); color: var(--white); text-align: center; padding: 0.75rem; border-radius: 8px; font-weight: 700; border-bottom: none; }
-    .blog-hero { background: linear-gradient(135deg, var(--navy) 0%, #1a3050 100%); color: var(--white); padding: 60px 24px; text-align: center; }
+
+    .blog-hero { background: linear-gradient(135deg, var(--navy) 0%, #1a3050 60%, #0d2035 100%); color: var(--white); padding: 80px 24px 60px; text-align: center; }
     .blog-hero .label { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; font-weight: 600; color: var(--gold-light); margin-bottom: 12px; }
-    .blog-hero h1 { font-family: "Playfair Display", serif; font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 900; line-height: 1.2; max-width: 800px; margin: 0 auto 16px; }
+    .blog-hero h1 { font-family: "Playfair Display", serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.15; max-width: 850px; margin: 0 auto 16px; }
+    .blog-hero h1 em { color: var(--gold-light); font-style: normal; }
     .blog-hero .meta { color: rgba(255,255,255,0.6); font-size: 0.88rem; }
-    .blog-content { max-width: 780px; margin: 0 auto; padding: 60px 24px 80px; }
-    .blog-content h2 { font-family: "Playfair Display", serif; font-size: 1.6rem; font-weight: 700; margin: 40px 0 16px; color: var(--navy); }
-    .blog-content h3 { font-size: 1.15rem; font-weight: 700; margin: 28px 0 12px; }
-    .blog-content p { color: #374151; margin-bottom: 18px; font-size: 1rem; }
-    .blog-content ul, .blog-content ol { margin: 0 0 18px 24px; }
-    .blog-content ul li, .blog-content ol li { color: #374151; margin-bottom: 8px; font-size: 1rem; }
-    .blog-content strong { color: var(--navy); }
-    .blog-content a { color: var(--gold-accessible); }
-    .callout { background: var(--cream); border-left: 4px solid var(--gold); padding: 20px 24px; border-radius: 0 8px 8px 0; margin: 28px 0; }
-    .callout p { margin: 0; font-weight: 500; }
-    .cta-box { background: var(--navy); color: var(--white); padding: 36px; border-radius: 12px; text-align: center; margin: 40px 0; }
-    .cta-box h3 { font-family: "Playfair Display", serif; font-size: 1.5rem; margin-bottom: 12px; color: var(--white); }
-    .cta-box p { color: rgba(255,255,255,0.75); margin-bottom: 20px; }
-    .cta-box a { display: inline-block; background: var(--gold-accessible); color: var(--white); padding: 14px 32px; border-radius: 6px; text-decoration: none; font-weight: 700; }
-    .compare-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.95rem; }
-    .compare-table th { background: var(--navy); color: var(--white); padding: 12px 16px; text-align: left; font-weight: 600; }
-    .compare-table td { padding: 11px 16px; border-bottom: 1px solid var(--border); color: #374151; }
+
+    .section { padding: 72px 24px; }
+    .section-inner { max-width: 900px; margin: 0 auto; }
+    .section-label { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; font-weight: 600; color: var(--gold-accessible); margin-bottom: 10px; }
+    .section-title { font-family: "Playfair Display", serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; line-height: 1.25; margin-bottom: 20px; }
+    .prose p { color: #374151; margin-bottom: 18px; font-size: 1rem; line-height: 1.8; }
+    .prose ul, .prose ol { margin: 0 0 18px 24px; }
+    .prose ul li, .prose ol li { color: #374151; margin-bottom: 8px; font-size: 1rem; line-height: 1.75; }
+    .prose strong { color: var(--navy); }
+    .prose a { color: var(--gold-accessible); }
+    .prose h3 { font-size: 1.15rem; font-weight: 700; margin: 28px 0 12px; color: var(--navy); }
+
+    .cream-bg { background: var(--cream); }
+
+    .callout { background: var(--white); border-left: 4px solid var(--gold); padding: 22px 26px; border-radius: 0 8px 8px 0; margin: 28px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    .callout p { margin: 0; font-weight: 500; color: #374151; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .stat-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 24px 20px; text-align: center; }
+    .stat-num { font-family: "Playfair Display", serif; font-size: 2rem; font-weight: 900; color: var(--gold-light); line-height: 1; }
+    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.65); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 32px; }
+    .feature-card { background: var(--white); padding: 28px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+    .feature-icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .feature-card h3 { font-weight: 700; margin-bottom: 8px; font-size: 1rem; color: var(--navy); }
+    .feature-card p { color: var(--gray); font-size: 0.92rem; line-height: 1.7; }
+
+    .pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .pill { background: var(--white); border: 1px solid #d1d5db; padding: 6px 16px; border-radius: 20px; font-size: 0.88rem; font-weight: 500; color: var(--navy); }
+    .cream-bg .pill { background: var(--white); }
+    section:not(.cream-bg) .pill { background: var(--cream); }
+
+    .compare-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 0.95rem; background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+    .compare-table th { background: var(--navy); color: var(--white); padding: 14px 16px; text-align: left; font-weight: 600; }
+    .compare-table td { padding: 13px 16px; border-bottom: 1px solid var(--border); color: #374151; }
     .compare-table tr:last-child td { border-bottom: none; }
     .compare-table tr:nth-child(even) td { background: #f9fafb; }
     .check { color: #16a34a; font-weight: 700; }
     .cross { color: #dc2626; font-weight: 700; }
-    .related-posts { background: var(--cream); border-radius: 12px; padding: 28px; margin: 40px 0; }
-    .related-posts h3 { font-family: "Playfair Display", serif; font-size: 1.2rem; margin-bottom: 16px; color: var(--navy); }
-    .related-posts ul { list-style: none; margin: 0; padding: 0; }
-    .related-posts ul li { margin-bottom: 10px; }
-    .related-posts ul li a { color: var(--gold-accessible); font-weight: 500; text-decoration: none; font-size: 0.95rem; }
-    .related-posts ul li a:hover { text-decoration: underline; }
+
+    .faq-list { margin-top: 40px; display: grid; gap: 12px; }
+    .faq-item { border: 1.5px solid #e5e7eb; border-radius: 8px; overflow: hidden; background: var(--white); }
+    .faq-q { width: 100%; background: none; border: none; padding: 18px 20px; text-align: left; font-family: "DM Sans", sans-serif; font-size: 0.97rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; color: var(--navy); }
+    .faq-q span { font-size: 1.4rem; color: var(--gold-accessible); transition: transform 0.3s; font-weight: 400; }
+    .faq-q.open span { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.2s; background: var(--cream); }
+    .faq-a.open { max-height: 500px; padding: 0 20px 18px; }
+    .faq-a p { font-size: 0.93rem; color: var(--gray); padding-top: 14px; line-height: 1.75; }
+    .faq-a p a { color: var(--gold-accessible); }
+
+    .related-posts-section { background: var(--cream); }
+    .related-posts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 32px; }
+    .related-post { display: block; background: var(--white); padding: 20px 24px; border-radius: 8px; text-decoration: none; color: var(--navy); font-weight: 500; font-size: 0.95rem; box-shadow: 0 2px 10px rgba(0,0,0,0.04); transition: transform 0.2s; }
+    .related-post:hover { transform: translateY(-2px); color: var(--gold-accessible); }
+
+    .cta-section { background: var(--navy); color: var(--white); padding: 72px 24px; text-align: center; }
+    .cta-section h2 { font-family: "Playfair Display", serif; font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 16px; color: var(--white); }
+    .cta-section p { color: rgba(255,255,255,0.75); margin-bottom: 28px; font-size: 1rem; max-width: 640px; margin-left: auto; margin-right: auto; }
+    .cta-btn { display: inline-block; background: var(--gold-accessible); color: var(--white); padding: 16px 36px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 1.05rem; margin: 0 8px 12px; }
+    .cta-btn:hover { background: var(--gold-light); color: var(--navy); }
+    .cta-btn-outline { display: inline-block; background: transparent; color: var(--white); padding: 16px 36px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 1.05rem; border: 2px solid rgba(255,255,255,0.4); margin: 0 8px 12px; }
+    .cta-btn-outline:hover { background: rgba(255,255,255,0.1); }
+
     footer { background: var(--navy); color: rgba(255,255,255,0.6); padding: 48px 24px 28px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 32px; }
     .footer-desc { font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.45); max-width: 280px; }
@@ -100,7 +139,17 @@
     footer ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.88rem; }
     footer ul a:hover { color: var(--gold-light); }
     .footer-bottom { max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; font-size: 0.83rem; }
-    @media (max-width: 900px) { nav > ul { display: none; } .hamburger { display: flex; } .footer-inner { grid-template-columns: 1fr; gap: 2rem; } .compare-table { font-size: 0.82rem; } .compare-table th, .compare-table td { padding: 9px 10px; } }
+
+    @media (max-width: 900px) {
+      nav > ul { display: none; }
+      .hamburger { display: flex; }
+      .features-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .related-posts-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .compare-table { font-size: 0.82rem; }
+      .compare-table th, .compare-table td { padding: 10px 12px; }
+    }
   </style>
 </head>
 <body>
@@ -223,246 +272,284 @@
 
 <div class="blog-hero">
   <div class="label">Foundation Damage &middot; Texas &amp; Georgia</div>
-  <h1>How to Sell a House With Foundation Issues in Texas or Georgia</h1>
+  <h1>How to Sell a House With <em>Foundation Issues</em> in Texas or Georgia</h1>
   <div class="meta">By Luca Rebuffi &ndash; Royal Groups Realty &nbsp;&middot;&nbsp; July 2025 &nbsp;&middot;&nbsp; 9 min read</div>
 </div>
 
-<div class="blog-content">
-
-  <p>If you&rsquo;re trying to <strong>sell a house with foundation issues</strong>, you already know it&rsquo;s one of the toughest sales situations in real estate. The moment a retail buyer&rsquo;s inspector spots the words &ldquo;foundation movement&rdquo; or &ldquo;differential settlement,&rdquo; the deal usually dies &mdash; or the buyer comes back demanding $30,000 off the price and repair credits on top of it.</p>
-
-  <p>The good news: <strong>Royal Groups Realty buys homes with foundation problems as-is across Texas and Georgia</strong>. No repairs, no engineer&rsquo;s reports, no leveling estimates. Just a fair cash offer that factors in the condition, and a fast close that gets you out from under it. This guide walks through what causes foundation issues, what your options really are, and why a cash sale is almost always the smarter move.</p>
-
-  <h2>Why Foundation Issues Are So Common &mdash; Especially in Texas</h2>
-  <p>Texas is arguably the worst state in the country for residential foundation problems. The soil across most of the state &mdash; especially DFW, Houston, and Austin &mdash; is expansive clay. When it rains, the clay swells. When it dries out during a hot Texas summer, the clay shrinks. That constant expansion and contraction pushes and pulls on your foundation for decades, and eventually something gives.</p>
-  <p>Georgia has its own version of the problem. Red clay soil across metro Atlanta, plus foundation stress from heavy rain, poor drainage, and settling in older homes. The failure modes are slightly different but the outcome is the same &mdash; cracks, unlevel floors, sticking doors, and inspection nightmares.</p>
-
-  <div class="callout">
-    <p>&#128161; <strong>Foundation issues aren&rsquo;t unusual in Texas &mdash; they&rsquo;re common.</strong> Industry estimates suggest 20&ndash;30% of Texas homes will experience some form of foundation movement in their lifetime. So if this is happening to your home, you&rsquo;re not alone, and it&rsquo;s not your fault. It&rsquo;s the ground under the house.</p>
+<section class="section">
+  <div class="section-inner prose">
+    <div class="section-label">The Reality</div>
+    <h2 class="section-title">Selling a Home With Foundation Damage Doesn&rsquo;t Have to Be a Nightmare</h2>
+    <p>If you&rsquo;re trying to <strong>sell a house with foundation issues</strong>, you already know it&rsquo;s one of the toughest sales situations in real estate. The moment a retail buyer&rsquo;s inspector spots the words &ldquo;foundation movement&rdquo; or &ldquo;differential settlement,&rdquo; the deal usually dies &mdash; or the buyer comes back demanding $30,000 off the price and repair credits on top of it.</p>
+    <p>The good news: <strong>Royal Groups Realty buys homes with foundation problems as-is across Texas and Georgia</strong>. No repairs, no engineer&rsquo;s reports, no leveling estimates. Just a fair cash offer that factors in the condition, and a fast close that gets you out from under it. This guide walks through what causes foundation issues, what your options really are, and why a cash sale is almost always the smarter move.</p>
   </div>
+</section>
 
-  <h2>Common Signs of Foundation Problems</h2>
-  <p>Not sure if what you&rsquo;re seeing counts as a foundation issue? Here&rsquo;s what buyers, inspectors, and structural engineers look for:</p>
-  <ul>
-    <li><strong>Cracks in interior walls</strong> &mdash; especially diagonal cracks running from window/door corners toward the ceiling</li>
-    <li><strong>Cracks in exterior brick or siding</strong> &mdash; stair-step cracks in brick are a classic red flag</li>
-    <li><strong>Doors and windows that stick</strong> or won&rsquo;t close properly</li>
-    <li><strong>Uneven floors</strong> that slope noticeably when you walk across them</li>
-    <li><strong>Gaps between walls and ceilings/floors</strong></li>
-    <li><strong>Gaps in exterior brick around windows and doors</strong></li>
-    <li><strong>Cracks in the slab</strong> visible in garage, patio, or under carpet</li>
-    <li><strong>Cabinets or countertops pulling away from walls</strong></li>
-    <li><strong>Chimney tilting or separating from the house</strong></li>
-    <li><strong>Water pooling near the foundation</strong> after rain</li>
-    <li><strong>Cracked or damaged pier &amp; beam supports</strong> (in older homes)</li>
-    <li><strong>Musty smell or moisture</strong> in crawlspaces or basements</li>
-  </ul>
-
-  <h2>What Foundation Repair Actually Costs</h2>
-  <p>This is where most homeowners get an unpleasant surprise. Real numbers from Texas and Georgia foundation contractors:</p>
-  <ul>
-    <li><strong>Minor cracks and cosmetic repairs</strong> &mdash; $500&ndash;$2,500</li>
-    <li><strong>Slab pier repair (single side of house)</strong> &mdash; $4,000&ndash;$10,000</li>
-    <li><strong>Full slab pier repair</strong> &mdash; $10,000&ndash;$25,000</li>
-    <li><strong>Pier &amp; beam re-leveling</strong> &mdash; $5,000&ndash;$15,000</li>
-    <li><strong>Pier &amp; beam full replacement of piers/beams</strong> &mdash; $15,000&ndash;$40,000+</li>
-    <li><strong>Full foundation replacement</strong> &mdash; $30,000&ndash;$100,000+</li>
-    <li><strong>Drainage system correction</strong> (usually needed alongside repair) &mdash; $3,000&ndash;$12,000</li>
-    <li><strong>Engineer&rsquo;s report</strong> (required for permitting and by most buyers) &mdash; $500&ndash;$1,500</li>
-    <li><strong>Cosmetic repairs after foundation work</strong> (drywall, tile, brick, doors) &mdash; $3,000&ndash;$20,000</li>
-  </ul>
-  <p>A &ldquo;moderate&rdquo; foundation repair job in Texas typically runs <strong>$18,000&ndash;$35,000 all-in</strong> once you include the repair, drainage, engineer&rsquo;s letter, and cosmetic fixes to the interior/exterior after the piers go in. And that&rsquo;s before you list the house.</p>
-
-  <h2>Why Selling a House With Foundation Issues on the MLS Is So Hard</h2>
-
-  <h3>1. Most retail buyers can&rsquo;t finance it</h3>
-  <p>FHA, VA, and USDA loans require the home to meet minimum property standards &mdash; active foundation movement usually disqualifies. Conventional loans get spooked when the appraiser flags foundation issues. This eliminates the majority of your buyer pool immediately.</p>
-
-  <h3>2. The inspection kills most deals</h3>
-  <p>Even if you find a cash-heavy buyer, a good inspector will spot foundation movement in about 15 minutes. From that point, it&rsquo;s either a huge price cut, a demand for a signed transferable warranty from a foundation company, or the buyer walks entirely.</p>
-
-  <h3>3. Insurance may complicate the sale</h3>
-  <p>Some carriers won&rsquo;t write new policies on homes with active foundation movement. When the buyer&rsquo;s insurance comes back declined, the deal collapses.</p>
-
-  <h3>4. Disclosure requirements</h3>
-  <p>Both Texas and Georgia require sellers to disclose known material defects. Once you know about foundation issues, you have to tell buyers. That legal requirement is smart &mdash; it&rsquo;s also why so many foundation homes sit unsold for months.</p>
-
-  <h3>5. Repair-first strategies rarely work out</h3>
-  <p>Many homeowners try to &ldquo;fix it and list it.&rdquo; But even with a foundation warranty in hand, buyers get nervous. Homes that have had foundation work often sell for 5&ndash;15% less than comparable homes without a repair history &mdash; even after you&rsquo;ve spent $25K on the fix.</p>
-
-  <div class="cta-box">
-    <h3>Have a House With Foundation Problems?</h3>
-    <p>We buy homes with foundation damage as-is across Texas and Georgia. No repairs, no engineer&rsquo;s report required. Cash offer in 24 hours.</p>
-    <a href="/contact">Get My Cash Offer &rarr;</a>
+<section class="section cream-bg">
+  <div class="section-inner prose">
+    <div class="section-label">The Root Cause</div>
+    <h2 class="section-title">Why Foundation Issues Are So Common &mdash; Especially in Texas</h2>
+    <p>Texas is arguably the worst state in the country for residential foundation problems. The soil across most of the state &mdash; especially DFW, Houston, and Austin &mdash; is expansive clay. When it rains, the clay swells. When it dries out during a hot Texas summer, the clay shrinks. That constant expansion and contraction pushes and pulls on your foundation for decades, and eventually something gives.</p>
+    <p>Georgia has its own version of the problem. Red clay soil across metro Atlanta, plus foundation stress from heavy rain, poor drainage, and settling in older homes. The failure modes are slightly different but the outcome is the same &mdash; cracks, unlevel floors, sticking doors, and inspection nightmares.</p>
+    <div class="callout">
+      <p>&#128161; <strong>Foundation issues aren&rsquo;t unusual in Texas &mdash; they&rsquo;re common.</strong> Industry estimates suggest 20&ndash;30% of Texas homes will experience some form of foundation movement in their lifetime. So if this is happening to your home, you&rsquo;re not alone, and it&rsquo;s not your fault. It&rsquo;s the ground under the house.</p>
+    </div>
   </div>
+</section>
 
-  <h2>Your Real Options for Selling a Foundation-Damaged Home</h2>
-
-  <h3>Option 1: Repair, Then List on the MLS</h3>
-  <p>Spend $18K&ndash;$35K on foundation repair, cosmetic fixes, and an engineer&rsquo;s letter. Then list. Best case: you sell close to comparable market value, minus the natural discount buyers apply to homes with foundation history. Worst case: it still sits, and you&rsquo;re now $25K deeper into a house you were trying to get out of.</p>
-
-  <h3>Option 2: List As-Is at a Discount</h3>
-  <p>Skip the repair, price the home to reflect the issue, and hope for a cash-heavy investor. This can work &mdash; but you&rsquo;re now attracting mostly investors and flippers who make lowball offers, negotiate hard on inspection, and often back out anyway.</p>
-
-  <h3>Option 3: Sell Direct to a Cash Buyer Like Royal Groups Realty</h3>
-  <p>Skip the middle entirely. We buy the home as-is, cover closing costs, don&rsquo;t request an engineer&rsquo;s report, and close in 7&ndash;21 days. Our offer reflects the condition &mdash; but so would any as-is MLS offer, minus the commissions, minus the months of waiting, minus the risk of deal collapse.</p>
-
-  <h2>Real Numbers &mdash; Foundation Home Sale Comparison</h2>
-  <p>Here&rsquo;s a realistic scenario. A 1980s Dallas-area home worth around <strong>$310,000 in perfect condition</strong> &mdash; but with active slab foundation movement requiring $25,000 in repairs plus $8,000 in interior cosmetic fixes (drywall, tile, sticking doors).</p>
-
-  <table class="compare-table">
-    <thead>
-      <tr>
-        <th>Line Item</th>
-        <th>Repair &amp; List</th>
-        <th>List As-Is</th>
-        <th>Cash Sale</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Sale price</td>
-        <td>$285,000</td>
-        <td>$245,000</td>
-        <td>$220,000</td>
-      </tr>
-      <tr>
-        <td>Foundation repair</td>
-        <td class="cross">&ndash;$25,000</td>
-        <td>$0</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td>Cosmetic repair after piers</td>
-        <td class="cross">&ndash;$8,000</td>
-        <td>$0</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td>Engineer&rsquo;s letter</td>
-        <td class="cross">&ndash;$1,000</td>
-        <td>$0</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td>Agent commission (6%)</td>
-        <td class="cross">&ndash;$17,100</td>
-        <td class="cross">&ndash;$14,700</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td>Closing costs (~2%)</td>
-        <td class="cross">&ndash;$5,700</td>
-        <td class="cross">&ndash;$4,900</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td>Holding costs (5&ndash;6 mo)</td>
-        <td class="cross">&ndash;$8,000</td>
-        <td class="cross">&ndash;$6,000</td>
-        <td>$0</td>
-      </tr>
-      <tr>
-        <td><strong>Net to seller</strong></td>
-        <td><strong>$220,200</strong></td>
-        <td><strong>$219,400</strong></td>
-        <td><strong>$220,000</strong></td>
-      </tr>
-      <tr>
-        <td>Timeline</td>
-        <td>~7 months</td>
-        <td>~4 months</td>
-        <td class="check">7&ndash;21 days</td>
-      </tr>
-      <tr>
-        <td>Out-of-pocket cost</td>
-        <td class="cross">$34,000 upfront</td>
-        <td>$0</td>
-        <td class="check">$0</td>
-      </tr>
-      <tr>
-        <td>Certainty of close</td>
-        <td class="cross">Low &mdash; inspection risk</td>
-        <td class="cross">Low &mdash; financing issues</td>
-        <td class="check">Essentially guaranteed</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p>All three paths land in the same neighborhood &mdash; around $220K net. But the repair-and-list path requires <strong>$34K out of your pocket up front</strong> plus 7 months of holding and risk. The cash sale gets you the same net, in days, with zero cash out and zero risk.</p>
-
-  <h2>What Kinds of Foundation Issues We Buy</h2>
-  <p>All of them. Some common ones we see regularly:</p>
-  <ul>
-    <li><strong>Slab foundation movement</strong> &mdash; the most common Texas issue</li>
-    <li><strong>Cracked slabs</strong> visible in garage or under flooring</li>
-    <li><strong>Pier &amp; beam settling</strong> &mdash; common in older Dallas, Fort Worth, and Atlanta homes</li>
-    <li><strong>Failed foundation repair</strong> from a previous contractor</li>
-    <li><strong>Homes with active leaks or plumbing failures</strong> under the slab</li>
-    <li><strong>Homes on hillsides</strong> with movement issues (common in North Georgia)</li>
-    <li><strong>Post-tension slab damage</strong></li>
-    <li><strong>Basement wall bowing or cracking</strong> (Georgia)</li>
-    <li><strong>Homes with foundation engineer reports</strong> flagging major issues</li>
-    <li><strong>Homes previously red-flagged by inspectors or appraisers</strong></li>
-  </ul>
-
-  <h2>How to Get Started</h2>
-  <ol>
-    <li><strong>Call or text</strong> <a href="tel:4696658481">469-665-8481</a> or email <a href="mailto:info@royalgroupsrealty.com">info@royalgroupsrealty.com</a>. Tell us the address and roughly what&rsquo;s going on with the foundation. If you have an engineer&rsquo;s report or repair quote, great &mdash; send it. If not, no problem.</li>
-    <li><strong>Quick walkthrough</strong> &mdash; usually 20 minutes or so. We&rsquo;re not there to judge, just to see the extent of the issue so our offer is fair.</li>
-    <li><strong>Cash offer within 24 hours</strong> &mdash; we share our math openly, including how we factored in the repair cost.</li>
-    <li><strong>You choose when to close</strong> &mdash; 7 days, 30 days, whatever works for your timeline.</li>
-    <li><strong>Close at a licensed title company.</strong> Funds wired at closing.</li>
-  </ol>
-
-  <h2>Frequently Asked Questions</h2>
-
-  <h3>Do I need to get an engineer&rsquo;s report before you&rsquo;ll make an offer?</h3>
-  <p>No. We don&rsquo;t require any engineering reports, foundation quotes, or inspections from you. If you happen to already have documentation, it can help us make a more precise offer &mdash; but it&rsquo;s not required. We&rsquo;ll do our own walkthrough and evaluation.</p>
-
-  <h3>What if I don&rsquo;t know how bad the foundation issues are?</h3>
-  <p>Very common. Most homeowners just know something is &ldquo;off&rdquo; &mdash; doors sticking, cracks appearing, floors feeling uneven. Tell us what you&rsquo;re seeing and we&rsquo;ll take it from there. You don&rsquo;t need to diagnose it.</p>
-
-  <h3>Will you still buy if a previous inspection killed a sale?</h3>
-  <p>Yes &mdash; this is one of the most common situations we help with. A retail deal fell through because of foundation findings, and now the seller needs to move on. We&rsquo;re not scared off by an inspection report that scared away a retail buyer.</p>
-
-  <h3>Do you buy homes that have had foundation repair already?</h3>
-  <p>Absolutely. Even homes with completed foundation work often have trouble selling on the MLS because buyers get nervous. We don&rsquo;t. Whether the repair was recent, from 20 years ago, or is still ongoing, we&rsquo;re in.</p>
-
-  <h3>What about homes with plumbing leaks under the slab?</h3>
-  <p>Very common cause of foundation problems. We buy these regularly. Slab leaks, sewer line breaks, hot water leaks &mdash; all resolved as part of our purchase, not yours.</p>
-
-  <h3>Will insurance issues affect the sale?</h3>
-  <p>Not with us. We don&rsquo;t need to obtain homeowner&rsquo;s insurance to close, and we&rsquo;re not financing through a bank that requires it. So even if your carrier has non-renewed you due to foundation issues, we can still close.</p>
-
-  <h3>Do you buy pier &amp; beam homes with foundation issues?</h3>
-  <p>Yes. Pier &amp; beam is common in older Texas and Georgia homes and has its own set of common problems &mdash; rotting sills, sagging beams, cracked piers, moisture damage in the crawlspace. All manageable for us.</p>
-
-  <h3>How do you factor foundation damage into your offer?</h3>
-  <p>We estimate the repair cost based on what we see during walkthrough (or your engineer&rsquo;s report if you have one), plus a reasonable buffer for the unexpected. That cost gets deducted from what the home would be worth in fully repaired condition. We show you the math openly.</p>
-
-  <h3>Where do you buy?</h3>
-  <p>All of Texas and all of Georgia. Every county, every city. Foundation issues are especially common in <a href="/counties/dallas-county-tx">Dallas</a>, <a href="/counties/tarrant-county-tx">Tarrant</a>, <a href="/counties/collin-county-tx">Collin</a>, <a href="/counties/denton-county-tx">Denton</a>, <a href="/counties/harris-county-tx">Harris</a>, <a href="/counties/bexar-county-tx">Bexar</a>, <a href="/counties/williamson-county-tx">Williamson</a>, <a href="/counties/fulton-county-ga">Fulton</a>, <a href="/counties/cobb-county-ga">Cobb</a>, <a href="/counties/dekalb-county-ga">DeKalb</a>, and <a href="/counties/gwinnett-county-ga">Gwinnett</a>.</p>
-
-  <div class="related-posts">
-    <h3>Related Articles</h3>
+<section class="section">
+  <div class="section-inner prose">
+    <div class="section-label">Warning Signs</div>
+    <h2 class="section-title">Common Signs of Foundation Problems</h2>
+    <p>Not sure if what you&rsquo;re seeing counts as a foundation issue? Here&rsquo;s what buyers, inspectors, and structural engineers look for:</p>
     <ul>
-      <li><a href="/blog/sell-house-as-is-dfw">Selling a House As-Is in DFW</a></li>
-      <li><a href="/blog/cash-offer-vs-traditional-home-sale">Cash Offer vs Traditional Home Sale</a></li>
-      <li><a href="/blog/sell-house-code-violations">Selling a House With Code Violations</a></li>
-      <li><a href="/blog/sell-fire-damaged-house">Selling a Fire Damaged House</a></li>
-      <li><a href="/blog/sell-house-fast-dallas-tx">Sell a House Fast in Dallas, TX</a></li>
-      <li><a href="/blog/sell-house-fast-fort-worth-tx">Sell a House Fast in Fort Worth, TX</a></li>
+      <li><strong>Cracks in interior walls</strong> &mdash; especially diagonal cracks running from window/door corners toward the ceiling</li>
+      <li><strong>Cracks in exterior brick or siding</strong> &mdash; stair-step cracks in brick are a classic red flag</li>
+      <li><strong>Doors and windows that stick</strong> or won&rsquo;t close properly</li>
+      <li><strong>Uneven floors</strong> that slope noticeably when you walk across them</li>
+      <li><strong>Gaps between walls and ceilings/floors</strong></li>
+      <li><strong>Gaps in exterior brick around windows and doors</strong></li>
+      <li><strong>Cracks in the slab</strong> visible in garage, patio, or under carpet</li>
+      <li><strong>Cabinets or countertops pulling away from walls</strong></li>
+      <li><strong>Chimney tilting or separating from the house</strong></li>
+      <li><strong>Water pooling near the foundation</strong> after rain</li>
+      <li><strong>Cracked or damaged pier &amp; beam supports</strong> (in older homes)</li>
+      <li><strong>Musty smell or moisture</strong> in crawlspaces or basements</li>
     </ul>
   </div>
+</section>
 
-  <div style="margin-top:48px; padding-top:32px; border-top:1px solid #e5e7eb;">
-    <p style="color:var(--gray); font-size:0.9rem;"><strong>About Royal Groups Realty:</strong> We buy houses fast across Texas and Georgia &mdash; including homes with foundation damage, structural issues, and other conditions retail buyers avoid. 6 years in business, 250+ closings, 22 five-star Google reviews. Call us at <a href="tel:4696658481">469-665-8481</a>, email <a href="mailto:info@royalgroupsrealty.com">info@royalgroupsrealty.com</a>, or visit our <a href="/contact">contact page</a>.</p>
+<section class="section cream-bg">
+  <div class="section-inner prose">
+    <div class="section-label">The Real Costs</div>
+    <h2 class="section-title">What Foundation Repair Actually Costs</h2>
+    <p>This is where most homeowners get an unpleasant surprise. Real numbers from Texas and Georgia foundation contractors:</p>
+    <ul>
+      <li><strong>Minor cracks and cosmetic repairs</strong> &mdash; $500&ndash;$2,500</li>
+      <li><strong>Slab pier repair (single side of house)</strong> &mdash; $4,000&ndash;$10,000</li>
+      <li><strong>Full slab pier repair</strong> &mdash; $10,000&ndash;$25,000</li>
+      <li><strong>Pier &amp; beam re-leveling</strong> &mdash; $5,000&ndash;$15,000</li>
+      <li><strong>Pier &amp; beam full replacement of piers/beams</strong> &mdash; $15,000&ndash;$40,000+</li>
+      <li><strong>Full foundation replacement</strong> &mdash; $30,000&ndash;$100,000+</li>
+      <li><strong>Drainage system correction</strong> (usually needed alongside repair) &mdash; $3,000&ndash;$12,000</li>
+      <li><strong>Engineer&rsquo;s report</strong> (required for permitting and by most buyers) &mdash; $500&ndash;$1,500</li>
+      <li><strong>Cosmetic repairs after foundation work</strong> (drywall, tile, brick, doors) &mdash; $3,000&ndash;$20,000</li>
+    </ul>
+    <p>A &ldquo;moderate&rdquo; foundation repair job in Texas typically runs <strong>$18,000&ndash;$35,000 all-in</strong> once you include the repair, drainage, engineer&rsquo;s letter, and cosmetic fixes to the interior/exterior after the piers go in. And that&rsquo;s before you list the house.</p>
   </div>
+</section>
 
-</div>
+<section class="section">
+  <div class="section-inner prose">
+    <div class="section-label">Why the MLS Struggles</div>
+    <h2 class="section-title">Why Selling a Foundation-Damaged Home Traditionally Is So Hard</h2>
+    <h3>1. Most retail buyers can&rsquo;t finance it</h3>
+    <p>FHA, VA, and USDA loans require the home to meet minimum property standards &mdash; active foundation movement usually disqualifies. Conventional loans get spooked when the appraiser flags foundation issues. This eliminates the majority of your buyer pool immediately.</p>
+    <h3>2. The inspection kills most deals</h3>
+    <p>Even if you find a cash-heavy buyer, a good inspector will spot foundation movement in about 15 minutes. From that point, it&rsquo;s either a huge price cut, a demand for a signed transferable warranty from a foundation company, or the buyer walks entirely.</p>
+    <h3>3. Insurance may complicate the sale</h3>
+    <p>Some carriers won&rsquo;t write new policies on homes with active foundation movement. When the buyer&rsquo;s insurance comes back declined, the deal collapses.</p>
+    <h3>4. Disclosure requirements</h3>
+    <p>Both Texas and Georgia require sellers to disclose known material defects. Once you know about foundation issues, you have to tell buyers. That legal requirement is smart &mdash; it&rsquo;s also why so many foundation homes sit unsold for months.</p>
+    <h3>5. Repair-first strategies rarely work out</h3>
+    <p>Many homeowners try to &ldquo;fix it and list it.&rdquo; But even with a foundation warranty in hand, buyers get nervous. Homes that have had foundation work often sell for 5&ndash;15% less than comparable homes without a repair history &mdash; even after you&rsquo;ve spent $25K on the fix.</p>
+  </div>
+</section>
+
+<section class="section" style="padding:0;">
+  <div class="section-inner" style="padding: 72px 24px;">
+    <div class="section-label">By the Numbers</div>
+    <h2 class="section-title">Why Sellers Choose Royal Groups Realty</h2>
+  </div>
+  <div style="background: var(--navy); padding: 48px 24px;">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-num">24hr</div><div class="stat-label">Cash Offer</div></div>
+        <div class="stat-card"><div class="stat-num">7&ndash;28</div><div class="stat-label">Days to Close</div></div>
+        <div class="stat-card"><div class="stat-num">250+</div><div class="stat-label">Closings</div></div>
+        <div class="stat-card"><div class="stat-num">$0</div><div class="stat-label">Fees or Commissions</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section cream-bg">
+  <div class="section-inner prose">
+    <div class="section-label">Your Options</div>
+    <h2 class="section-title">Three Paths to Sell a Foundation-Damaged Home</h2>
+    <h3>Option 1: Repair, Then List on the MLS</h3>
+    <p>Spend $18K&ndash;$35K on foundation repair, cosmetic fixes, and an engineer&rsquo;s letter. Then list. Best case: you sell close to comparable market value, minus the natural discount buyers apply to homes with foundation history. Worst case: it still sits, and you&rsquo;re now $25K deeper into a house you were trying to get out of.</p>
+    <h3>Option 2: List As-Is at a Discount</h3>
+    <p>Skip the repair, price the home to reflect the issue, and hope for a cash-heavy investor. This can work &mdash; but you&rsquo;re now attracting mostly investors and flippers who make lowball offers, negotiate hard on inspection, and often back out anyway.</p>
+    <h3>Option 3: Sell Direct to a Cash Buyer Like Royal Groups Realty</h3>
+    <p>Skip the middle entirely. We buy the home as-is, cover closing costs, don&rsquo;t request an engineer&rsquo;s report, and close in 7&ndash;21 days. Our offer reflects the condition &mdash; but so would any as-is MLS offer, minus the commissions, minus the months of waiting, minus the risk of deal collapse.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner prose">
+    <div class="section-label">Side-by-Side Comparison</div>
+    <h2 class="section-title">Real Numbers &mdash; Foundation Home Sale Comparison</h2>
+    <p>Here&rsquo;s a realistic scenario. A 1980s Dallas-area home worth around <strong>$310,000 in perfect condition</strong> &mdash; but with active slab foundation movement requiring $25,000 in repairs plus $8,000 in interior cosmetic fixes (drywall, tile, sticking doors).</p>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Line Item</th>
+          <th>Repair &amp; List</th>
+          <th>List As-Is</th>
+          <th>Cash Sale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Sale price</td><td>$285,000</td><td>$245,000</td><td>$220,000</td></tr>
+        <tr><td>Foundation repair</td><td class="cross">&ndash;$25,000</td><td>$0</td><td>$0</td></tr>
+        <tr><td>Cosmetic repair after piers</td><td class="cross">&ndash;$8,000</td><td>$0</td><td>$0</td></tr>
+        <tr><td>Engineer&rsquo;s letter</td><td class="cross">&ndash;$1,000</td><td>$0</td><td>$0</td></tr>
+        <tr><td>Agent commission (6%)</td><td class="cross">&ndash;$17,100</td><td class="cross">&ndash;$14,700</td><td>$0</td></tr>
+        <tr><td>Closing costs (~2%)</td><td class="cross">&ndash;$5,700</td><td class="cross">&ndash;$4,900</td><td>$0</td></tr>
+        <tr><td>Holding costs (5&ndash;6 mo)</td><td class="cross">&ndash;$8,000</td><td class="cross">&ndash;$6,000</td><td>$0</td></tr>
+        <tr><td><strong>Net to seller</strong></td><td><strong>$220,200</strong></td><td><strong>$219,400</strong></td><td><strong>$220,000</strong></td></tr>
+        <tr><td>Timeline</td><td>~7 months</td><td>~4 months</td><td class="check">7&ndash;21 days</td></tr>
+        <tr><td>Out-of-pocket cost</td><td class="cross">$34,000 upfront</td><td>$0</td><td class="check">$0</td></tr>
+        <tr><td>Certainty of close</td><td class="cross">Low</td><td class="cross">Low</td><td class="check">Guaranteed</td></tr>
+      </tbody>
+    </table>
+    <p>All three paths land in the same neighborhood &mdash; around $220K net. But the repair-and-list path requires <strong>$34K out of your pocket up front</strong> plus 7 months of holding and risk. The cash sale gets you the same net, in days, with zero cash out and zero risk.</p>
+  </div>
+</section>
+
+<section class="section cream-bg">
+  <div class="section-inner">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-title">The Fastest, Easiest Way to Sell With Foundation Issues</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">&#9889;</div>
+        <h3>Cash Offer in 24 Hours</h3>
+        <p>We make cash offers on foundation-damaged homes within 24 hours. No engineer's report required, no repair quotes needed.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#127968;</div>
+        <h3>Buy As-Is &mdash; Any Condition</h3>
+        <p>Active slab movement, pier &amp; beam issues, failed prior repairs, plumbing leaks under the slab &mdash; we buy them all.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128176;</div>
+        <h3>Zero Fees or Commissions</h3>
+        <p>No agent commissions, no closing costs, no hidden fees. The cash offer we make is exactly what you receive at closing.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">&#128200;</div>
+        <h3>Guaranteed Close</h3>
+        <p>No financing contingencies, no inspection killers, no last-minute walkaways. Once we make an offer, we close.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">What We Buy</div>
+    <h2 class="section-title">Foundation Issues We Regularly Handle</h2>
+    <p style="color:var(--gray); margin-bottom: 8px; font-size:1rem;">All of them. Some common ones we see every month:</p>
+    <div class="pills">
+      <span class="pill">Slab foundation movement</span>
+      <span class="pill">Cracked slabs</span>
+      <span class="pill">Pier &amp; beam settling</span>
+      <span class="pill">Failed prior repairs</span>
+      <span class="pill">Plumbing leaks under slab</span>
+      <span class="pill">Hillside movement</span>
+      <span class="pill">Post-tension slab damage</span>
+      <span class="pill">Basement wall bowing</span>
+      <span class="pill">Engineer-flagged homes</span>
+      <span class="pill">Failed prior inspections</span>
+    </div>
+    <p style="color:var(--gray); margin-top:24px; font-size:0.92rem;">Don&rsquo;t see your situation? We&rsquo;ve probably seen worse. Call us at <a href="tel:4696658481" style="color:var(--gold-accessible); font-weight:600;">469-665-8481</a>.</p>
+  </div>
+</section>
+
+<section class="section cream-bg">
+  <div class="section-inner prose">
+    <div class="section-label">Simple Process</div>
+    <h2 class="section-title">How to Get Started</h2>
+    <ol>
+      <li><strong>Call or text</strong> <a href="tel:4696658481">469-665-8481</a> or email <a href="mailto:info@royalgroupsrealty.com">info@royalgroupsrealty.com</a>. Tell us the address and roughly what&rsquo;s going on with the foundation.</li>
+      <li><strong>Quick walkthrough</strong> &mdash; usually 20 minutes or so. We&rsquo;re not there to judge, just to see the extent of the issue so our offer is fair.</li>
+      <li><strong>Cash offer within 24 hours</strong> &mdash; we share our math openly, including how we factored in the repair cost.</li>
+      <li><strong>You choose when to close</strong> &mdash; 7 days, 30 days, whatever works for your timeline.</li>
+      <li><strong>Close at a licensed title company.</strong> Funds wired at closing.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Common Questions</div>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(0)">Do I need to get an engineer&rsquo;s report before you&rsquo;ll make an offer? <span>+</span></button>
+        <div class="faq-a" id="faq-0"><p>No. We don&rsquo;t require any engineering reports, foundation quotes, or inspections from you. If you happen to already have documentation, it can help us make a more precise offer &mdash; but it&rsquo;s not required. We&rsquo;ll do our own walkthrough and evaluation.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(1)">What if I don&rsquo;t know how bad the foundation issues are? <span>+</span></button>
+        <div class="faq-a" id="faq-1"><p>Very common. Most homeowners just know something is &ldquo;off&rdquo; &mdash; doors sticking, cracks appearing, floors feeling uneven. Tell us what you&rsquo;re seeing and we&rsquo;ll take it from there. You don&rsquo;t need to diagnose it.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(2)">Will you still buy if a previous inspection killed a sale? <span>+</span></button>
+        <div class="faq-a" id="faq-2"><p>Yes &mdash; this is one of the most common situations we help with. A retail deal fell through because of foundation findings, and now the seller needs to move on. We&rsquo;re not scared off by an inspection report that scared away a retail buyer.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(3)">Do you buy homes that have had foundation repair already? <span>+</span></button>
+        <div class="faq-a" id="faq-3"><p>Absolutely. Even homes with completed foundation work often have trouble selling on the MLS because buyers get nervous. We don&rsquo;t. Whether the repair was recent, from 20 years ago, or is still ongoing, we&rsquo;re in.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(4)">What about homes with plumbing leaks under the slab? <span>+</span></button>
+        <div class="faq-a" id="faq-4"><p>Very common cause of foundation problems. We buy these regularly. Slab leaks, sewer line breaks, hot water leaks &mdash; all resolved as part of our purchase, not yours.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(5)">Will insurance issues affect the sale? <span>+</span></button>
+        <div class="faq-a" id="faq-5"><p>Not with us. We don&rsquo;t need to obtain homeowner&rsquo;s insurance to close, and we&rsquo;re not financing through a bank that requires it. So even if your carrier has non-renewed you due to foundation issues, we can still close.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(6)">Do you buy pier &amp; beam homes with foundation issues? <span>+</span></button>
+        <div class="faq-a" id="faq-6"><p>Yes. Pier &amp; beam is common in older Texas and Georgia homes and has its own set of common problems &mdash; rotting sills, sagging beams, cracked piers, moisture damage in the crawlspace. All manageable for us.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(7)">How do you factor foundation damage into your offer? <span>+</span></button>
+        <div class="faq-a" id="faq-7"><p>We estimate the repair cost based on what we see during walkthrough (or your engineer&rsquo;s report if you have one), plus a reasonable buffer for the unexpected. That cost gets deducted from what the home would be worth in fully repaired condition. We show you the math openly.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(8)">Where do you buy? <span>+</span></button>
+        <div class="faq-a" id="faq-8"><p>All of Texas and all of Georgia. Every county, every city. Foundation issues are especially common in <a href="/counties/dallas-county-tx">Dallas</a>, <a href="/counties/tarrant-county-tx">Tarrant</a>, <a href="/counties/collin-county-tx">Collin</a>, <a href="/counties/denton-county-tx">Denton</a>, <a href="/counties/harris-county-tx">Harris</a>, <a href="/counties/bexar-county-tx">Bexar</a>, <a href="/counties/williamson-county-tx">Williamson</a>, <a href="/counties/fulton-county-ga">Fulton</a>, <a href="/counties/cobb-county-ga">Cobb</a>, <a href="/counties/dekalb-county-ga">DeKalb</a>, and <a href="/counties/gwinnett-county-ga">Gwinnett</a>.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section related-posts-section">
+  <div class="section-inner">
+    <div class="section-label">Keep Reading</div>
+    <h2 class="section-title">Related Articles</h2>
+    <div class="related-posts-grid">
+      <a href="/blog/sell-house-as-is-dfw" class="related-post">Selling a House As-Is in DFW &rarr;</a>
+      <a href="/blog/cash-offer-vs-traditional-home-sale" class="related-post">Cash Offer vs Traditional Home Sale &rarr;</a>
+      <a href="/blog/sell-house-code-violations" class="related-post">Selling a House With Code Violations &rarr;</a>
+      <a href="/blog/sell-fire-damaged-house" class="related-post">Selling a Fire Damaged House &rarr;</a>
+      <a href="/blog/sell-house-fast-dallas-tx" class="related-post">Sell a House Fast in Dallas, TX &rarr;</a>
+      <a href="/blog/sell-house-fast-fort-worth-tx" class="related-post">Sell a House Fast in Fort Worth, TX &rarr;</a>
+    </div>
+  </div>
+</section>
 
 </main>
+
+<section class="cta-section">
+  <h2>Ready to Sell Your Foundation-Damaged Home?</h2>
+  <p>Get a no-obligation cash offer within 24 hours. No repairs, no engineer&rsquo;s reports, no stress.</p>
+  <a href="/" class="cta-btn">Get My Cash Offer &rarr;</a>
+  <a href="tel:4696658481" class="cta-btn-outline">&#128222; Call 469-665-8481</a>
+</section>
 
 <footer>
   <div class="footer-inner">
@@ -500,6 +587,10 @@
 </footer>
 
 <script>
+  function toggleFaq(i) {
+    document.querySelectorAll('.faq-q')[i].classList.toggle('open');
+    document.getElementById('faq-' + i).classList.toggle('open');
+  }
   document.addEventListener('click', function(e) {
     var hamburger = document.querySelector('.hamburger');
     var mobileMenu = document.querySelector('.mobile-menu');
