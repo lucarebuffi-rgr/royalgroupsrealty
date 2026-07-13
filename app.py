@@ -438,20 +438,22 @@ def submit():
     honeypot = data.get("website", "").strip()
     if honeypot:
         return jsonify({"success": False, "message": "Invalid submission."}), 400
-    name    = data.get("name", "").strip()
-    phone   = data.get("phone", "").strip()
-    address = data.get("address", "").strip()
-    email   = data.get("email", "").strip()
+name          = data.get("name", "").strip()
+    phone         = data.get("phone", "").strip()
+    address       = data.get("address", "").strip()
+    email         = data.get("email", "").strip()
+    asking_price  = data.get("asking_price", "").strip()
 
     if not all([name, phone, address, email]):
         return jsonify({"success": False, "message": "All fields are required."}), 400
 
     try:
         requests.post(MAKE_WEBHOOK, json={
-            "name":    name,
-            "phone":   phone,
-            "address": address,
-            "email":   email
+            "name":          name,
+            "phone":         phone,
+            "address":       address,
+            "email":         email,
+            "asking_price":  asking_price
         })
     except Exception as e:
         print(f"Make.com error: {e}")
