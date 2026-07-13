@@ -438,7 +438,8 @@ def submit():
     honeypot = data.get("website", "").strip()
     if honeypot:
         return jsonify({"success": False, "message": "Invalid submission."}), 400
-name          = data.get("name", "").strip()
+
+    name          = data.get("name", "").strip()
     phone         = data.get("phone", "").strip()
     address       = data.get("address", "").strip()
     email         = data.get("email", "").strip()
