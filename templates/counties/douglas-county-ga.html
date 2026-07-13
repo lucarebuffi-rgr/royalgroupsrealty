@@ -292,6 +292,10 @@
         <label for="asking_price" class="sr-only">Asking Price (optional)</label>
         <input type="text" id="asking_price" placeholder="Asking Price (optional)" inputmode="numeric" autocomplete="off" />
       </div>
+      <div class="form-group">
+        <label for="asking_price" class="sr-only">Asking Price (optional)</label>
+        <input type="text" id="asking_price" placeholder="Asking Price (optional)" inputmode="numeric" autocomplete="off" />
+      </div>
       <input type="text" name="website" id="honeypot" style="display:none;" tabindex="-1" autocomplete="off" />
       <button class="btn-submit" onclick="submitForm()">Get My Offer →</button>
       <div id="form-msg"></div>
@@ -484,7 +488,7 @@
       phone: document.getElementById('phone').value,
       address: document.getElementById('address').value,
       email: document.getElementById('email').value,
-      website: document.getElementById('honeypot').value
+      asking_price: document.getElementById('asking_price') ? document.getElementById('asking_price').value : '', website: document.getElementById('honeypot').value
     };
     msg.className = '';
     msg.textContent = 'Submitting…';
