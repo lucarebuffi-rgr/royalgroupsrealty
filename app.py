@@ -431,6 +431,10 @@ def blog_sell_house_fast_houston_tx():
 def blog_foundation():
     return render_template('blog/sell-house-foundation-issues.html')
 
+@app.route('/blog/cash-home-buyer-rural-georgia')
+def blog_rural_georgia():
+    return render_template('blog/cash-home-buyer-rural-georgia.html')
+
 # ── Lead Form Submission ──
 @app.route("/submit", methods=["POST"])
 def submit():
