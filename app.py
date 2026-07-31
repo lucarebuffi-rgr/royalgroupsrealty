@@ -435,6 +435,10 @@ def blog_foundation():
 def blog_rural_georgia():
     return render_template('blog/cash-home-buyer-rural-georgia.html')
 
+@app.route('/blog/how-much-do-cash-home-buyers-pay')
+def blog_cash_buyer_percentage():
+    return render_template('blog/how-much-do-cash-home-buyers-pay.html')
+
 # ── Lead Form Submission ──
 @app.route("/submit", methods=["POST"])
 def submit():
