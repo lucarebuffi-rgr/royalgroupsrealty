@@ -439,6 +439,10 @@ def blog_rural_georgia():
 def blog_cash_buyer_percentage():
     return render_template('blog/how-much-do-cash-home-buyers-pay.html')
 
+@app.route('/blog/sell-house-fast-augusta-ga')
+def blog_augusta():
+    return render_template('blog/sell-house-fast-augusta-ga.html')
+
 # ── Lead Form Submission ──
 @app.route("/submit", methods=["POST"])
 def submit():
