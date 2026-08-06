@@ -443,6 +443,10 @@ def blog_cash_buyer_percentage():
 def blog_augusta():
     return render_template('blog/sell-house-fast-augusta-ga.html')
 
+@app.route('/blog/sell-land-comal-county-tx')
+def blog_comal_land():
+    return render_template('blog/sell-land-comal-county-tx.html')
+
 # ── Lead Form Submission ──
 @app.route("/submit", methods=["POST"])
 def submit():
