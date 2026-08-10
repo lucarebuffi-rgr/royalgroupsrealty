@@ -3,10 +3,10 @@ from flask import Flask, render_template, request, jsonify, send_from_directory,
 
 app = Flask(__name__)
 
-# ── Make.com webhook URL ──
+# Make.com webhook URL
 MAKE_WEBHOOK = "https://hook.us2.make.com/xa7uddev8m89ceqd97d9iurxyquirtn7"
 
-# ── 301 Redirects from old Squarespace URLs ──
+# 301 Redirects from old Squarespace URLs
 @app.route("/how-it-works")
 def how_it_works_redirect():
     return redirect("/#how-it-works", code=301)
@@ -27,7 +27,11 @@ def privacy_policy_redirect():
 def home_redirect():
     return redirect("/", code=301)
 
-# ── Core Pages ──
+@app.route("/terms-of-service/")
+def terms_of_service_redirect():
+    return redirect("/terms", code=301)
+
+# Core Pages
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -56,7 +60,7 @@ def blog():
 def sitemap():
     return send_from_directory(".", "sitemap.xml")
 
-# ── Texas County Pages ──
+# Texas County Pages
 @app.route("/counties/cooke-county-tx")
 def cooke_county_tx():
     return render_template("counties/cooke-county-tx.html")
@@ -197,7 +201,7 @@ def harris_county_tx():
 def comal_county_tx():
     return render_template("counties/comal-county-tx.html")
 
-# ── Georgia County Pages ──
+# Georgia County Pages
 @app.route("/counties/dawson-county-ga")
 def dawson_county_ga():
     return render_template("counties/dawson-county-ga.html")
@@ -338,7 +342,7 @@ def emanuel_county_ga():
 def liberty_county_ga():
     return render_template("counties/liberty-county-ga.html")
 
-# ── Blog Posts ──
+# Blog Posts
 @app.route("/blog/sell-house-fast-dallas-tx")
 def blog_sell_house_fast_dallas_tx():
     return render_template("blog/sell-house-fast-dallas-tx.html")
@@ -407,72 +411,35 @@ def blog_sell_house_fast_marietta_ga():
 def blog_fort_worth():
     return render_template("blog/sell-house-fast-fort-worth-tx.html")
 
-@app.route('/blog/cash-offers-real-estate-agents')
-def blog_agents():
-    return render_template('blog/cash-offers-real-estate-agents.html')
-
-@app.route('/blog/selling-inherited-home-texas')
-def blog_inherited_texas():
-    return render_template('blog/selling-inherited-home-texas.html')
-
-@app.route('/blog/sell-hoarder-house')
-def blog_hoarder():
-    return render_template('blog/sell-hoarder-house.html')
-
-@app.route('/blog/sell-vacant-land-fast')
-def blog_vacant_land():
-    return render_template('blog/sell-vacant-land-fast.html')
-
 @app.route("/blog/sell-house-fast-houston-tx")
 def blog_sell_house_fast_houston_tx():
     return render_template("blog/sell-house-fast-houston-tx.html")
 
-@app.route('/blog/sell-house-foundation-issues')
-def blog_foundation():
-    return render_template('blog/sell-house-foundation-issues.html')
+@app.route("/blog/cash-offers-real-estate-agents")
+def blog_agents():
+    return render_template("blog/cash-offers-real-estate-agents.html")
 
-@app.route('/blog/cash-home-buyer-rural-georgia')
-def blog_rural_georgia():
-    return render_template('blog/cash-home-buyer-rural-georgia.html')
-
-@app.route('/blog/how-much-do-cash-home-buyers-pay')
-def blog_cash_buyer_percentage():
-    return render_template('blog/how-much-do-cash-home-buyers-pay.html')
-
-@app.route('/blog/sell-house-fast-augusta-ga')
-def blog_augusta():
-    return render_template('blog/sell-house-fast-augusta-ga.html')
-
-@app.route('/blog/sell-land-comal-county-tx')
-def blog_comal_land():
-    return render_template('blog/sell-land-comal-county-tx.html')
-
-# ── Lead Form Submission ──
+# Lead Form Submission
 @app.route("/submit", methods=["POST"])
 def submit():
     data     = request.get_json()
     honeypot = data.get("website", "").strip()
     if honeypot:
         return jsonify({"success": False, "message": "Invalid submission."}), 400
-
-    name          = data.get("name", "").strip()
-    phone         = data.get("phone", "").strip()
-    address       = data.get("address", "").strip()
-    email         = data.get("email", "").strip()
-    asking_price  = data.get("asking_price", "").strip()
-    page_source   = data.get("page_source", "").strip()
+    name    = data.get("name", "").strip()
+    phone   = data.get("phone", "").strip()
+    address = data.get("address", "").strip()
+    email   = data.get("email", "").strip()
 
     if not all([name, phone, address, email]):
         return jsonify({"success": False, "message": "All fields are required."}), 400
 
     try:
         requests.post(MAKE_WEBHOOK, json={
-            "name":          name,
-            "phone":         phone,
-            "address":       address,
-            "email":         email,
-            "asking_price":  asking_price,
-            "page_source":   page_source
+            "name":    name,
+            "phone":   phone,
+            "address": address,
+            "email":   email
         })
     except Exception as e:
         print(f"Make.com error: {e}")
