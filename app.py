@@ -451,6 +451,10 @@ def blog_foreclosure_ga():
 def blog_manufactured():
     return render_template('blog/sell-manufactured-mobile-home-for-cash.html')
 
+@app.route('/blog/complete-guide-sell-house-for-cash-texas-georgia')
+def blog_complete_guide():
+    return render_template('blog/complete-guide-sell-house-for-cash-texas-georgia.html')
+
 # Lead Form Submission
 @app.route("/submit", methods=["POST"])
 def submit():
