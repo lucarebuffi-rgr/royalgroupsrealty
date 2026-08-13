@@ -419,6 +419,38 @@ def blog_sell_house_fast_houston_tx():
 def blog_agents():
     return render_template("blog/cash-offers-real-estate-agents.html")
 
+@app.route('/blog/how-long-does-it-take-to-sell-a-house-for-cash')
+def blog_timeline():
+    return render_template('blog/how-long-does-it-take-to-sell-a-house-for-cash.html')
+
+@app.route('/blog/what-happens-to-your-mortgage-when-you-sell-for-cash')
+def blog_mortgage():
+    return render_template('blog/what-happens-to-your-mortgage-when-you-sell-for-cash.html')
+
+@app.route('/blog/sell-house-fast-columbia-county-ga')
+def blog_columbia():
+    return render_template('blog/sell-house-fast-columbia-county-ga.html')
+
+@app.route('/blog/sell-house-fast-san-antonio-tx')
+def blog_san_antonio():
+    return render_template('blog/sell-house-fast-san-antonio-tx.html')
+
+@app.route('/blog/cash-home-buyer-vs-ibuyer')
+def blog_ibuyer():
+    return render_template('blog/cash-home-buyer-vs-ibuyer.html')
+
+@app.route('/blog/do-you-pay-taxes-when-you-sell-your-house-for-cash')
+def blog_taxes():
+    return render_template('blog/do-you-pay-taxes-when-you-sell-your-house-for-cash.html')
+
+@app.route('/blog/avoid-foreclosure-georgia')
+def blog_foreclosure_ga():
+    return render_template('blog/avoid-foreclosure-georgia.html')
+
+@app.route('/blog/sell-manufactured-mobile-home-for-cash')
+def blog_manufactured():
+    return render_template('blog/sell-manufactured-mobile-home-for-cash.html')
+
 # Lead Form Submission
 @app.route("/submit", methods=["POST"])
 def submit():
