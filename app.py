@@ -455,6 +455,14 @@ def blog_manufactured():
 def blog_complete_guide():
     return render_template('blog/complete-guide-sell-house-for-cash-texas-georgia.html')
 
+@app.route('/blog/probate-attorneys-guide-inherited-property-texas')
+def blog_probate_attorneys_tx():
+    return render_template('blog/probate-attorneys-guide-inherited-property-texas.html')
+
+@app.route('/blog/probate-attorneys-guide-inherited-property-georgia')
+def blog_probate_attorneys_ga():
+    return render_template('blog/probate-attorneys-guide-inherited-property-georgia.html')
+
 # Lead Form Submission
 @app.route("/submit", methods=["POST"])
 def submit():
