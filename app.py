@@ -467,6 +467,10 @@ def blog_probate_attorneys_ga():
 def blog_sell_house_fast_atlanta_metro_ga():
     return render_template("blog/sell-house-fast-atlanta-metro-ga.html")
 
+@app.route('/blog/sell-house-fast-austin-tx')
+def blog_austin():
+    return render_template('blog/sell-house-fast-austin-tx.html')
+
 # Lead Form Submission
 @app.route("/submit", methods=["POST"])
 def submit():
