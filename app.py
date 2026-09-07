@@ -471,6 +471,38 @@ def blog_sell_house_fast_atlanta_metro_ga():
 def blog_austin():
     return render_template('blog/sell-house-fast-austin-tx.html')
 
+@app.route('/blog/sell-land-comal-county-tx')
+def blog_comal_land():
+    return render_template('blog/sell-land-comal-county-tx.html')
+
+@app.route('/blog/sell-hoarder-house')
+def blog_hoarder_house():
+    return render_template('blog/sell-hoarder-house.html')
+
+@app.route('/blog/sell-vacant-land-fast')
+def blog_vacant_land():
+    return render_template('blog/sell-vacant-land-fast.html')
+
+@app.route('/blog/cash-home-buyer-rural-georgia')
+def blog_rural_georgia():
+    return render_template('blog/cash-home-buyer-rural-georgia.html')
+
+@app.route('/blog/sell-house-foundation-issues')
+def blog_foundation_issues():
+    return render_template('blog/sell-house-foundation-issues.html')
+
+@app.route('/blog/selling-inherited-home-texas')
+def blog_inherited_texas():
+    return render_template('blog/selling-inherited-home-texas.html')
+
+@app.route('/blog/how-much-do-cash-home-buyers-pay')
+def blog_cash_buyer_percentage():
+    return render_template('blog/how-much-do-cash-home-buyers-pay.html')
+
+@app.route('/blog/sell-house-fast-augusta-ga')
+def blog_augusta():
+    return render_template('blog/sell-house-fast-augusta-ga.html')
+
 # Lead Form Submission
 @app.route("/submit", methods=["POST"])
 def submit():
