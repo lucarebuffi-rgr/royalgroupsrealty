@@ -30,7 +30,7 @@
     "publisher": { "@type": "Organization", "name": "Royal Groups Realty", "url": "https://www.royalgroupsrealty.com" },
     "url": "https://www.royalgroupsrealty.com/blog/selling-partial-interest-property",
     "datePublished": "2026-04-12",
-    "dateModified": "2026-04-12"
+    "dateModified": "2026-09-13"
   }
   </script>
   <script type="application/ld+json">
@@ -123,6 +123,26 @@
   ]
 }
   </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Can You Sell Your Share of an Inherited House If Your Siblings Won't Sell?",
+  "description": "How to sell a partial or fractional ownership interest in a property in Texas and Georgia when a co-owner refuses to sell, why a partition lawsuit is usually the worst option, and how Royal Groups Realty buys partial interests other cash buyers turn down.",
+  "thumbnailUrl": [
+    "https://i.ytimg.com/vi/MuzGFegXUVQ/maxresdefault.jpg"
+  ],
+  "uploadDate": "2026-09-13",
+  "duration": "PT1M15S",
+  "contentUrl": "https://www.youtube.com/watch?v=MuzGFegXUVQ",
+  "embedUrl": "https://www.youtube.com/embed/MuzGFegXUVQ",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Royal Groups Realty",
+    "url": "https://www.royalgroupsrealty.com"
+  }
+}
+  </script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -165,6 +185,20 @@
     .prose a { color: var(--gold-accessible); }
     .prose h3 { font-size: 1.15rem; font-weight: 700; margin: 28px 0 12px; color: var(--navy); }
     .cream-bg { background: var(--cream); }
+    .video-wrap { max-width: 900px; margin: 34px auto 0; }
+    .video-frame { position: relative; width: 100%; padding-bottom: 56.25%; height: 0; border-radius: 12px; overflow: hidden; background: var(--navy); box-shadow: 0 10px 40px rgba(13,27,42,0.18); }
+    .video-frame iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .video-facade { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 0; border: 0; background: var(--navy); cursor: pointer; display: block; }
+    .video-facade img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .video-facade::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(13,27,42,0.38); transition: background 0.25s; }
+    .video-facade:hover::after, .video-facade:focus-visible::after { background: rgba(13,27,42,0.18); }
+    .video-facade:focus-visible { outline: 3px solid var(--gold-light); outline-offset: 3px; }
+    .video-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; width: 78px; height: 78px; border-radius: 50%; background: var(--gold-accessible); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 28px rgba(0,0,0,0.4); transition: transform 0.25s, background 0.25s; }
+    .video-facade:hover .video-play { transform: translate(-50%, -50%) scale(1.08); background: var(--gold-light); }
+    .video-play svg { width: 30px; height: 30px; fill: var(--white); margin-left: 5px; }
+    .video-facade:hover .video-play svg { fill: var(--navy); }
+    .video-caption { text-align: center; font-size: 0.85rem; color: var(--gray); margin-top: 16px; line-height: 1.6; }
+    .video-caption a { color: var(--gold-accessible); }
     .callout { background: var(--white); border-left: 4px solid var(--gold); padding: 22px 26px; border-radius: 0 8px 8px 0; margin: 28px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
     .callout p { margin: 0; font-weight: 500; color: #374151; }
     .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
@@ -219,6 +253,8 @@
       nav > ul { display: none; }
       .hamburger { display: flex; }
       .features-grid { grid-template-columns: 1fr; }
+      .video-play { width: 60px; height: 60px; }
+      .video-play svg { width: 23px; height: 23px; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .related-posts-grid { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
@@ -355,6 +391,18 @@
     <div class="section-label">The Situation</div>
     <h2 class="section-title">Stuck With a Partial Interest? You&rsquo;re Not Actually Stuck.</h2>
     <p>Owning a partial interest in a property &mdash; whether through inheritance, divorce, or a business partnership &mdash; can leave you feeling stuck. You may want to sell, but your co-owner doesn&rsquo;t. Or the title is complicated by multiple heirs. Here&rsquo;s what you need to know about your options &mdash; and how Royal Groups Realty can buy your share even when other cash buyers won&rsquo;t.</p>
+
+    <div class="video-wrap">
+      <div class="video-frame" id="video-frame">
+        <button class="video-facade" id="video-facade" onclick="loadVideo()" aria-label="Play video: Can You Sell Your Share of an Inherited House If Your Siblings Won&rsquo;t Sell?">
+          <img src="https://i.ytimg.com/vi/MuzGFegXUVQ/maxresdefault.jpg" alt="Royal Groups Realty video explaining how to sell a partial interest in a property in Texas and Georgia" width="1280" height="720" loading="lazy" />
+          <span class="video-play">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </button>
+      </div>
+      <p class="video-caption">Watch: Can You Sell Your Share of an Inherited House If Your Siblings Won&rsquo;t Sell? &nbsp;&middot;&nbsp; <a href="https://www.youtube.com/watch?v=MuzGFegXUVQ" target="_blank" rel="noopener">View on YouTube</a></p>
+    </div>
   </div>
 </section>
 
@@ -532,6 +580,20 @@
 </footer>
 
 <script>
+  function loadVideo() {
+    var frame = document.getElementById('video-frame');
+    var facade = document.getElementById('video-facade');
+    if (!frame || !facade) return;
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('src', 'https://www.youtube-nocookie.com/embed/MuzGFegXUVQ?autoplay=1&rel=0&modestbranding=1');
+    iframe.setAttribute('title', 'Can You Sell Your Share of an Inherited House If Your Siblings Won\u2019t Sell?');
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+    iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+    iframe.setAttribute('allowfullscreen', '');
+    facade.remove();
+    frame.appendChild(iframe);
+  }
   function toggleFaq(i) {
     document.querySelectorAll('.faq-q')[i].classList.toggle('open');
     document.getElementById('faq-' + i).classList.toggle('open');
