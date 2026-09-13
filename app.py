@@ -503,6 +503,10 @@ def blog_cash_buyer_percentage():
 def blog_augusta():
     return render_template('blog/sell-house-fast-augusta-ga.html')
 
+@app.route('/blog/sell-house-fast-savannah-ga')
+def blog_savannah():
+    return render_template('blog/sell-house-fast-savannah-ga.html')
+
 # Lead Form Submission
 @app.route("/submit", methods=["POST"])
 def submit():
