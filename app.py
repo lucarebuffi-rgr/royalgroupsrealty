@@ -507,6 +507,10 @@ def blog_augusta():
 def blog_savannah():
     return render_template('blog/sell-house-fast-savannah-ga.html')
 
+@app.route('/counties/travis-county-tx')
+def county_travis_tx():
+    return render_template('counties/travis-county-tx.html')
+
 # Lead Form Submission
 @app.route("/submit", methods=["POST"])
 def submit():
