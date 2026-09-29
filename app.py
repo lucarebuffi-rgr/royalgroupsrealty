@@ -511,6 +511,10 @@ def blog_savannah():
 def county_travis_tx():
     return render_template('counties/travis-county-tx.html')
 
+@app.route('/blog/real-estate-glossary-for-home-sellers')
+def blog_glossary():
+    return render_template('blog/real-estate-glossary-for-home-sellers.html')
+
 # Lead Form Submission
 @app.route("/submit", methods=["POST"])
 def submit():
