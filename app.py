@@ -515,6 +515,10 @@ def county_travis_tx():
 def blog_glossary():
     return render_template('blog/real-estate-glossary-for-home-sellers.html')
 
+@app.route('/blog/sell-house-with-mold-water-damage')
+def blog_mold_water_damage():
+    return render_template('blog/sell-house-with-mold-water-damage.html')
+
 # Lead Form Submission
 @app.route("/submit", methods=["POST"])
 def submit():
