@@ -140,7 +140,22 @@
     footer ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.88rem; }
     footer ul a:hover { color: var(--gold-light); }
     .footer-bottom { max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; font-size: 0.83rem; }
+    .compare-table { width: 100%; border-collapse: collapse; margin-top: 40px; font-size: 0.93rem; }
+    .compare-table th { padding: 14px 18px; text-align: left; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .compare-table th:first-child { background: transparent; }
+    .compare-table th.col-cash { background: var(--navy); color: var(--gold-light); border-radius: 8px 8px 0 0; }
+    .compare-table th.col-trad { background: #e5e7eb; color: var(--gray); border-radius: 8px 8px 0 0; }
+    .compare-table td { padding: 13px 18px; border-bottom: 1px solid #e5e7eb; vertical-align: middle; }
+    .compare-table td:first-child { font-weight: 600; color: var(--navy); }
+    .compare-table td.col-cash { background: rgba(13,27,42,0.04); color: var(--navy); font-weight: 600; }
+    .compare-table td.col-trad { background: #f9fafb; color: var(--gray); }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .check { color: #16a34a; font-weight: 700; }
+    .cross { color: #dc2626; font-weight: 700; }
     @media (max-width: 900px) {
+      .compare-table { font-size: 0.82rem; }
+      .compare-table th, .compare-table td { padding: 10px 12px; }
+    }
       .hero-inner { grid-template-columns: 1fr; }
       .steps { grid-template-columns: 1fr; }
       .features-grid { grid-template-columns: 1fr; }
@@ -203,7 +218,6 @@
           <li><a href="/counties/rockwall-county-tx">Rockwall County</a></li>
           <li><a href="/counties/smith-county-tx">Smith County</a></li>
           <li><a href="/counties/tarrant-county-tx">Tarrant County</a></li>
-          <li><a href="/counties/travis-county-tx">Travis County</a></li>
           <li><a href="/counties/victoria-county-tx">Victoria County</a></li>
           <li><a href="/counties/williamson-county-tx">Williamson County</a></li>
           <li><a href="/counties/wise-county-tx">Wise County</a></li>
@@ -336,6 +350,65 @@
   </div>
 </section>
 
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label">Cash vs. Traditional Sale</div>
+    <h2 class="section-title">Cash Offer vs. Listing on the MLS &mdash; Which Is Right for You?</h2>
+    <p class="section-sub">Not every Hall County homeowner needs a traditional listing. Here&rsquo;s an honest comparison so you can make the best decision for your situation.</p>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="col-cash">Royal Groups Realty (Cash)</th>
+          <th class="col-trad">Traditional MLS Listing</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Time to Receive Offer</td>
+          <td class="col-cash"><span class="check">&#10003;</span> Within 24 hours</td>
+          <td class="col-trad">Days to weeks on market</td>
+        </tr>
+        <tr>
+          <td>Time to Close</td>
+          <td class="col-cash"><span class="check">&#10003;</span> 7&ndash;28 days</td>
+          <td class="col-trad">30&ndash;60+ days</td>
+        </tr>
+        <tr>
+          <td>Repairs Required</td>
+          <td class="col-cash"><span class="check">&#10003;</span> None &mdash; we buy as-is</td>
+          <td class="col-trad"><span class="cross">&#10007;</span> Usually required</td>
+        </tr>
+        <tr>
+          <td>Agent Commissions</td>
+          <td class="col-cash"><span class="check">&#10003;</span> $0 &mdash; zero commissions</td>
+          <td class="col-trad"><span class="cross">&#10007;</span> 5&ndash;6% of sale price</td>
+        </tr>
+        <tr>
+          <td>Closing Costs</td>
+          <td class="col-cash"><span class="check">&#10003;</span> We cover all closing costs</td>
+          <td class="col-trad"><span class="cross">&#10007;</span> Typically 1&ndash;3%</td>
+        </tr>
+        <tr>
+          <td>Financing Contingencies</td>
+          <td class="col-cash"><span class="check">&#10003;</span> None &mdash; guaranteed close</td>
+          <td class="col-trad"><span class="cross">&#10007;</span> Deal can fall through</td>
+        </tr>
+        <tr>
+          <td>Home Showings</td>
+          <td class="col-cash"><span class="check">&#10003;</span> One walkthrough at most</td>
+          <td class="col-trad"><span class="cross">&#10007;</span> Multiple showings required</td>
+        </tr>
+        <tr>
+          <td>Certainty of Sale</td>
+          <td class="col-cash"><span class="check">&#10003;</span> Guaranteed if you accept</td>
+          <td class="col-trad">Depends on buyer financing</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
 <section class="section cream-bg">
   <div class="section-inner">
     <div class="section-label">Simple Process</div>
@@ -435,6 +508,18 @@
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(4)">How do I get a cash offer for my Hall County home? <span>+</span></button>
         <div class="faq-a" id="faq-4"><p>Fill out the form on this page or call us at 469-665-8481. We'll review your property details and get you a fair cash offer within 24 hours. No obligation, no pressure.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(5)">Will you buy my Hall County home near Lake Lanier or in a flood zone? <span>+</span></button>
+        <div class="faq-a" id="faq-5"><p>Yes. We buy properties throughout Hall County including homes near Lake Lanier, in flood zones, or with other environmental considerations. We evaluate each property on its own merits. Call us at 469-665-8481 to discuss your specific property.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(6)">Will you buy my Hall County home if it has a lien or back taxes? <span>+</span></button>
+        <div class="faq-a" id="faq-6"><p>Yes. We regularly purchase homes in Hall County that carry tax liens, HOA liens, or other encumbrances. In many cases these can be resolved directly at closing. Call us at 469-665-8481 and we&rsquo;ll walk through your specific situation at no cost.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(7)">Is your cash offer fair compared to listing on the MLS? <span>+</span></button>
+        <div class="faq-a" id="faq-7"><p>Our offers reflect the as-is market value of your Hall County home. While a cash offer may differ from a fully renovated listing price, you save on agent commissions (5&ndash;6%), closing costs, repair expenses, and months of carrying costs &mdash; factors that often equal or exceed any difference in price. We&rsquo;re transparent about our offers and never pressure you to accept.</p></div>
       </div>
     </div>
   </div>
