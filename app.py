@@ -519,6 +519,10 @@ def blog_glossary():
 def blog_mold_water_damage():
     return render_template('blog/sell-house-with-mold-water-damage.html')
 
+@app.route('/blog/sell-house-with-reverse-mortgage')
+def blog_reverse_mortgage():
+    return render_template('blog/sell-house-with-reverse-mortgage.html')
+
 # Lead Form Submission
 @app.route("/submit", methods=["POST"])
 def submit():
