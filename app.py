@@ -60,6 +60,11 @@ def blog():
 def sitemap():
     return send_from_directory(".", "sitemap.xml")
 
+# Unlisted deal landing pages (no nav links, no sitemap — only reachable with the link)
+@app.route("/deals/<deal_id>")
+def deal_page(deal_id):
+    return render_template("deal.html", deal_id=deal_id)
+
 # Texas County Pages
 @app.route("/counties/cooke-county-tx")
 def cooke_county_tx():
