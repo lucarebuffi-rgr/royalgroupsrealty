@@ -245,24 +245,22 @@
               '</div></div></a>';
           }).join('');
           grid.querySelectorAll('[data-photofolder]').forEach(async el => {
+            const addr = el.getAttribute('data-addr') || '';
+            const svFallback = () => {
+              const svUrl = 'https://maps.googleapis.com/maps/api/streetview?size=800x500&location=' + encodeURIComponent(addr) + '&key=' + STREETVIEW_KEY;
+              const wrap = document.createElement('div');
+              wrap.className = 'deal-photo-wrap sv-card-wrap';
+              wrap.innerHTML = '<img class="deal-photo" loading="lazy" src="' + svUrl + '" alt="Street view" onerror="this.parentElement.style.display=\'none\'" /><div class="sv-banner sm">PICTURES STILL PENDING</div>';
+              return wrap;
+            };
             const url = await firstPhoto({ masterPhoto: el.getAttribute('data-master'), driveFolderUrl: el.getAttribute('data-photofolder') });
             if (url) {
               const img = document.createElement('img');
               img.className = 'deal-photo'; img.loading = 'lazy'; img.src = url; img.alt = 'Property photo';
+              img.onerror = () => { img.replaceWith(svFallback()); };
               el.replaceWith(img);
             } else {
-              const wrap = document.createElement('div');
-              wrap.className = 'sv-card-wrap';
-              const img = document.createElement('img');
-              img.className = 'deal-photo'; img.loading = 'lazy'; img.alt = 'Street view of property';
-              img.src = 'https://maps.googleapis.com/maps/api/streetview?size=800x500&location=' + encodeURIComponent(el.getAttribute('data-addr') || '') + '&key=' + STREETVIEW_KEY;
-              img.onerror = () => { wrap.style.display = 'none'; };
-              const banner = document.createElement('div');
-              banner.className = 'sv-banner sm';
-              banner.textContent = 'PICTURES STILL PENDING';
-              wrap.appendChild(img);
-              wrap.appendChild(banner);
-              el.replaceWith(wrap);
+              el.replaceWith(svFallback());
             }
           });
         }
