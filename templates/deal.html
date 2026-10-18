@@ -175,6 +175,12 @@
       return d;
     }
     const COND_META = [['condRoof', 'Roof'], ['condHvac', 'HVAC'], ['condPlumbing', 'Plumbing'], ['condElectrical', 'Electrical'], ['condFoundation', 'Foundation'], ['condInterior', 'Interior'], ['condOther', 'Other Property Details']];
+    const TRANS_META = [['transWalkthrough', 'Walkthrough Date'], ['transClosing', 'Closing Date'], ['transOccupancy', 'Occupancy'], ['transAccess', 'Access Instructions'], ['transTitle', 'Title Company'], ['transEmd', 'EMD Required'], ['transPof', 'Proof of Funds Required']];
+    function transactionDetailsCard(d) {
+      const rows = TRANS_META.filter(m => (d[m[0]] || '').trim()).map(m =>
+        '<div class="cond-row"><div class="cond-name">' + m[1] + '</div><div class="cond-text">' + esc(d[m[0]]).replace(/\n/g, '<br>') + '</div></div>').join('');
+      return rows ? '<div class="card"><h2>Transaction Details</h2>' + rows + '</div>' : '';
+    }
     function conditionDetailsCard(d) {
       const rows = COND_META.filter(m => (d[m[0]] || '').trim()).map(m =>
         '<div class="cond-row"><div class="cond-name">' + m[1] + '</div><div class="cond-text">' + esc(d[m[0]]).replace(/\n/g, '<br>') + '</div></div>').join('');
@@ -263,6 +269,7 @@
               </div>
               ${componentsCard(d)}
               ${conditionDetailsCard(d)}
+              ${transactionDetailsCard(d)}
             </div>
             <div class="sticky-side">
               <div class="card" id="offer-card">
