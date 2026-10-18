@@ -107,31 +107,6 @@
 
   <div id="deal-root"><div class="empty-state">Loading deal…</div></div>
 
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <a href="/"><img src="/static/logo.png" alt="Royal Groups Realty" width="320" height="160" style="height:120px;width:auto;" loading="lazy" /></a>
-        <p>Luca Rebuffi offers a seamless, stress-free selling experience with easy-to-understand cash offers, no fees, and a flexible closing. 6 years experience. 250+ closings across Texas and Georgia.</p>
-      </div>
-      <div>
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About Us</a></li>
-          <li><a href="/contact">Contact</a></li>
-          <li><a href="/privacy">Privacy Policy</a></li>
-          <li><a href="/terms">Terms &amp; Conditions</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Get In Touch</h3>
-        <p class="phone"><a id="footer-phone" href="tel:4696063358" style="color:inherit;text-decoration:none;">&#128222; (469) 606-3358</a></p>
-        <p style="margin-top:12px;font-size:0.88rem;">We serve homeowners across all of Texas and Georgia.</p>
-      </div>
-    </div>
-    <div class="footer-bottom">&copy; 2025 Luca Rebuffi &ndash; Royal Groups Realty. All Rights Reserved.</div>
-  </footer>
-
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script>
@@ -254,10 +229,10 @@
                   <div>
                     <div class="nm">Luca Rebuffi</div>
                     <div class="co">Royal Groups Realty</div>
-                    <div class="ph"><a href="tel:' + PH.tel + '">&#128222; ' + PH.display + '</a></div>
+                    <div class="ph"><a href="tel:${PH.tel}">&#128222; ${PH.display}</a></div>
                   </div>
                 </div>
-                <p style="font-size:0.88rem;color:var(--gray);margin-top:14px;">Questions about this deal? Call or text ' + PH.display + ' — serious cash buyers only.</p>
+                <p style="font-size:0.88rem;color:var(--gray);margin-top:14px;">Questions about this deal? Call or text ${PH.display} — serious cash buyers only.</p>
               </div>
               <div class="card" id="offer-card">
                 <div class="section-label">Make An Offer</div>
