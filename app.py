@@ -9,8 +9,24 @@ app = Flask(__name__)
 FIREBASE_API_KEY = "AIzaSyDNpa-2O0RduvXa5qmmIfFoioKG4gyoCOs"
 FIRESTORE_DEALS_URL = "https://firestore.googleapis.com/v1/projects/rgr-crm-941ab/databases/(default)/documents/dispoDeals"
 
+def _fs_val(v, default=""):
+    if not isinstance(v, dict):
+        return default
+    if "stringValue" in v:
+        return v["stringValue"]
+    if "integerValue" in v:
+        try: return int(v["integerValue"])
+        except: return v["integerValue"]
+    if "doubleValue" in v:
+        return v["doubleValue"]
+    if "booleanValue" in v:
+        return v["booleanValue"]
+    if "timestampValue" in v:
+        return v["timestampValue"]
+    return default
+
 def _fs_str(v, default=""):
-    return v.get("stringValue", v.get("integerValue", default)) if isinstance(v, dict) else default
+    return _fs_val(v, default)
 
 def _flat_fields(doc):
     f = doc.get("fields", {})
@@ -31,39 +47,18 @@ def _cache_set(key, val):
 
 def get_deal_by_id(deal_id):
     """Fetch a single deal doc by ID for server-rendered meta tags."""
-    hit = _cache_get("id:" + deal_id)
-    if hit is not None:
-        return hit
-    try:
-        r = requests.get(FIRESTORE_DEALS_URL + "/" + deal_id, params={"key": FIREBASE_API_KEY}, timeout=8)
-        if r.status_code == 404:
-            return None
-        r.raise_for_status()
-        deal = _flat_fields(r.json())
-        _cache_set("id:" + deal_id, deal)
-        return deal
-    except Exception as e:
-        print("deal lookup failed:", e)
+    for d in get_all_deals():
+        if d.get("_id") == deal_id:
+            return d
     return None
 
 def get_deal_by_slug(slug):
     """Fetch a deal doc by its slug for server-rendered meta tags. Returns a flat dict or None."""
-    hit = _cache_get("slug:" + slug)
-    if hit is not None:
-        return hit
-    try:
-        r = requests.get(FIRESTORE_DEALS_URL, params={"key": FIREBASE_API_KEY, "pageSize": 100}, timeout=8)
-        r.raise_for_status()
-        for doc in r.json().get("documents", []):
-            f = doc.get("fields", {})
-            addr = _fs_str(f.get("address", {}))
-            dslug = _fs_str(f.get("slug", {})) or re.sub(r"[^a-zA-Z0-9]", "", addr)
-            if dslug == slug and _fs_str(f.get("stage", {})) not in ("dead", "closed"):
-                deal = {k: _fs_str(v) for k, v in f.items()}
-                _cache_set("slug:" + slug, deal)
-                return deal
-    except Exception as e:
-        print("deal lookup failed:", e)
+    for d in get_all_deals():
+        addr = d.get("address", "")
+        dslug = (d.get("slug") or "").strip() or re.sub(r"[^a-zA-Z0-9]", "", addr)
+        if dslug == slug:
+            return d
     return None
 
 # Make.com webhook URL
@@ -127,6 +122,41 @@ def sitemap():
 @app.route("/deals")
 def deals_index():
     return render_template("deals.html")
+
+def get_all_deals():
+    """All active deals, cached server-side. Public pages read from here, never Firestore directly."""
+    hit = _cache_get("all_deals")
+    if hit is not None:
+        return hit
+    try:
+        r = requests.get(FIRESTORE_DEALS_URL, params={"key": FIREBASE_API_KEY, "pageSize": 100}, timeout=8)
+        r.raise_for_status()
+        deals = []
+        for doc in r.json().get("documents", []):
+            d = _flat_fields(doc)
+            d["_id"] = doc.get("name", "").split("/")[-1]
+            if d.get("stage") not in ("dead", "closed"):
+                deals.append(d)
+        _cache_set("all_deals", deals)
+        return deals
+    except Exception as e:
+        print("deals fetch failed:", e)
+        return []
+
+@app.route("/api/deals")
+def api_deals():
+    return jsonify(get_all_deals())
+
+@app.route("/api/deal/<key>")
+def api_deal(key):
+    if "." in key:
+        abort(404)
+    for d in get_all_deals():
+        addr = d.get("address", "")
+        dslug = (d.get("slug") or "").strip() or re.sub(r"[^a-zA-Z0-9]", "", addr)
+        if dslug == key or d.get("_id") == key:
+            return jsonify(d)
+    abort(404)
 
 def _og_for_deal(deal):
     if not deal:
