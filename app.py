@@ -7,13 +7,12 @@ from flask import Flask, render_template, request, jsonify, send_from_directory,
 
 app = Flask(__name__)
 
-
 # Public Firebase client key (same one the templates use client-side) — lets the
 # server fetch a deal's master photo for link-preview meta tags.
 FIREBASE_API_KEY = "AIzaSyDNpa-2O0RduvXa5qmmIfFoioKG4gyoCOs"
 DRIVE_KEY = "AIzaSyBV20moxsKtzMqfg66XdaQ8Q4tGGNAK6I0"
+STREETVIEW_KEY = "AIzaSyC2jM_NVkTgo2d0nAQTOSpgMd53gBintEc"
 FIRESTORE_DEALS_URL = "https://firestore.googleapis.com/v1/projects/rgr-crm-941ab/databases/(default)/documents/dispoDeals"
-
 
 def _fs_val(v, default=""):
     if not isinstance(v, dict):
@@ -31,20 +30,16 @@ def _fs_val(v, default=""):
         return v["timestampValue"]
     return default
 
-
 def _fs_str(v, default=""):
     return _fs_val(v, default)
-
 
 def _flat_fields(doc):
     f = doc.get("fields", {})
     return {k: _fs_str(v) for k, v in f.items()}
 
-
 # Tiny TTL cache so deal pages don't hammer Firestore (quota is precious).
 _DEAL_CACHE = {}
 _DEAL_CACHE_TTL = 300
-
 
 def _cache_get(key):
     hit = _DEAL_CACHE.get(key)
@@ -52,15 +47,12 @@ def _cache_get(key):
         return hit[0]
     return None
 
-
 def _cache_get_stale(key):
     hit = _DEAL_CACHE.get(key)
     return hit[0] if hit else None
 
-
 def _cache_set(key, val):
     _DEAL_CACHE[key] = (val, time.time() + _DEAL_CACHE_TTL)
-
 
 def get_deal_by_id(deal_id):
     """Fetch a single deal doc by ID for server-rendered meta tags."""
@@ -68,7 +60,6 @@ def get_deal_by_id(deal_id):
         if d.get("_id") == deal_id:
             return d
     return None
-
 
 def get_deal_by_slug(slug):
     """Fetch a deal doc by its slug for server-rendered meta tags. Returns a flat dict or None."""
@@ -211,6 +202,9 @@ def get_all_deals():
                 d["estRent"] = rent
                 d["estRentLow"] = rent_low
                 d["estRentHigh"] = rent_high
+                # Resolve masterPhotoId to a stable URL for clients that don't know the new field yet.
+                if d.get("masterPhotoId") and not d.get("masterPhoto"):
+                    d["masterPhoto"] = "https://drive.google.com/thumbnail?id=" + str(d["masterPhotoId"]) + "&sz=s1200"
                 deals.append(d)
         _cache_set("all_deals", deals)
         return deals
@@ -268,30 +262,41 @@ def _thumb_base(u):
     return re.sub(r"=s\d+.*$", "", str(u or ""))
 
 def _og_photo_bytes(deal):
-    """Deal's master photo (matched by thumbnail URL) or first Drive photo, else None."""
+    """Deal's master photo (matched by file ID) or first Drive photo, else Street View, else None."""
     fid = _drive_folder_id(deal.get("driveFolderUrl"))
-    if not fid:
-        return None
+    if fid:
+        try:
+            q = "'%s' in parents and mimeType contains 'image/' and trashed = false" % fid
+            r = requests.get("https://www.googleapis.com/drive/v3/files",
+                             params={"q": q, "key": DRIVE_KEY, "fields": "files(id,thumbnailLink)", "pageSize": 20},
+                             timeout=10)
+            r.raise_for_status()
+            files = r.json().get("files", [])
+            if files:
+                # Match by masterPhotoId (file ID) first, then legacy masterPhoto URL, then first file
+                master_id = deal.get("masterPhotoId")
+                pick = next((f for f in files if master_id and f.get("id") == master_id), None)
+                if not pick:
+                    master_base = _thumb_base(deal.get("masterPhoto"))
+                    pick = next((f for f in files if master_base and _thumb_base(f.get("thumbnailLink")) == master_base), files[0])
+                tlink = re.sub(r"=s\d+.*$", "=s1600", pick.get("thumbnailLink") or "")
+                if tlink:
+                    ir = requests.get(tlink, timeout=15)
+                    ir.raise_for_status()
+                    return ir.content
+        except Exception as e:
+            print("og photo failed:", e)
+    # Fallback: Street View image for deals without Drive photos
     try:
-        q = "'%s' in parents and mimeType contains 'image/' and trashed = false" % fid
-        r = requests.get("https://www.googleapis.com/drive/v3/files",
-                         params={"q": q, "key": DRIVE_KEY, "fields": "files(id,thumbnailLink)", "pageSize": 20},
-                         timeout=10)
-        r.raise_for_status()
-        files = r.json().get("files", [])
-        if not files:
-            return None
-        master_base = _thumb_base(deal.get("masterPhoto"))
-        pick = next((f for f in files if master_base and _thumb_base(f.get("thumbnailLink")) == master_base), files[0])
-        tlink = re.sub(r"=s\d+.*$", "=s1600", pick.get("thumbnailLink") or "")
-        if not tlink:
-            return None
-        ir = requests.get(tlink, timeout=15)
-        ir.raise_for_status()
-        return ir.content
+        addr = ", ".join([deal.get("address", ""), deal.get("city", ""), deal.get("state", ""), deal.get("zip", "")]).strip(", ")
+        if addr and STREETVIEW_KEY:
+            sv_url = "https://maps.googleapis.com/maps/api/streetview?size=1200x800&location=" + requests.utils.quote(addr) + "&key=" + STREETVIEW_KEY
+            sr = requests.get(sv_url, timeout=15)
+            sr.raise_for_status()
+            return sr.content
     except Exception as e:
-        print("og photo failed:", e)
-        return None
+        print("og streetview failed:", e)
+    return None
 
 @app.route("/og-image/<key>")
 def og_image(key):
