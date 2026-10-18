@@ -202,8 +202,15 @@
           if (urls.length) {
             $('gallery').style.display = 'block';
             const main = $('gal-main'), strip = $('gal-strip');
-            const set = i => { main.src = urls[i]; strip.querySelectorAll('img').forEach((t, j) => t.classList.toggle('active', i === j)); };
-            strip.innerHTML = urls.map((u, i) => '<img src="' + u + '" loading="lazy" class="' + (i === 0 ? 'active' : '') + '" data-i="' + i + '" alt="Property photo" />').join('');
+            let gi = 0;
+            const set = i => { gi = i; main.src = urls[i]; strip.querySelectorAll('img').forEach((t, j) => t.classList.toggle('active', i === j)); };
+            main.onerror = () => {
+              const imgs = strip.querySelectorAll('img');
+              if (imgs[gi]) imgs[gi].style.display = 'none';
+              if (gi + 1 < urls.length) set(gi + 1);
+              else $('gallery').style.display = 'none';
+            };
+            strip.innerHTML = urls.map((u, i) => '<img src="' + u + '" loading="lazy" class="' + (i === 0 ? 'active' : '') + '" data-i="' + i + '" alt="Property photo" onerror="this.style.display=\'none\'" />').join('');
             strip.querySelectorAll('img').forEach(t => t.onclick = () => set(+t.dataset.i));
             set(0);
           }
