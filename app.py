@@ -269,6 +269,7 @@ def _og_photo_bytes(deal):
             q = "'%s' in parents and mimeType contains 'image/' and trashed = false" % fid
             r = requests.get("https://www.googleapis.com/drive/v3/files",
                              params={"q": q, "key": DRIVE_KEY, "fields": "files(id,thumbnailLink)", "pageSize": 20},
+                             headers={"Referer": "https://www.royalgroupsrealty.com/"},
                              timeout=10)
             r.raise_for_status()
             files = r.json().get("files", [])
