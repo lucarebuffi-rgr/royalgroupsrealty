@@ -1,4 +1,5 @@
 import requests
+import time
 from flask import Flask, render_template, request, jsonify, send_from_directory, redirect
 
 app = Flask(__name__)
@@ -15,20 +16,41 @@ def _flat_fields(doc):
     f = doc.get("fields", {})
     return {k: _fs_str(v) for k, v in f.items()}
 
+# Tiny TTL cache so deal pages don't hammer Firestore (quota is precious).
+_DEAL_CACHE = {}
+_DEAL_CACHE_TTL = 300
+
+def _cache_get(key):
+    hit = _DEAL_CACHE.get(key)
+    if hit and hit[1] > time.time():
+        return hit[0]
+    return None
+
+def _cache_set(key, val):
+    _DEAL_CACHE[key] = (val, time.time() + _DEAL_CACHE_TTL)
+
 def get_deal_by_id(deal_id):
     """Fetch a single deal doc by ID for server-rendered meta tags."""
+    hit = _cache_get("id:" + deal_id)
+    if hit is not None:
+        return hit
     try:
         r = requests.get(FIRESTORE_DEALS_URL + "/" + deal_id, params={"key": FIREBASE_API_KEY}, timeout=8)
         if r.status_code == 404:
             return None
         r.raise_for_status()
-        return _flat_fields(r.json())
+        deal = _flat_fields(r.json())
+        _cache_set("id:" + deal_id, deal)
+        return deal
     except Exception as e:
         print("deal lookup failed:", e)
     return None
 
 def get_deal_by_slug(slug):
     """Fetch a deal doc by its slug for server-rendered meta tags. Returns a flat dict or None."""
+    hit = _cache_get("slug:" + slug)
+    if hit is not None:
+        return hit
     try:
         r = requests.get(FIRESTORE_DEALS_URL, params={"key": FIREBASE_API_KEY, "pageSize": 100}, timeout=8)
         r.raise_for_status()
@@ -37,7 +59,9 @@ def get_deal_by_slug(slug):
             addr = _fs_str(f.get("address", {}))
             dslug = _fs_str(f.get("slug", {})) or re.sub(r"[^a-zA-Z0-9]", "", addr)
             if dslug == slug and _fs_str(f.get("stage", {})) not in ("dead", "closed"):
-                return {k: _fs_str(v) for k, v in f.items()}
+                deal = {k: _fs_str(v) for k, v in f.items()}
+                _cache_set("slug:" + slug, deal)
+                return deal
     except Exception as e:
         print("deal lookup failed:", e)
     return None
