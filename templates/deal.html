@@ -298,7 +298,7 @@
         const dealSpecsRows = [
           ['Price', money(d.askPrice)],
           ['Est. Flip Rehab', d.rehabFlip ? money(d.rehabFlip) : '—'],
-          ['Est. Rent-Ready Rehab', d.rehabRentReady ? money(d.rehabRentReady) : '—'],
+          ['Est. Rent-Ready Rehab', d.rehabFlip ? money(d.rehabFlip) : '—'],
           ['After Repair Value', money(d.arv)]
         ];
         if (d.estRent) {
@@ -314,8 +314,7 @@
         root.innerHTML = `
         <div class="hero"><div class="hero-inner">
           <div class="hero-label">${heroLabel}</div>
-          <h1>${esc(headline)}</h1>
-          <div class="hero-addr">${esc(d.address || '')}${addr2 ? ' · ' + esc(addr2) : ''}</div>
+          <div class="hero-addr" style="font-size:1.35rem;font-weight:600;color:#fff;">${esc(d.address || '')}${addr2 ? ' · ' + esc(addr2) : ''}</div>
           <div class="hero-price-row">
             <div class="hero-price"><div class="lbl">Price</div><div class="val">${money(d.askPrice)}</div></div>
             <div class="hero-price"><div class="lbl">After Repair Value</div><div class="val arv">${money(d.arv)}</div></div>
