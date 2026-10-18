@@ -38,6 +38,10 @@
     .state-card .cta { margin-top: 4px; font-size: 0.75rem; color: var(--gray); }
     .show-all { display: block; margin: 12px auto 0; background: none; border: none; color: var(--gold-accessible); font-size: 0.95rem; font-weight: 600; padding: 12px 20px; min-height: 48px; text-decoration: underline; }
     .deal-grid { display: grid; gap: 20px; margin-top: 20px; }
+    .agent-strip { background: var(--white); border-radius: 16px; padding: 22px 18px; box-shadow: 0 4px 18px rgba(0,0,0,0.06); display: flex; gap: 14px; align-items: center; margin-top: 20px; }
+    .agent-strip img { width: 68px; height: 68px; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold); flex: 0 0 auto; }
+    .agent-strip .nm { font-weight: 700; font-size: 1.05rem; margin-bottom: 6px; }
+    .agent-strip .ph a { color: var(--gold-accessible); font-weight: 700; text-decoration: none; font-size: 1.05rem; }
     .deal-card { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 18px rgba(0,0,0,0.07); display: block; text-decoration: none; color: inherit; }
     .deal-card:active { transform: scale(0.99); }
     .deal-photo-wrap { position: relative; }
@@ -88,6 +92,14 @@
       </select>
     </div>
     <div class="deal-grid" id="deal-grid"><div class="empty-state"><h2>Loading deals…</h2></div></div>
+    <div class="agent-strip">
+      <img src="/static/luca.webp" alt="Luca Rebuffi" loading="lazy" />
+      <div>
+        <div class="nm">Luca Rebuffi</div>
+        <div class="ph"><a href="tel:7707625598">&#127825; (770) 762-5598</a></div>
+        <div class="ph" style="margin-top:6px;"><a href="tel:4696063358">&#129312; (469) 606-3358</a></div>
+      </div>
+    </div>
   </div>
   <script>
     const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
