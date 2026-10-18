@@ -172,6 +172,7 @@
           '<div class="offer-form">' +
           '<input id="of-name" placeholder="Your name" autocomplete="name" />' +
           '<input id="of-phone" placeholder="Phone number" inputmode="tel" autocomplete="tel" />' +
+          '<input id="of-email" placeholder="Email address" type="email" inputmode="email" autocomplete="email" />' +
           '<input id="of-amount" placeholder="Offer amount ($)" inputmode="decimal" />' +
           '<button class="btn-submit" id="of-btn" onclick="submitOffer()">Submit Offer</button>' +
           '<div class="msg" id="offer-msg"></div>' +
@@ -200,18 +201,19 @@
     async function submitOffer() {
       const name = ($('of-name').value || '').trim();
       const phone = ($('of-phone').value || '').trim();
+      const email = ($('of-email').value || '').trim();
       const amount = +(($('of-amount').value || '').replace(/[^0-9.]/g, '') || 0);
       const msg = $('offer-msg');
       if (!name || !phone || !amount) { msg.className = 'msg error'; msg.textContent = 'Name, phone, and offer amount are required.'; return; }
       const btn = $('of-btn'); btn.disabled = true; btn.textContent = 'Submitting…';
       try {
         await db.collection('dispoOffers').add({
-          dealId: window.RESOLVED_DEAL_ID, buyerName: name + ' (web)', buyerPhone: phone,
+          dealId: window.RESOLVED_DEAL_ID, buyerName: name + ' (web)', buyerPhone: phone, buyerEmail: email,
           offerAmount: amount, source: 'landing_page', createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
         try { await db.collection('dispoActivity').add({ dealId: window.RESOLVED_DEAL_ID, type: 'offer', text: '🌐 Web offer: ' + name + ' — $' + amount.toLocaleString(), createdAt: firebase.firestore.FieldValue.serverTimestamp() }); } catch (e) {}
         msg.className = 'msg ok'; msg.textContent = 'Offer received! Luca will be in touch shortly.';
-        $('of-name').value = ''; $('of-phone').value = ''; $('of-amount').value = '';
+        $('of-name').value = ''; $('of-phone').value = ''; $('of-email').value = ''; $('of-amount').value = '';
       } catch (e) { msg.className = 'msg error'; msg.textContent = 'Could not submit — please call ' + ((window.DEAL_PHONE || {}).display || '(469) 606-3358') + ' instead.'; }
       btn.disabled = false; btn.textContent = 'Submit Offer';
     }
