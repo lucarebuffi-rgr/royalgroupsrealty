@@ -225,7 +225,7 @@
           '<tr><td>Est. flip rehab</td><td>' + (d.rehabFlip ? money(d.rehabFlip) : '—') + '</td></tr>' +
           '<tr><td>Est. rent-ready rehab</td><td>' + (d.rehabRentReady ? money(d.rehabRentReady) : '—') + '</td></tr>' +
           '<tr><td>After-repair value</td><td>' + money(d.arv) + '</td></tr>' +
-          (d.estRent ? '<tr><td>Est. rent value</td><td>' + money(d.estRent) + '/mo' + ((d.estRentLow && d.estRentHigh) ? '<br><small>(range ' + money(d.estRentLow) + '–' + money(d.estRentHigh) + ')</small>' : '') + '</td></tr>' : '') +
+          (d.estRent ? '<tr><td>Est. rent value</td><td>' + money(d.estRent) + '/mo' + ((d.estRentLow && d.estRentHigh) ? ' (range ' + money(d.estRentLow) + '–' + money(d.estRentHigh) + ')' : '') + '</td></tr>' : '') +
           '</table></div>' +
           componentsCard(d) +
           conditionDetailsCard(d) +
