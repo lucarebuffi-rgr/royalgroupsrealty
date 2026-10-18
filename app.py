@@ -176,11 +176,12 @@ def _og_for_deal(deal):
         return {}
     addr = deal.get("address", "")
     city = ", ".join(x for x in [deal.get("city", ""), deal.get("state", "")] if x)
+    ap = deal.get("askPrice")
+    ask_str = "$" + format(int(ap), ",d") if ap else "contact for price"
     return {
         "og_title": (deal.get("headline") or addr) + " | Royal Groups Realty",
         "og_description": "Off-market investment opportunity: %s%s — asking %s" % (
-            addr, (", " + city) if city else "",
-            ("$" + deal["askPrice"]) if deal.get("askPrice") else "contact for price"),
+            addr, (", " + city) if city else "", ask_str),
         "og_image": deal.get("masterPhoto", ""),
     }
 
