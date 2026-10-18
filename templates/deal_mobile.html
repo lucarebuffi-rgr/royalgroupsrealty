@@ -172,6 +172,10 @@
         document.title = (d.headline || d.address) + ' | Royal Groups Realty';
         const PH = dealPhone(d);
         window.DEAL_PHONE = PH;
+        const countyName = String(d.county || '').replace(/\s*county$/i, '').trim();
+        const heroLabel = countyName
+          ? '&#128205; ' + esc(countyName.toUpperCase()) + ' COUNTY, ' + esc(String(d.state || '').toUpperCase()) + ' OFF MARKET OPPORTUNITY'
+          : 'Off-Market Investment Opportunity';
         const full = [d.address, d.city, d.state, d.zip].filter(Boolean).join(', ');
         const dashed = full.replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '');
         const specs = [
@@ -180,7 +184,7 @@
           d.propertyType ? esc(d.propertyType) : ''
         ].filter(Boolean).map(s => '<span class="badge">' + s + '</span>').join('');
         root.innerHTML =
-          '<div class="hero"><div class="hero-label">Off-Market Investment Opportunity</div>' +
+          '<div class="hero"><div class="hero-label">' + heroLabel + '</div>' +
           '<h1>' + esc(d.headline || d.address) + '</h1>' +
           '<div class="addr">' + esc(full) + '</div>' +
           '<div class="hero-prices"><div><div class="lbl">Price</div><div class="ask">' + money(d.askPrice) + '</div></div>' +
