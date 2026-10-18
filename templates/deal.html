@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Investment Opportunity | Royal Groups Realty</title>
+  <meta name="description" content="Off-market investment opportunity from Royal Groups Realty." />
+
+  <style>@font-face{font-family:'Playfair Display';font-weight:700;font-style:normal;font-display:swap;src:url('/static/fonts/playfair-display-latin-700-normal.woff2') format('woff2');}@font-face{font-family:'Playfair Display';font-weight:900;font-style:normal;font-display:swap;src:url('/static/fonts/playfair-display-latin-900-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:400;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:500;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:600;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-600-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:700;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-700-normal.woff2') format('woff2');}</style>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1b2a; --gold: #c8932a; --gold-light: #e8b84b;
+      --gold-accessible: #8a5c14;
+      --cream: #faf8f3; --white: #ffffff; --gray: #6b7280;
+      --light-gray: #f3f4f6; --red: #c0392b; --green: #16a34a;
+    }
+    body { font-family: 'DM Sans', sans-serif; color: var(--navy); background: var(--cream); line-height: 1.6; }
+    .topbar { background: var(--navy); color: var(--white); text-align: center; padding: 8px 16px; font-size: 0.85rem; letter-spacing: 0.03em; }
+    .topbar a { color: var(--gold-light); text-decoration: none; font-weight: 600; }
+    header { background: var(--white); box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+    .nav-slim { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; }
+    .nav-slim img { height: 72px; width: auto; }
+    .nav-phone { background: var(--gold-accessible); color: var(--white); padding: 10px 20px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 0.95rem; }
+    .nav-phone:hover { background: var(--gold); }
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, #1a3050 60%, #0d2035 100%); color: var(--white); padding: 56px 24px 48px; }
+    .hero-inner { max-width: 1100px; margin: 0 auto; }
+    .hero-label { text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.75rem; font-weight: 600; color: var(--gold-light); margin-bottom: 12px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.15; margin-bottom: 8px; }
+    .hero-addr { color: rgba(255,255,255,0.7); font-size: 1.05rem; margin-bottom: 20px; }
+    .hero-price-row { display: flex; gap: 36px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 20px; }
+    .hero-price .lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.55); }
+    .hero-price .val { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; color: var(--gold-light); line-height: 1.1; }
+    .hero-price .val.arv { font-size: 1.5rem; color: var(--white); }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; }
+    .badge { background: rgba(200,147,42,0.2); border: 1px solid var(--gold); color: var(--gold-light); padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 24px 72px; }
+    .gallery { margin-bottom: 36px; }
+    .gallery-main { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 12px; box-shadow: 0 16px 40px rgba(0,0,0,0.12); background: var(--light-gray); cursor: pointer; }
+    .gallery-thumbs { display: flex; gap: 10px; overflow-x: auto; margin-top: 10px; padding-bottom: 4px; }
+    .gallery-thumbs img { width: 110px; height: 74px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid transparent; flex: 0 0 auto; }
+    .gallery-thumbs img.active { border-color: var(--gold); }
+    .cols { display: grid; grid-template-columns: 1fr 380px; gap: 36px; align-items: start; }
+    .card { background: var(--white); border-radius: 12px; padding: 32px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 28px; }
+    .section-label { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; font-weight: 600; color: var(--gold-accessible); margin-bottom: 10px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 14px; }
+    .about-text { color: #374151; font-size: 0.98rem; white-space: pre-wrap; line-height: 1.75; }
+    .spec-table { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
+    .spec-table td { padding: 10px 0; border-bottom: 1px solid var(--light-gray); }
+    .spec-table td:first-child { color: var(--gray); }
+    .spec-table td:last-child { text-align: right; font-weight: 600; }
+    .agent { display: flex; gap: 18px; align-items: center; }
+    .agent img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold); }
+    .agent .nm { font-weight: 700; font-size: 1.05rem; }
+    .agent .co { color: var(--gray); font-size: 0.88rem; }
+    .agent .ph a { color: var(--gold-accessible); font-weight: 700; text-decoration: none; font-size: 1rem; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; }
+    .form-group input, .form-group textarea { width: 100%; border: 1.5px solid #d1d5db; border-radius: 6px; padding: 12px 14px; font-size: 0.95rem; font-family: 'DM Sans', sans-serif; outline: none; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { min-height: 84px; resize: vertical; }
+    .btn-submit { width: 100%; background: var(--gold-accessible); color: var(--white); border: none; padding: 15px; border-radius: 6px; font-size: 1.05rem; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; letter-spacing: 0.03em; }
+    .btn-submit:hover { background: var(--gold); }
+    .btn-submit:disabled { opacity: 0.6; cursor: default; }
+    #offer-msg { margin-top: 12px; font-size: 0.9rem; font-weight: 600; text-align: center; }
+    #offer-msg.success { color: var(--green); }
+    #offer-msg.error { color: var(--red); }
+    .offer-done { text-align: center; padding: 24px 0; }
+    .offer-done .big { font-size: 2.6rem; }
+    .offer-done h3 { font-family: 'Playfair Display', serif; margin: 8px 0 4px; }
+    .offer-done p { color: var(--gray); font-size: 0.92rem; }
+    .sticky-side { position: sticky; top: 24px; }
+    footer { background: var(--navy); color: rgba(255,255,255,0.6); padding: 48px 24px 30px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 32px; }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.7; }
+    footer h3 { color: var(--white); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+    footer ul { list-style: none; display: grid; gap: 10px; }
+    footer ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.9rem; }
+    footer .phone { color: var(--gold-light); font-size: 1.15rem; font-weight: 600; }
+    .footer-bottom { max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; text-align: center; font-size: 0.83rem; }
+    .empty-state { text-align: center; padding: 100px 24px; color: var(--gray); }
+    @media (max-width: 900px) {
+      .cols { grid-template-columns: 1fr; }
+      .sticky-side { position: static; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .nav-slim img { height: 56px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">&#11088; Trusted Home Buyer Since 2020 &nbsp;|&nbsp; Call or Text: <a href="tel:4696658481">469-665-8481</a></div>
+  <header>
+    <div class="nav-slim">
+      <a href="/"><img src="/static/logo.png" alt="Royal Groups Realty" /></a>
+      <a class="nav-phone" href="tel:4696658481">&#128222; 469-665-8481</a>
+    </div>
+  </header>
+
+  <div id="deal-root"><div class="empty-state">Loading deal…</div></div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/"><img src="/static/logo.png" alt="Royal Groups Realty" width="320" height="160" style="height:120px;width:auto;" loading="lazy" /></a>
+        <p>Luca Rebuffi offers a seamless, stress-free selling experience with easy-to-understand cash offers, no fees, and a flexible closing. 6 years experience. 250+ closings across Texas and Georgia.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Get In Touch</h3>
+        <p class="phone"><a href="tel:4696658481" style="color:inherit;text-decoration:none;">&#128222; 469-665-8481</a></p>
+        <p style="margin-top:12px;font-size:0.88rem;">We serve homeowners across all of Texas and Georgia.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Luca Rebuffi &ndash; Royal Groups Realty. All Rights Reserved.</div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+    const DEAL_ID = {{ deal_id|tojson }};
+    firebase.initializeApp({
+      apiKey: <redacted>,
+      authDomain: "rgr-crm-941ab.firebaseapp.com",
+      projectId: "rgr-crm-941ab"
+    });
+    const db = firebase.firestore();
+    const DRIVE_KEY=<redacted>
+    const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    const money = n => (n === '' || n == null || isNaN(+n)) ? '—' : '$' + (+n).toLocaleString();
+    const $ = id => document.getElementById(id);
+
+    function driveFolderId(url) {
+      const m = String(url || '').match(/folders\/([a-zA-Z0-9_-]+)/);
+      return m ? m[1] : '';
+    }
+    async function photoURLs(folderUrl) {
+      const fid = driveFolderId(folderUrl);
+      if (!fid) return [];
+      try {
+        const q = encodeURIComponent("'" + fid + "' in parents and mimeType contains 'image/' and trashed = false");
+        const r = await fetch('https://www.googleapis.com/drive/v3/files?q=' + q + '&key=' + DRIVE_KEY + '&fields=files(id,thumbnailLink)&pageSize=24');
+        const j = await r.json();
+        return (j.files || []).map(f => (f.thumbnailLink || '').replace(/=s\d+.*$/, '=s1200'));
+      } catch (e) { return []; }
+    }
+
+    async function boot() {
+      const root = $('deal-root');
+      try {
+        const doc = await db.collection('dispoDeals').doc(DEAL_ID).get();
+        if (!doc.exists) { root.innerHTML = '<div class="empty-state"><h2>Deal not found</h2><p>This listing is no longer available.</p></div>'; return; }
+        const d = { id: doc.id, ...doc.data() };
+        if (['dead', 'closed'].includes(d.stage)) { root.innerHTML = '<div class="empty-state"><h2>No longer available</h2><p>This deal has been closed.</p></div>'; return; }
+        document.title = (d.headline || d.address) + ' | Royal Groups Realty';
+        const headline = d.headline || d.address;
+        const addr2 = [d.city, d.state].filter(Boolean).join(', ') + (d.zip ? ' ' + d.zip : '');
+        const badges = [
+          d.beds ? d.beds + ' Beds' : '', d.baths ? d.baths + ' Baths' : '',
+          d.sqft ? (+d.sqft).toLocaleString() + ' Sq Ft' : '',
+          d.propertyType || '', d.yearBuilt ? 'Built ' + d.yearBuilt : ''
+        ].filter(Boolean).map(b => '<span class="badge">' + esc(b) + '</span>').join('');
+        const specs = [
+          ['Bedrooms', d.beds || '—'], ['Bathrooms', d.baths || '—'],
+          ['Living Area', d.sqft ? (+d.sqft).toLocaleString() + ' sq ft' : '—'],
+          ['Year Built', d.yearBuilt || '—'], ['Property Type', d.propertyType || '—'],
+          ['Asking Price', money(d.askPrice)], ['After Repair Value', money(d.arv)],
+          ['Est. Repairs', d.repairEst ? money(d.repairEst) : '—']
+        ].map(r => '<tr><td>' + r[0] + '</td><td>' + esc(String(r[1])) + '</td></tr>').join('');
+
+        root.innerHTML = `
+        <div class="hero"><div class="hero-inner">
+          <div class="hero-label">Off-Market Investment Opportunity</div>
+          <h1>${esc(headline)}</h1>
+          <div class="hero-addr">${esc(d.address || '')}${addr2 ? ' · ' + esc(addr2) : ''}</div>
+          <div class="hero-price-row">
+            <div class="hero-price"><div class="lbl">Asking Price</div><div class="val">${money(d.askPrice)}</div></div>
+            <div class="hero-price"><div class="lbl">After Repair Value</div><div class="val arv">${money(d.arv)}</div></div>
+          </div>
+          <div class="badges">${badges}</div>
+        </div></div>
+        <div class="wrap">
+          <div class="gallery" id="gallery" style="display:none;">
+            <img class="gallery-main" id="gal-main" alt="Property photo" />
+            <div class="gallery-thumbs" id="gal-thumbs"></div>
+          </div>
+          <div class="cols">
+            <div>
+              <div class="card">
+                <div class="section-label">About This Deal</div>
+                <div class="section-title">Property Details</div>
+                <div class="about-text">${esc(d.notes || 'Contact us for full details on this off-market opportunity.')}</div>
+              </div>
+              <div class="card">
+                <div class="section-label">The Numbers</div>
+                <div class="section-title">Deal Breakdown</div>
+                <table class="spec-table">${specs}</table>
+              </div>
+            </div>
+            <div class="sticky-side">
+              <div class="card">
+                <div class="agent">
+                  <img src="/static/luca.webp" alt="Luca Rebuffi" loading="lazy" />
+                  <div>
+                    <div class="nm">Luca Rebuffi</div>
+                    <div class="co">Royal Groups Realty</div>
+                    <div class="ph"><a href="tel:4696658481">&#128222; 469-665-8481</a></div>
+                  </div>
+                </div>
+                <p style="font-size:0.88rem;color:var(--gray);margin-top:14px;">Questions about this deal? Call or text — serious cash buyers only.</p>
+              </div>
+              <div class="card" id="offer-card">
+                <div class="section-label">Make An Offer</div>
+                <div class="section-title">Submit Your Offer</div>
+                <div id="offer-form">
+                  <div class="form-group"><label>Your name *</label><input id="of-name" autocomplete="name" /></div>
+                  <div class="form-group"><label>Phone *</label><input id="of-phone" type="tel" autocomplete="tel" /></div>
+                  <div class="form-group"><label>Email</label><input id="of-email" type="email" autocomplete="email" /></div>
+                  <div class="form-group"><label>Offer amount $ *</label><input id="of-amount" type="number" min="1" /></div>
+                  <div class="form-group"><label>Message</label><textarea id="of-msg" placeholder="Proof of funds, close timeline…"></textarea></div>
+                  <button class="btn-submit" id="of-btn" onclick="submitOffer()">Submit Offer</button>
+                  <div id="offer-msg"></div>
+                </div>
+                <div id="offer-done" class="offer-done" style="display:none;">
+                  <div class="big">✅</div>
+                  <h3>Offer received!</h3>
+                  <p>We'll review it and reach out shortly.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+        window.scrollTo(0, 0);
+        if (d.driveFolderUrl) loadGallery(d.driveFolderUrl);
+      } catch (e) {
+        console.error(e);
+        root.innerHTML = '<div class="empty-state"><h2>Could not load this deal</h2><p>Please try again or call 469-665-8481.</p></div>';
+      }
+    }
+    async function loadGallery(folderUrl) {
+      const urls = await photoURLs(folderUrl);
+      if (!urls.length) return;
+      $('gallery').style.display = 'block';
+      const main = $('gal-main'), thumbs = $('gal-thumbs');
+      const set = i => {
+        main.src = urls[i];
+        thumbs.querySelectorAll('img').forEach((t, j) => t.classList.toggle('active', i === j));
+      };
+      thumbs.innerHTML = urls.map((u, i) => '<img src="' + u + '" loading="lazy" data-i="' + i + '" class="' + (i === 0 ? 'active' : '') + '" />').join('');
+      thumbs.querySelectorAll('img').forEach(t => t.onclick = () => set(+t.dataset.i));
+      set(0);
+    }
+    async function submitOffer() {
+      const name = ($('of-name').value || '').trim();
+      const phone = ($('of-phone').value || '').trim();
+      const amount = +(($('of-amount').value || '').replace(/[^0-9.]/g, '') || 0);
+      const msg = $('offer-msg');
+      if (!name || !phone || !amount) { msg.className = 'error'; msg.textContent = 'Name, phone, and offer amount are required.'; return; }
+      const btn = $('of-btn'); btn.disabled = true; btn.textContent = 'Submitting…';
+      try {
+        await db.collection('dispoOffers').add({
+          dealId: DEAL_ID, buyerName: name + ' (web)', buyerPhone: phone,
+          buyerEmail: ($('of-email').value || '').trim(), amount,
+          notes: ($('of-msg').value || '').trim(), status: 'pending',
+          source: 'landing_page', createdAt: new Date().toISOString()
+        });
+        await db.collection('dispoActivity').add({ dealId: DEAL_ID, text: '🌐 Web offer: $' + amount.toLocaleString() + ' from ' + name, at: new Date().toISOString() });
+        $('offer-form').style.display = 'none';
+        $('offer-done').style.display = 'block';
+      } catch (e) {
+        console.error(e);
+        msg.className = 'error'; msg.textContent = 'Could not submit — please call 469-665-8481 instead.';
+        btn.disabled = false; btn.textContent = 'Submit Offer';
+      }
+    }
+    boot();
+  </script>
+</body>
+</html>
