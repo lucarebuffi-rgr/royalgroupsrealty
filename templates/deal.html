@@ -134,6 +134,7 @@
     });
     const db = firebase.firestore();
     const DRIVE_KEY="AIzaSyBV20moxsKtzMqfg66XdaQ8Q4tGGNAK6I0"
+    const STREETVIEW_KEY="AIzaSyC2jM_NVkTgo2d0nAQTOSpgMd53gBintEc"
     const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     function dealPhone(d) {
       return String(d.state || '').toUpperCase() === 'GA'
@@ -169,7 +170,7 @@
     }
     function streetViewUrl(d) {
       const addr = [d.address, d.city, d.state, d.zip].filter(Boolean).join(', ');
-      return 'https://maps.googleapis.com/maps/api/streetview?size=1200x800&location=' + encodeURIComponent(addr) + '&key=' + DRIVE_KEY;
+      return 'https://maps.googleapis.com/maps/api/streetview?size=1200x800&location=' + encodeURIComponent(addr) + '&key=' + STREETVIEW_KEY;
     }
     function showStreetView(d) {
       const gal = $('gallery');
