@@ -266,7 +266,7 @@
                 <div class="section-label">About This Deal</div>
                 <div class="section-title">Property Details</div>
                 <table class="spec-table">${propSpecs}</table>
-                <div class="about-text" style="margin-top:14px;">${esc(d.notes || 'Contact us for full details on this off-market opportunity.')}</div>
+                ${d.notes ? `<div class="about-text" style="margin-top:14px;">${esc(d.notes)}</div>` : ''}
               </div>
               <div class="card">
                 <div class="section-label">The Numbers</div>
