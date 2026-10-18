@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Off-Market Deals | Royal Groups Realty</title>
+  <meta name="description" content="Current off-market investment opportunities from Royal Groups Realty." />
+
+  <style>@font-face{font-family:'Playfair Display';font-weight:700;font-style:normal;font-display:swap;src:url('/static/fonts/playfair-display-latin-700-normal.woff2') format('woff2');}@font-face{font-family:'Playfair Display';font-weight:900;font-style:normal;font-display:swap;src:url('/static/fonts/playfair-display-latin-900-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:400;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:500;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:600;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-600-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:700;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-700-normal.woff2') format('woff2');}</style>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1b2a; --gold: #c8932a; --gold-light: #e8b84b;
+      --gold-accessible: #8a5c14;
+      --cream: #faf8f3; --white: #ffffff; --gray: #6b7280;
+      --light-gray: #f3f4f6; --red: #c0392b; --green: #16a34a;
+    }
+    body { font-family: 'DM Sans', sans-serif; color: var(--navy); background: var(--cream); line-height: 1.6; }
+    .topbar { background: var(--navy); color: var(--white); text-align: center; padding: 8px 16px; font-size: 0.85rem; letter-spacing: 0.03em; }
+    .topbar a { color: var(--gold-light); text-decoration: none; font-weight: 600; }
+    header { background: var(--white); box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+    .nav-slim { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; }
+    .nav-slim img { height: 72px; width: auto; }
+    .nav-phone { background: var(--gold-accessible); color: var(--white); padding: 10px 20px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 0.95rem; }
+    .nav-phone:hover { background: var(--gold); }
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, #1a3050 60%, #0d2035 100%); color: var(--white); padding: 52px 24px 44px; text-align: center; }
+    .hero-label { text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.75rem; font-weight: 600; color: var(--gold-light); margin-bottom: 12px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900; }
+    .hero p { color: rgba(255,255,255,0.65); margin-top: 10px; font-size: 1rem; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 44px 24px 72px; }
+    .deal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
+    .deal-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: flex; flex-direction: column; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .deal-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+    .deal-photo { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: var(--light-gray); }
+    .deal-photo.placeholder { display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 2.4rem; background: linear-gradient(135deg, #1a3050, #0d1b2a); }
+    .deal-body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+    .deal-headline { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; line-height: 1.3; margin-bottom: 4px; }
+    .deal-addr { color: var(--gray); font-size: 0.88rem; margin-bottom: 14px; }
+    .deal-prices { display: flex; gap: 24px; margin-bottom: 12px; }
+    .deal-prices .lbl { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray); }
+    .deal-prices .ask { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--green); }
+    .deal-prices .arv { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--navy); }
+    .deal-specs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .badge { background: rgba(200,147,42,0.14); border: 1px solid rgba(200,147,42,0.55); color: var(--gold-accessible); padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
+    .btn-view { margin-top: auto; display: block; text-align: center; background: var(--gold-accessible); color: var(--white); font-weight: 700; padding: 13px; border-radius: 6px; text-decoration: none; }
+    .btn-view:hover { background: var(--gold); }
+    .empty-state { text-align: center; padding: 80px 24px; color: var(--gray); grid-column: 1 / -1; }
+    .agent-strip { background: var(--white); border-radius: 12px; padding: 24px 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: flex; gap: 18px; align-items: center; margin-top: 40px; }
+    .agent-strip img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold); }
+    .agent-strip .nm { font-weight: 700; }
+    .agent-strip .co { color: var(--gray); font-size: 0.88rem; }
+    .agent-strip .ph a { color: var(--gold-accessible); font-weight: 700; text-decoration: none; }
+    footer { background: var(--navy); color: rgba(255,255,255,0.6); padding: 48px 24px 30px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 32px; }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.7; }
+    footer h3 { color: var(--white); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+    footer ul { list-style: none; display: grid; gap: 10px; }
+    footer ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.9rem; }
+    footer .phone { color: var(--gold-light); font-size: 1.15rem; font-weight: 600; }
+    .footer-bottom { max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; text-align: center; font-size: 0.83rem; }
+    @media (max-width: 900px) {
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .nav-slim img { height: 56px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">&#11088; Trusted Home Buyer Since 2020 &nbsp;|&nbsp; Call or Text: <a href="tel:4696658481">469-665-8481</a></div>
+  <header>
+    <div class="nav-slim">
+      <a href="/"><img src="/static/logo.png" alt="Royal Groups Realty" /></a>
+      <a class="nav-phone" href="tel:4696658481">&#128222; 469-665-8481</a>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="hero-label">Exclusive &middot; Off-Market</div>
+    <h1>Current Investment Opportunities</h1>
+    <p>Active deals from Royal Groups Realty &mdash; available only through this link.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="deal-grid" id="deal-grid"><div class="empty-state">Loading deals…</div></div>
+    <div class="agent-strip">
+      <img src="/static/luca.webp" alt="Luca Rebuffi" loading="lazy" />
+      <div>
+        <div class="nm">Luca Rebuffi</div>
+        <div class="co">Royal Groups Realty</div>
+        <div class="ph"><a href="tel:4696658481">&#128222; 469-665-8481</a></div>
+      </div>
+      <p style="margin-left:auto;color:var(--gray);font-size:0.9rem;max-width:340px;">Serious cash buyers only. Call or text with questions on any deal.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/"><img src="/static/logo.png" alt="Royal Groups Realty" width="320" height="160" style="height:120px;width:auto;" loading="lazy" /></a>
+        <p>Luca Rebuffi offers a seamless, stress-free selling experience with easy-to-understand cash offers, no fees, and a flexible closing. 6 years experience. 250+ closings across Texas and Georgia.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Get In Touch</h3>
+        <p class="phone"><a href="tel:4696658481" style="color:inherit;text-decoration:none;">&#128222; 469-665-8481</a></p>
+        <p style="margin-top:12px;font-size:0.88rem;">We serve homeowners across all of Texas and Georgia.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Luca Rebuffi &ndash; Royal Groups Realty. All Rights Reserved.</div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+    firebase.initializeApp({
+      apiKey: "AIzaSyDNpa-2O0RduvXa5qmmIfFoioKG4gyoCOs",
+      authDomain: "rgr-crm-941ab.firebaseapp.com",
+      projectId: "rgr-crm-941ab"
+    });
+    const db = firebase.firestore();
+    const DRIVE_KEY = "AIzaSyBV20moxsKtzMqfg66XdaQ8Q4tGGNAK6I0";
+    const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    const money = n => (n === '' || n == null || isNaN(+n)) ? '—' : '$' + (+n).toLocaleString();
+    const $ = id => document.getElementById(id);
+    function dealSlug(d) { return String(d.slug || '').trim() || String(d.address || '').replace(/[^a-zA-Z0-9]/g, '') || d.id; }
+
+    function driveFolderId(url) {
+      const m = String(url || '').match(/folders\/([a-zA-Z0-9_-]+)/);
+      return m ? m[1] : '';
+    }
+    async function firstPhoto(folderUrl) {
+      const fid = driveFolderId(folderUrl);
+      if (!fid) return '';
+      try {
+        const q = encodeURIComponent("'" + fid + "' in parents and mimeType contains 'image/' and trashed = false");
+        const r = await fetch('https://www.googleapis.com/drive/v3/files?q=' + q + '&key=' + DRIVE_KEY + '&fields=files(thumbnailLink)&pageSize=1');
+        const j = await r.json();
+        const f = (j.files || [])[0];
+        return f ? (f.thumbnailLink || '').replace(/=s\d+.*$/, '=s800') : '';
+      } catch (e) { return ''; }
+    }
+
+    async function boot() {
+      const grid = $('deal-grid');
+      try {
+        const snap = await db.collection('dispoDeals').get();
+        let deals = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+          .filter(d => !['dead', 'closed'].includes(d.stage));
+        deals.sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
+        if (!deals.length) {
+          grid.innerHTML = '<div class="empty-state"><h2>No active deals right now</h2><p>Check back soon — new off-market opportunities land here first.</p></div>';
+          return;
+        }
+        grid.innerHTML = deals.map(d => {
+          const specs = [
+            d.beds ? d.beds + ' Beds' : '', d.baths ? d.baths + ' Baths' : '',
+            d.sqft ? (+d.sqft).toLocaleString() + ' Sq Ft' : '', d.propertyType || ''
+          ].filter(Boolean).map(s => '<span class="badge">' + esc(s) + '</span>').join('');
+          return '<div class="deal-card">' +
+            '<div class="deal-photo placeholder" data-photofolder="' + esc(d.driveFolderUrl || '') + '">&#127968;</div>' +
+            '<div class="deal-body">' +
+            '<div class="deal-headline">' + esc(d.headline || d.address || '') + '</div>' +
+            '<div class="deal-addr">' + esc(d.address || '') + ' &middot; ' + esc(d.city || '') + (d.city ? ', ' : '') + esc(d.state || '') + ' ' + esc(d.zip || '') + '</div>' +
+            '<div class="deal-prices"><div><div class="lbl">Asking</div><div class="ask">' + money(d.askPrice) + '</div></div>' +
+            '<div><div class="lbl">ARV</div><div class="arv">' + money(d.arv) + '</div></div></div>' +
+            '<div class="deal-specs">' + specs + '</div>' +
+            '<a class="btn-view" href="/' + esc(dealSlug(d)) + '">View the Deal &rarr;</a>' +
+            '</div></div>';
+        }).join('');
+        // load one photo per card in the background
+        grid.querySelectorAll('[data-photofolder]').forEach(async el => {
+          const url = await firstPhoto(el.getAttribute('data-photofolder'));
+          if (url) {
+            const img = document.createElement('img');
+            img.className = 'deal-photo'; img.loading = 'lazy'; img.src = url; img.alt = 'Property photo';
+            el.replaceWith(img);
+          } else { el.innerHTML = '&#127968;'; }
+        });
+      } catch (e) {
+        console.error(e);
+        grid.innerHTML = '<div class="empty-state"><h2>Could not load deals</h2><p>Please try again or call 469-665-8481.</p></div>';
+      }
+    }
+    boot();
+  </script>
+</body>
+</html>

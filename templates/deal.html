@@ -129,7 +129,9 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script>
-    const DEAL_ID = {{ deal_id|tojson }};
+    const DEAL_SLUG = {{ deal_slug|tojson if deal_slug is defined else 'null' }};
+    const DEAL_ID = {{ deal_id|tojson if deal_id is defined else 'null' }};
+    function dealSlug(d) { return String(d.slug || '').trim() || String(d.address || '').replace(/[^a-zA-Z0-9]/g, '') || d.id; }
     firebase.initializeApp({
       apiKey: "AIzaSyDNpa-2O0RduvXa5qmmIfFoioKG4gyoCOs",
       authDomain: "rgr-crm-941ab.firebaseapp.com",
@@ -159,9 +161,22 @@
     async function boot() {
       const root = $('deal-root');
       try {
-        const doc = await db.collection('dispoDeals').doc(DEAL_ID).get();
-        if (!doc.exists) { root.innerHTML = '<div class="empty-state"><h2>Deal not found</h2><p>This listing is no longer available.</p></div>'; return; }
-        const d = { id: doc.id, ...doc.data() };
+        let d = null;
+        if (DEAL_SLUG) {
+          const snap = await db.collection('dispoDeals').where('slug', '==', DEAL_SLUG).limit(1).get();
+          if (!snap.empty) { const doc = snap.docs[0]; d = { id: doc.id, ...doc.data() }; }
+          if (!d) {
+            // fallback: match slug computed from the address (docs saved before slugs were stored)
+            const all = await db.collection('dispoDeals').get();
+            const hit = all.docs.map(x => ({ id: x.id, ...x.data() })).find(x => dealSlug(x) === DEAL_SLUG);
+            if (hit) d = hit;
+          }
+        } else if (DEAL_ID) {
+          const doc = await db.collection('dispoDeals').doc(DEAL_ID).get();
+          if (doc.exists) d = { id: doc.id, ...doc.data() };
+        }
+        if (!d) { root.innerHTML = '<div class="empty-state"><h2>Deal not found</h2><p>This listing is no longer available.</p></div>'; return; }
+        window.RESOLVED_DEAL_ID = d.id;
         if (['dead', 'closed'].includes(d.stage)) { root.innerHTML = '<div class="empty-state"><h2>No longer available</h2><p>This deal has been closed.</p></div>'; return; }
         document.title = (d.headline || d.address) + ' | Royal Groups Realty';
         const headline = d.headline || d.address;
@@ -270,12 +285,12 @@
       const btn = $('of-btn'); btn.disabled = true; btn.textContent = 'Submitting…';
       try {
         await db.collection('dispoOffers').add({
-          dealId: DEAL_ID, buyerName: name + ' (web)', buyerPhone: phone,
+          dealId: window.RESOLVED_DEAL_ID, buyerName: name + ' (web)', buyerPhone: phone,
           buyerEmail: ($('of-email').value || '').trim(), amount,
           notes: ($('of-msg').value || '').trim(), status: 'pending',
           source: 'landing_page', createdAt: new Date().toISOString()
         });
-        await db.collection('dispoActivity').add({ dealId: DEAL_ID, text: '🌐 Web offer: $' + amount.toLocaleString() + ' from ' + name, at: new Date().toISOString() });
+        await db.collection('dispoActivity').add({ dealId: window.RESOLVED_DEAL_ID, text: '🌐 Web offer: $' + amount.toLocaleString() + ' from ' + name, at: new Date().toISOString() });
         $('offer-form').style.display = 'none';
         $('offer-done').style.display = 'block';
       } catch (e) {
