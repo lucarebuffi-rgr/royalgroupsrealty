@@ -125,7 +125,7 @@ def sitemap():
 # Unlisted deal landing pages (no nav links, no sitemap — only reachable with the link)
 @app.route("/deals")
 def deals_index():
-    return render_template("deals.html")
+    return render_template("deals_mobile.html" if is_mobile() else "deals.html")
 
 def get_all_deals():
     """All active deals, cached server-side. Public pages read from here, never Firestore directly."""
@@ -167,6 +167,10 @@ def api_deal(key):
             return jsonify(d)
     abort(404)
 
+def is_mobile():
+    ua = request.headers.get("User-Agent", "").lower()
+    return any(x in ua for x in ("iphone", "ipod", "android", "mobile", "blackberry", "iemobile", "opera mini"))
+
 def _og_for_deal(deal):
     if not deal:
         return {}
@@ -182,7 +186,8 @@ def _og_for_deal(deal):
 
 @app.route("/deals/<deal_id>")
 def deal_page(deal_id):
-    return render_template("deal.html", deal_id=deal_id, **_og_for_deal(get_deal_by_id(deal_id)))
+    tpl = "deal_mobile.html" if is_mobile() else "deal.html"
+    return render_template(tpl, deal_id=deal_id, **_og_for_deal(get_deal_by_id(deal_id)))
 
 # Pretty deal URLs: royalgroupsrealty.com/63SVillaRd (slug from the street address).
 # Registered after every specific route so /about, /contact, /blog, etc. still win.
@@ -190,7 +195,8 @@ def deal_page(deal_id):
 def deal_page_slug(slug):
     if "." in slug:
         abort(404)
-    return render_template("deal.html", deal_slug=slug, **_og_for_deal(get_deal_by_slug(slug)))
+    tpl = "deal_mobile.html" if is_mobile() else "deal.html"
+    return render_template(tpl, deal_slug=slug, **_og_for_deal(get_deal_by_slug(slug)))
 
 # Texas County Pages
 @app.route("/counties/cooke-county-tx")
