@@ -45,6 +45,7 @@
     .deal-card { background: var(--white); border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: block; text-decoration: none; color: inherit; transition: transform 0.15s ease, box-shadow 0.15s ease; }
     .deal-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
     .deal-photo-wrap { position: relative; }
+    .sv-card-wrap .sv-banner.sm { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%) rotate(-5deg); text-align: center; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.25em; color: rgba(255,255,255,0.75); background: rgba(13,27,42,0.28); padding: 6px 0; pointer-events: none; }
     .deal-photo { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: var(--light-gray); display: block; }
     .deal-photo.placeholder { display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.85); font-size: 2.4rem; background: linear-gradient(135deg, #1a3050, #0d1b2a); }
     .status-badge { position: absolute; top: 12px; right: 12px; background: #dcfce7; color: #166534; font-size: 0.72rem; font-weight: 700; padding: 5px 12px; border-radius: 20px; letter-spacing: 0.04em; }
@@ -151,6 +152,7 @@
     });
     const db = firebase.firestore();
     const DRIVE_KEY = "AIzaSyBV20moxsKtzMqfg66XdaQ8Q4tGGNAK6I0";
+    const STREETVIEW_KEY = "AIzaSyC2jM_NVkTgo2d0nAQTOSpgMd53gBintEc";
     const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     const money = n => (n === '' || n == null || isNaN(+n)) ? '—' : '$' + (+n).toLocaleString();
     const $ = id => document.getElementById(id);
@@ -230,7 +232,7 @@
           grid.innerHTML = list.map(d => {
             const addr = [d.address, d.city].filter(Boolean).join(', ') + (d.state ? ', ' + d.state : '') + (d.zip ? ' ' + d.zip : '');
             return '<a class="deal-card" href="/' + esc(dealSlug(d)) + '">' +
-              '<div class="deal-photo-wrap"><div class="deal-photo placeholder" data-photofolder="' + esc(d.driveFolderUrl || '') + '" data-master="' + esc(d.masterPhoto || '') + '">&#127968;</div>' +
+              '<div class="deal-photo-wrap"><div class="deal-photo placeholder" data-photofolder="' + esc(d.driveFolderUrl || '') + '" data-master="' + esc(d.masterPhoto || '') + '" data-addr="' + esc(addr) + '">&#127968;</div>' +
               '<span class="status-badge">Active</span></div>' +
               '<div class="deal-body">' +
               '<div class="deal-addr">' + esc(addr) + '</div>' +
@@ -248,6 +250,19 @@
               const img = document.createElement('img');
               img.className = 'deal-photo'; img.loading = 'lazy'; img.src = url; img.alt = 'Property photo';
               el.replaceWith(img);
+            } else {
+              const wrap = document.createElement('div');
+              wrap.className = 'sv-card-wrap';
+              const img = document.createElement('img');
+              img.className = 'deal-photo'; img.loading = 'lazy'; img.alt = 'Street view of property';
+              img.src = 'https://maps.googleapis.com/maps/api/streetview?size=800x500&location=' + encodeURIComponent(el.getAttribute('data-addr') || '') + '&key=' + STREETVIEW_KEY;
+              img.onerror = () => { wrap.style.display = 'none'; };
+              const banner = document.createElement('div');
+              banner.className = 'sv-banner sm';
+              banner.textContent = 'PICTURES STILL PENDING';
+              wrap.appendChild(img);
+              wrap.appendChild(banner);
+              el.replaceWith(wrap);
             }
           });
         }
