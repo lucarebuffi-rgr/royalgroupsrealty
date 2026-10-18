@@ -152,6 +152,10 @@
     });
     const db = firebase.firestore();
     const DRIVE_KEY = "AIzaSyBV20moxsKtzMqfg66XdaQ8Q4tGGNAK6I0";
+    function masterPhotoUrl(d) {
+      if (d.masterPhotoId) return 'https://drive.google.com/thumbnail?id=' + d.masterPhotoId + '&sz=s1200';
+      return d.masterPhoto || '';
+    }
     const STREETVIEW_KEY = "AIzaSyC2jM_NVkTgo2d0nAQTOSpgMd53gBintEc";
     const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     const money = n => (n === '' || n == null || isNaN(+n)) ? '—' : '$' + (+n).toLocaleString();
@@ -163,7 +167,7 @@
       return m ? m[1] : '';
     }
     async function firstPhoto(deal) {
-      if (deal.masterPhoto) return deal.masterPhoto;
+      if (masterPhotoUrl(deal)) return masterPhotoUrl(deal);
       const fid = driveFolderId(deal.driveFolderUrl);
       if (!fid) return '';
       try {
@@ -232,7 +236,7 @@
           grid.innerHTML = list.map(d => {
             const addr = [d.address, d.city].filter(Boolean).join(', ') + (d.state ? ', ' + d.state : '') + (d.zip ? ' ' + d.zip : '');
             return '<a class="deal-card" href="/' + esc(dealSlug(d)) + '">' +
-              '<div class="deal-photo-wrap"><div class="deal-photo placeholder" data-photofolder="' + esc(d.driveFolderUrl || '') + '" data-master="' + esc(d.masterPhoto || '') + '" data-addr="' + esc(addr) + '">&#127968;</div>' +
+              '<div class="deal-photo-wrap"><div class="deal-photo placeholder" data-photofolder="' + esc(d.driveFolderUrl || '') + '" data-master="' + esc(masterPhotoUrl(d) || '') + '" data-addr="' + esc(addr) + '">&#127968;</div>' +
               '<span class="status-badge">Active</span></div>' +
               '<div class="deal-body">' +
               '<div class="deal-addr">' + esc(addr) + '</div>' +
