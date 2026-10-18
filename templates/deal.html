@@ -131,12 +131,12 @@
   <script>
     const DEAL_ID = {{ deal_id|tojson }};
     firebase.initializeApp({
-      apiKey: <redacted>,
+      apiKey: "AIzaSyDNpa-2O0RduvXa5qmmIfFoioKG4gyoCOs",
       authDomain: "rgr-crm-941ab.firebaseapp.com",
       projectId: "rgr-crm-941ab"
     });
     const db = firebase.firestore();
-    const DRIVE_KEY=<redacted>
+    const DRIVE_KEY="AIzaSyBV20moxsKtzMqfg66XdaQ8Q4tGGNAK6I0"
     const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     const money = n => (n === '' || n == null || isNaN(+n)) ? '—' : '$' + (+n).toLocaleString();
     const $ = id => document.getElementById(id);
