@@ -235,9 +235,13 @@
           ['Est. Repairs', d.repairEst ? money(d.repairEst) : '—']
         ].map(r => '<tr><td>' + r[0] + '</td><td>' + esc(String(r[1])) + '</td></tr>').join('');
 
+        const countyName = String(d.county || '').replace(/\s*county$/i, '').trim();
+        const heroLabel = countyName
+          ? `&#128205; ${esc(countyName.toUpperCase())} COUNTY, ${esc(String(d.state || '').toUpperCase())} OFF MARKET OPPORTUNITY`
+          : 'Off-Market Investment Opportunity';
         root.innerHTML = `
         <div class="hero"><div class="hero-inner">
-          <div class="hero-label">Off-Market Investment Opportunity</div>
+          <div class="hero-label">${heroLabel}</div>
           <h1>${esc(headline)}</h1>
           <div class="hero-addr">${esc(d.address || '')}${addr2 ? ' · ' + esc(addr2) : ''}</div>
           <div class="hero-price-row">
