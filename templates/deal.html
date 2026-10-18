@@ -7,6 +7,12 @@
   <meta name="robots" content="noindex, nofollow" />
   <title>Investment Opportunity | Royal Groups Realty</title>
   <meta name="description" content="Off-market investment opportunity from Royal Groups Realty." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Royal Groups Realty" />
+  {% if og_title %}<meta property="og:title" content="{{ og_title }}" />{% endif %}
+  {% if og_description %}<meta property="og:description" content="{{ og_description }}" />{% endif %}
+  {% if og_image %}<meta property="og:image" content="{{ og_image }}" />{% endif %}
+  <meta name="twitter:card" content="summary_large_image" />
 
   <style>@font-face{font-family:'Playfair Display';font-weight:700;font-style:normal;font-display:swap;src:url('/static/fonts/playfair-display-latin-700-normal.woff2') format('woff2');}@font-face{font-family:'Playfair Display';font-weight:900;font-style:normal;font-display:swap;src:url('/static/fonts/playfair-display-latin-900-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:400;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:500;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:600;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-600-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:700;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-700-normal.woff2') format('woff2');}</style>
 
@@ -257,22 +263,24 @@
           </div>
         </div>`;
         window.scrollTo(0, 0);
-        if (d.driveFolderUrl) loadGallery(d.driveFolderUrl);
+        if (d.driveFolderUrl || d.masterPhoto) loadGallery(d.driveFolderUrl, d.masterPhoto);
       } catch (e) {
         console.error(e);
         root.innerHTML = '<div class="empty-state"><h2>Could not load this deal</h2><p>Please try again or call 469-665-8481.</p></div>';
       }
     }
-    async function loadGallery(folderUrl) {
+    async function loadGallery(folderUrl, masterPhoto) {
       const urls = await photoURLs(folderUrl);
-      if (!urls.length) return;
+      const ordered = masterPhoto ? [masterPhoto].concat(urls.filter(u => u !== masterPhoto)) : urls;
+      if (!ordered.length) return;
+      const urls2 = ordered;
       $('gallery').style.display = 'block';
       const main = $('gal-main'), thumbs = $('gal-thumbs');
       const set = i => {
-        main.src = urls[i];
+        main.src = urls2[i];
         thumbs.querySelectorAll('img').forEach((t, j) => t.classList.toggle('active', i === j));
       };
-      thumbs.innerHTML = urls.map((u, i) => '<img src="' + u + '" loading="lazy" data-i="' + i + '" class="' + (i === 0 ? 'active' : '') + '" />').join('');
+      thumbs.innerHTML = urls2.map((u, i) => '<img src="' + u + '" loading="lazy" data-i="' + i + '" class="' + (i === 0 ? 'active' : '') + '" />').join('');
       thumbs.querySelectorAll('img').forEach(t => t.onclick = () => set(+t.dataset.i));
       set(0);
     }
