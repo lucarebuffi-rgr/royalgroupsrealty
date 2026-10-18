@@ -233,10 +233,14 @@
           ['Year Built', d.yearBuilt || '—'], ['Lot Size', d.lotSize || '—'],
           ['Property Type', d.propertyType || '—']
         ].map(r => '<tr><td>' + r[0] + '</td><td>' + esc(String(r[1])) + '</td></tr>').join('');
-        const dealSpecs = [
-          ['Price', money(d.askPrice)], ['After Repair Value', money(d.arv)],
-          ['Est. Repairs', d.repairEst ? money(d.repairEst) : '—']
-        ].map(r => '<tr><td>' + r[0] + '</td><td>' + esc(String(r[1])) + '</td></tr>').join('');
+        const dealSpecsRows = [
+          ['Price', money(d.askPrice)],
+          ['Est. Flip Rehab', d.rehabFlip ? money(d.rehabFlip) : '—'],
+          ['Est. Rent-Ready Rehab', d.rehabRentReady ? money(d.rehabRentReady) : '—'],
+          ['After Repair Value', money(d.arv)]
+        ];
+        if (d.estRent) dealSpecsRows.push(['Est. Rent Value', money(d.estRent) + '/mo']);
+        const dealSpecs = dealSpecsRows.map(r => '<tr><td>' + r[0] + '</td><td>' + esc(String(r[1])) + '</td></tr>').join('');
 
         const countyName = String(d.county || '').replace(/\s*county$/i, '').trim();
         const heroLabel = countyName
