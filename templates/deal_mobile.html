@@ -104,6 +104,10 @@
     firebase.initializeApp({ apiKey: "AIzaSyDNpa-2O0RduvXa5qmmIfFoioKG4gyoCOs", authDomain: "rgr-crm-941ab.firebaseapp.com", projectId: "rgr-crm-941ab" });
     const db = firebase.firestore();
     const DRIVE_KEY = "AIzaSyBV20moxsKtzMqfg66XdaQ8Q4tGGNAK6I0";
+    function masterPhotoUrl(d) {
+      if (d.masterPhotoId) return 'https://drive.google.com/thumbnail?id=' + d.masterPhotoId + '&sz=s1200';
+      return d.masterPhoto || '';
+    }
     const STREETVIEW_KEY = "AIzaSyC2jM_NVkTgo2d0nAQTOSpgMd53gBintEc";
     const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     const money = n => (n === '' || n == null || isNaN(+n)) ? '—' : '$' + (+n).toLocaleString();
@@ -243,8 +247,8 @@
           '<div class="ph"><a href="tel:' + PH.tel + '">&#128222; ' + PH.display + '</a></div></div></div>' +
           '<p style="font-size:0.9rem;color:var(--gray);margin-top:12px;">Questions? Call or text ' + PH.display + ' — serious cash buyers only.</p></div>' +
           '</div></div></div>';
-        if (d.driveFolderUrl || d.masterPhoto) {
-          const urls = await photoURLs(d.driveFolderUrl, d.masterPhoto);
+        if (d.driveFolderUrl || masterPhotoUrl(d)) {
+          const urls = await photoURLs(d.driveFolderUrl, masterPhotoUrl(d));
           if (urls.length) {
             $('gallery').style.display = 'block';
             const main = $('gal-main'), strip = $('gal-strip');
