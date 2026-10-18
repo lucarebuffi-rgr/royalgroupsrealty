@@ -61,9 +61,21 @@ def sitemap():
     return send_from_directory(".", "sitemap.xml")
 
 # Unlisted deal landing pages (no nav links, no sitemap — only reachable with the link)
+@app.route("/deals")
+def deals_index():
+    return render_template("deals.html")
+
 @app.route("/deals/<deal_id>")
 def deal_page(deal_id):
     return render_template("deal.html", deal_id=deal_id)
+
+# Pretty deal URLs: royalgroupsrealty.com/63SVillaRd (slug from the street address).
+# Registered after every specific route so /about, /contact, /blog, etc. still win.
+@app.route("/<slug>")
+def deal_page_slug(slug):
+    if "." in slug:
+        abort(404)
+    return render_template("deal.html", deal_slug=slug)
 
 # Texas County Pages
 @app.route("/counties/cooke-county-tx")
