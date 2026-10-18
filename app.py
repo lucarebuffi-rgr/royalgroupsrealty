@@ -7,11 +7,13 @@ from flask import Flask, render_template, request, jsonify, send_from_directory,
 
 app = Flask(__name__)
 
+
 # Public Firebase client key (same one the templates use client-side) — lets the
 # server fetch a deal's master photo for link-preview meta tags.
 FIREBASE_API_KEY = "AIzaSyDNpa-2O0RduvXa5qmmIfFoioKG4gyoCOs"
 DRIVE_KEY = "AIzaSyBV20moxsKtzMqfg66XdaQ8Q4tGGNAK6I0"
 FIRESTORE_DEALS_URL = "https://firestore.googleapis.com/v1/projects/rgr-crm-941ab/databases/(default)/documents/dispoDeals"
+
 
 def _fs_val(v, default=""):
     if not isinstance(v, dict):
@@ -29,16 +31,20 @@ def _fs_val(v, default=""):
         return v["timestampValue"]
     return default
 
+
 def _fs_str(v, default=""):
     return _fs_val(v, default)
+
 
 def _flat_fields(doc):
     f = doc.get("fields", {})
     return {k: _fs_str(v) for k, v in f.items()}
 
+
 # Tiny TTL cache so deal pages don't hammer Firestore (quota is precious).
 _DEAL_CACHE = {}
 _DEAL_CACHE_TTL = 300
+
 
 def _cache_get(key):
     hit = _DEAL_CACHE.get(key)
@@ -46,12 +52,15 @@ def _cache_get(key):
         return hit[0]
     return None
 
+
 def _cache_get_stale(key):
     hit = _DEAL_CACHE.get(key)
     return hit[0] if hit else None
 
+
 def _cache_set(key, val):
     _DEAL_CACHE[key] = (val, time.time() + _DEAL_CACHE_TTL)
+
 
 def get_deal_by_id(deal_id):
     """Fetch a single deal doc by ID for server-rendered meta tags."""
@@ -59,6 +68,7 @@ def get_deal_by_id(deal_id):
         if d.get("_id") == deal_id:
             return d
     return None
+
 
 def get_deal_by_slug(slug):
     """Fetch a deal doc by its slug for server-rendered meta tags. Returns a flat dict or None."""
@@ -150,18 +160,18 @@ def _rentcast_property_type(d):
     return "SingleFamily"
 
 def get_rent_estimate(d):
-    """Long-term rent estimate via RentCast, cached 30 days per deal. None on any failure."""
+    """(rent, low, high) via RentCast long-term AVM, cached 30 days. All None on any failure."""
     key = d.get("_id") or d.get("slug") or ""
     now = time.time()
     hit = _RENT_CACHE.get(key)
     if hit and now - hit[0] < _RENT_TTL:
         return hit[1]
     if not RENTCAST_API_KEY:
-        return None
+        return (None, None, None)
     try:
         addr = ", ".join(x for x in (d.get("address"), d.get("city"), d.get("state"), d.get("zip")) if x)
         if not addr:
-            return None
+            return (None, None, None)
         params = {"address": addr, "propertyType": _rentcast_property_type(d), "compCount": 5}
         for f, rk in (("beds", "bedrooms"), ("baths", "bathrooms"), ("sqft", "squareFootage")):
             try:
@@ -173,14 +183,16 @@ def get_rent_estimate(d):
                          params=params, headers={"X-Api-Key": RENTCAST_API_KEY, "Accept": "application/json"},
                          timeout=10)
         r.raise_for_status()
-        rent = r.json().get("rent")
-        rent = int(rent) if rent else None
+        j = r.json()
+        rent = int(j.get("rent")) if j.get("rent") else None
+        low = int(j.get("rentRangeLow")) if j.get("rentRangeLow") else None
+        high = int(j.get("rentRangeHigh")) if j.get("rentRangeHigh") else None
         if rent:
-            _RENT_CACHE[key] = (now, rent)
-        return rent
+            _RENT_CACHE[key] = (now, (rent, low, high))
+        return (rent, low, high)
     except Exception as e:
         print("rentcast failed:", e)
-        return None
+        return (None, None, None)
 
 def get_all_deals():
     """All active deals, cached server-side. Public pages read from here, never Firestore directly."""
@@ -195,7 +207,10 @@ def get_all_deals():
             d = _flat_fields(doc)
             d["_id"] = doc.get("name", "").split("/")[-1]
             if d.get("stage") not in ("dead", "closed"):
-                d["estRent"] = get_rent_estimate(d)
+                rent, rent_low, rent_high = get_rent_estimate(d)
+                d["estRent"] = rent
+                d["estRentLow"] = rent_low
+                d["estRentHigh"] = rent_high
                 deals.append(d)
         _cache_set("all_deals", deals)
         return deals
@@ -237,7 +252,7 @@ def _og_for_deal(deal):
     ap = deal.get("askPrice")
     ask_str = "$" + format(int(ap), ",d") if ap else "contact for price"
     return {
-        "og_title": full_addr + " | Royal Groups Realty",
+        "og_title": full_addr,
         "og_description": "Off-market investment opportunity: %s — price %s" % (full_addr, ask_str),
         "og_image": request.host_url.rstrip("/") + "/og-image/" + (deal.get("slug") or deal.get("_id", "")),
     }
