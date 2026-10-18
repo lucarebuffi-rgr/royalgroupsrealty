@@ -3,6 +3,7 @@ import re
 import time
 import io
 import os
+import json
 from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, abort, send_file
 
 app = Flask(__name__)
@@ -133,8 +134,29 @@ def deals_index():
     return render_template("deals_mobile.html" if is_mobile() else "deals.html")
 
 RENTCAST_API_KEY = os.environ.get("RENTCAST_API_KEY", "")
+_RENT_CACHE_FILE = os.path.join(os.path.dirname(__file__), "rent_cache.json")
 _RENT_CACHE = {}
 _RENT_TTL = 30 * 24 * 3600  # 30 days — rents move slowly; also conserves the free quota
+
+def _load_rent_cache():
+    try:
+        with open(_RENT_CACHE_FILE) as f:
+            data = json.load(f)
+            # data: {key: [timestamp, [rent, low, high]]}
+            for k, v in data.items():
+                _RENT_CACHE[k] = (v[0], tuple(v[1]))
+    except Exception:
+        pass
+
+def _save_rent_cache():
+    try:
+        data = {k: [ts, list(vals)] for k, (ts, vals) in _RENT_CACHE.items()}
+        with open(_RENT_CACHE_FILE, "w") as f:
+            json.dump(data, f)
+    except Exception:
+        pass
+
+_load_rent_cache()
 
 def _rentcast_property_type(d):
     t = str(d.get("propertyType") or "").lower()
@@ -180,6 +202,7 @@ def get_rent_estimate(d):
         high = int(j.get("rentRangeHigh")) if j.get("rentRangeHigh") else None
         if rent:
             _RENT_CACHE[key] = (now, (rent, low, high))
+            _save_rent_cache()
         return (rent, low, high)
     except Exception as e:
         print("rentcast failed:", e)
