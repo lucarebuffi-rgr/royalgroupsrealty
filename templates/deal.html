@@ -98,6 +98,13 @@
       .footer-inner { grid-template-columns: 1fr 1fr; }
       .nav-slim img { height: 56px; }
     }
+    .comp-row { padding: 12px 0; border-bottom: 1px solid var(--light-gray); }
+    .comp-row:last-child { border-bottom: none; }
+    .comp-name { font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; }
+    .comp-pill { text-align: center; padding: 10px; border-radius: 10px; font-weight: 700; }
+    .comp-good { background: #dcfce7; color: #166534; }
+    .comp-fair { background: #fef3c7; color: #92400e; }
+    .comp-poor { background: #fee2e2; color: #991b1b; }
   </style>
 </head>
 <body>
@@ -162,6 +169,14 @@
       const d = await r.json();
       d.id = d._id;
       return d;
+    }
+    const COMP_META = [['compRoof', 'Roof', '&#127968;'], ['compHvac', 'HVAC', '&#10052;'], ['compPlumbing', 'Plumbing', '&#128736;'], ['compCosmetic', 'Cosmetic Quality', '&#127912;']];
+    function compClass(r) { r = String(r).toLowerCase(); return r === 'good' ? 'comp-good' : r === 'fair' ? 'comp-fair' : r === 'poor' ? 'comp-poor' : ''; }
+    function componentsCard(d) {
+      const rows = COMP_META.filter(m => d[m[0]]).map(m =>
+        '<div class="comp-row"><div class="comp-name">' + m[2] + ' ' + m[1] + '</div>' +
+        '<div class="comp-pill ' + compClass(d[m[0]]) + '">' + esc(d[m[0]]) + '</div></div>').join('');
+      return rows ? `<div class="card"><div class="section-label">Condition</div><div class="section-title">Components</div>${rows}</div>` : '';
     }
     async function boot() {
       const root = $('deal-root');
@@ -236,6 +251,7 @@
                 <div class="section-title">Deal Breakdown</div>
                 <table class="spec-table">${specs}</table>
               </div>
+              ${componentsCard(d)}
             </div>
             <div class="sticky-side">
               <div class="card" id="offer-card">
