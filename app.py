@@ -42,6 +42,10 @@ def _cache_get(key):
         return hit[0]
     return None
 
+def _cache_get_stale(key):
+    hit = _DEAL_CACHE.get(key)
+    return hit[0] if hit else None
+
 def _cache_set(key, val):
     _DEAL_CACHE[key] = (val, time.time() + _DEAL_CACHE_TTL)
 
@@ -141,7 +145,8 @@ def get_all_deals():
         return deals
     except Exception as e:
         print("deals fetch failed:", e)
-        return []
+        # Serve stale data rather than nothing during a transient outage.
+        return _cache_get_stale("all_deals") or []
 
 @app.route("/api/deals")
 def api_deals():
