@@ -151,7 +151,11 @@ def api_deals():
 def api_deal(key):
     if "." in key:
         abort(404)
-    for d in get_all_deals():
+    deals = get_all_deals()
+    if not deals:
+        # Cache is empty (e.g. Firestore quota throttled) — not "not found".
+        return jsonify({"error": "temporarily unavailable"}), 503
+    for d in deals:
         addr = d.get("address", "")
         dslug = (d.get("slug") or "").strip() or re.sub(r"[^a-zA-Z0-9]", "", addr)
         if dslug == key or d.get("_id") == key:
