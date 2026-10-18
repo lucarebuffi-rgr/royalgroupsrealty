@@ -26,27 +26,26 @@
     .nav-slim img { height: 72px; width: auto; }
     .nav-phone { background: var(--gold-accessible); color: var(--white); padding: 10px 20px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 0.95rem; }
     .nav-phone:hover { background: var(--gold); }
-    .hero { background: linear-gradient(135deg, var(--navy) 0%, #1a3050 60%, #0d2035 100%); color: var(--white); padding: 52px 24px 44px; text-align: center; }
-    .hero-label { text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.75rem; font-weight: 600; color: var(--gold-light); margin-bottom: 12px; }
-    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900; }
-    .hero p { color: rgba(255,255,255,0.65); margin-top: 10px; font-size: 1rem; }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 44px 24px 72px; }
-    .deal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
-    .deal-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: flex; flex-direction: column; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 24px 72px; }
+    .list-head { max-width: 1100px; margin: 0 auto; padding: 36px 24px 8px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .list-head h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; }
+    .list-head .h-icon { margin-right: 8px; }
+    .sort-wrap { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--gray); }
+    .sort-wrap select { border: 1.5px solid #d1d5db; border-radius: 20px; padding: 8px 14px; font-size: 0.85rem; font-family: 'DM Sans', sans-serif; background: var(--white); outline: none; cursor: pointer; }
+    .deal-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px; margin-top: 20px; }
+    .deal-card { background: var(--white); border-radius: 14px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: block; text-decoration: none; color: inherit; transition: transform 0.15s ease, box-shadow 0.15s ease; }
     .deal-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
-    .deal-photo { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: var(--light-gray); }
-    .deal-photo.placeholder { display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 2.4rem; background: linear-gradient(135deg, #1a3050, #0d1b2a); }
-    .deal-body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
-    .deal-headline { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; line-height: 1.3; margin-bottom: 4px; }
-    .deal-addr { color: var(--gray); font-size: 0.88rem; margin-bottom: 14px; }
-    .deal-prices { display: flex; gap: 24px; margin-bottom: 12px; }
-    .deal-prices .lbl { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray); }
-    .deal-prices .ask { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--green); }
-    .deal-prices .arv { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--navy); }
-    .deal-specs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-    .badge { background: rgba(200,147,42,0.14); border: 1px solid rgba(200,147,42,0.55); color: var(--gold-accessible); padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
-    .btn-view { margin-top: auto; display: block; text-align: center; background: var(--gold-accessible); color: var(--white); font-weight: 700; padding: 13px; border-radius: 6px; text-decoration: none; }
-    .btn-view:hover { background: var(--gold); }
+    .deal-photo-wrap { position: relative; }
+    .deal-photo { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: var(--light-gray); display: block; }
+    .deal-photo.placeholder { display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.85); font-size: 2.4rem; background: linear-gradient(135deg, #1a3050, #0d1b2a); }
+    .status-badge { position: absolute; top: 12px; right: 12px; background: #dcfce7; color: #166534; font-size: 0.72rem; font-weight: 700; padding: 5px 12px; border-radius: 20px; letter-spacing: 0.04em; }
+    .deal-body { padding: 18px 20px 20px; }
+    .deal-addr { font-weight: 700; font-size: 1.02rem; margin-bottom: 2px; }
+    .deal-sub { color: var(--gray); font-size: 0.86rem; margin-bottom: 14px; min-height: 1.3em; }
+    .deal-stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--light-gray); padding-top: 14px; text-align: center; }
+    .deal-stats .lbl { font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray); margin-bottom: 2px; }
+    .deal-stats .val { font-weight: 700; font-size: 0.98rem; }
+    .deal-stats .val.ask { color: var(--green); }
     .empty-state { text-align: center; padding: 80px 24px; color: var(--gray); grid-column: 1 / -1; }
     .agent-strip { background: var(--white); border-radius: 12px; padding: 24px 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); display: flex; gap: 18px; align-items: center; margin-top: 40px; }
     .agent-strip img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold); }
@@ -76,10 +75,16 @@
     </div>
   </header>
 
-  <div class="hero">
-    <div class="hero-label">Exclusive &middot; Off-Market</div>
-    <h1>Current Investment Opportunities</h1>
-    <p>Active deals from Royal Groups Realty &mdash; available only through this link.</p>
+  <div class="list-head">
+    <h1><span class="h-icon">&#127968;</span> All Properties From Royal Groups Realty</h1>
+    <div class="sort-wrap">
+      <label for="sort-sel">Sort</label>
+      <select id="sort-sel">
+        <option value="date">Date</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+      </select>
+    </div>
   </div>
 
   <div class="wrap">
@@ -162,31 +167,39 @@
           grid.innerHTML = '<div class="empty-state"><h2>No active deals right now</h2><p>Check back soon — new off-market opportunities land here first.</p></div>';
           return;
         }
-        grid.innerHTML = deals.map(d => {
-          const specs = [
-            d.beds ? d.beds + ' Beds' : '', d.baths ? d.baths + ' Baths' : '',
-            d.sqft ? (+d.sqft).toLocaleString() + ' Sq Ft' : '', d.propertyType || ''
-          ].filter(Boolean).map(s => '<span class="badge">' + esc(s) + '</span>').join('');
-          return '<div class="deal-card">' +
-            '<div class="deal-photo placeholder" data-photofolder="' + esc(d.driveFolderUrl || '') + '">&#127968;</div>' +
-            '<div class="deal-body">' +
-            '<div class="deal-headline">' + esc(d.headline || d.address || '') + '</div>' +
-            '<div class="deal-addr">' + esc(d.address || '') + ' &middot; ' + esc(d.city || '') + (d.city ? ', ' : '') + esc(d.state || '') + ' ' + esc(d.zip || '') + '</div>' +
-            '<div class="deal-prices"><div><div class="lbl">Asking</div><div class="ask">' + money(d.askPrice) + '</div></div>' +
-            '<div><div class="lbl">ARV</div><div class="arv">' + money(d.arv) + '</div></div></div>' +
-            '<div class="deal-specs">' + specs + '</div>' +
-            '<a class="btn-view" href="/' + esc(dealSlug(d)) + '">View the Deal &rarr;</a>' +
-            '</div></div>';
-        }).join('');
-        // load one photo per card in the background
-        grid.querySelectorAll('[data-photofolder]').forEach(async el => {
-          const url = await firstPhoto(el.getAttribute('data-photofolder'));
-          if (url) {
-            const img = document.createElement('img');
-            img.className = 'deal-photo'; img.loading = 'lazy'; img.src = url; img.alt = 'Property photo';
-            el.replaceWith(img);
-          } else { el.innerHTML = '&#127968;'; }
-        });
+        window._allDeals = deals;
+        renderDeals();
+        $('sort-sel').onchange = renderDeals;
+        function renderDeals() {
+          const mode = ($('sort-sel') || {}).value || 'date';
+          const list = (window._allDeals || []).slice();
+          if (mode === 'price-asc') list.sort((a, b) => (+a.askPrice || 0) - (+b.askPrice || 0));
+          else if (mode === 'price-desc') list.sort((a, b) => (+b.askPrice || 0) - (+a.askPrice || 0));
+          else list.sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
+          grid.innerHTML = list.map(d => {
+            const addr = [d.address, d.city].filter(Boolean).join(', ') + (d.state ? ', ' + d.state : '') + (d.zip ? ' ' + d.zip : '');
+            return '<a class="deal-card" href="/' + esc(dealSlug(d)) + '">' +
+              '<div class="deal-photo-wrap"><div class="deal-photo placeholder" data-photofolder="' + esc(d.driveFolderUrl || '') + '">&#127968;</div>' +
+              '<span class="status-badge">Active</span></div>' +
+              '<div class="deal-body">' +
+              '<div class="deal-addr">' + esc(addr) + '</div>' +
+              '<div class="deal-sub">' + esc(d.headline || '') + '</div>' +
+              '<div class="deal-stats">' +
+              '<div><div class="lbl">Asking</div><div class="val ask">' + money(d.askPrice) + '</div></div>' +
+              '<div><div class="lbl">Beds</div><div class="val">' + esc(d.beds || '&mdash;') + '</div></div>' +
+              '<div><div class="lbl">Baths</div><div class="val">' + esc(d.baths || '&mdash;') + '</div></div>' +
+              '<div><div class="lbl">Sqft</div><div class="val">' + (d.sqft ? (+d.sqft).toLocaleString() : '&mdash;') + '</div></div>' +
+              '</div></div></a>';
+          }).join('');
+          grid.querySelectorAll('[data-photofolder]').forEach(async el => {
+            const url = await firstPhoto(el.getAttribute('data-photofolder'));
+            if (url) {
+              const img = document.createElement('img');
+              img.className = 'deal-photo'; img.loading = 'lazy'; img.src = url; img.alt = 'Property photo';
+              el.replaceWith(img);
+            }
+          });
+        }
       } catch (e) {
         console.error(e);
         grid.innerHTML = '<div class="empty-state"><h2>Could not load deals</h2><p>Please try again or call 469-665-8481.</p></div>';
