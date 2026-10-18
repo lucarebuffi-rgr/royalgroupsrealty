@@ -168,10 +168,6 @@
           '<tr><td>After-repair value</td><td>' + money(d.arv) + '</td></tr>' +
           '<tr><td>Est. repairs</td><td>' + money(d.repairEst) + '</td></tr>' +
           '</table></div>' +
-          '<div class="card"><div class="agent"><img src="/static/luca.webp" alt="Luca Rebuffi" />' +
-          '<div><div class="nm">Luca Rebuffi</div><div class="co">Royal Groups Realty</div>' +
-          '<div class="ph"><a href="tel:' + PH.tel + '">&#128222; ' + PH.display + '</a></div></div></div>' +
-          '<p style="font-size:0.9rem;color:var(--gray);margin-top:12px;">Questions? Call or text ' + PH.display + ' — serious cash buyers only.</p></div>' +
           '<div class="card" id="offer-card"><h2>Make an Offer</h2>' +
           '<div class="offer-form">' +
           '<input id="of-name" placeholder="Your name" autocomplete="name" />' +
@@ -179,6 +175,10 @@
           '<input id="of-amount" placeholder="Offer amount ($)" inputmode="decimal" />' +
           '<button class="btn-submit" id="of-btn" onclick="submitOffer()">Submit Offer</button>' +
           '<div class="msg" id="offer-msg"></div>' +
+          '<div class="card"><div class="agent"><img src="/static/luca.webp" alt="Luca Rebuffi" />' +
+          '<div><div class="nm">Luca Rebuffi</div><div class="co">Royal Groups Realty</div>' +
+          '<div class="ph"><a href="tel:' + PH.tel + '">&#128222; ' + PH.display + '</a></div></div></div>' +
+          '<p style="font-size:0.9rem;color:var(--gray);margin-top:12px;">Questions? Call or text ' + PH.display + ' — serious cash buyers only.</p></div>' +
           '</div></div></div>';
         if (d.driveFolderUrl || d.masterPhoto) {
           const urls = await photoURLs(d.driveFolderUrl, d.masterPhoto);
