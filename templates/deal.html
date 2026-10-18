@@ -105,6 +105,10 @@
     .comp-good { background: #dcfce7; color: #166534; }
     .comp-fair { background: #fef3c7; color: #92400e; }
     .comp-poor { background: #fee2e2; color: #991b1b; }
+    .cond-row { padding: 12px 0; border-bottom: 1px solid var(--light-gray); }
+    .cond-row:last-child { border-bottom: none; }
+    .cond-name { font-weight: 700; font-size: 0.98rem; margin-bottom: 4px; }
+    .cond-text { color: #374151; font-size: 0.95rem; white-space: pre-wrap; }
   </style>
 </head>
 <body>
@@ -169,6 +173,12 @@
       const d = await r.json();
       d.id = d._id;
       return d;
+    }
+    const COND_META = [['condRoof', 'Roof'], ['condHvac', 'HVAC'], ['condPlumbing', 'Plumbing'], ['condElectrical', 'Electrical'], ['condFoundation', 'Foundation'], ['condInterior', 'Interior'], ['condOther', 'Other Property Details']];
+    function conditionDetailsCard(d) {
+      const rows = COND_META.filter(m => (d[m[0]] || '').trim()).map(m =>
+        '<div class="cond-row"><div class="cond-name">' + m[1] + '</div><div class="cond-text">' + esc(d[m[0]]).replace(/\n/g, '<br>') + '</div></div>').join('');
+      return rows ? '<div class="card"><h2>Condition Details</h2>' + rows + '</div>' : '';
     }
     const COMP_META = [['compRoof', 'Roof', '&#127968;'], ['compHvac', 'HVAC', '&#10052;'], ['compPlumbing', 'Plumbing', '&#128736;'], ['compCosmetic', 'Cosmetic Quality', '&#127912;']];
     function compClass(r) { r = String(r).toLowerCase(); return r === 'good' ? 'comp-good' : r === 'fair' ? 'comp-fair' : r === 'poor' ? 'comp-poor' : ''; }
@@ -252,6 +262,7 @@
                 <table class="spec-table">${specs}</table>
               </div>
               ${componentsCard(d)}
+              ${conditionDetailsCard(d)}
             </div>
             <div class="sticky-side">
               <div class="card" id="offer-card">
