@@ -222,12 +222,16 @@
         const badges = [
           d.beds ? d.beds + ' Beds' : '', d.baths ? d.baths + ' Baths' : '',
           d.sqft ? (+d.sqft).toLocaleString() + ' Sq Ft' : '',
+          d.lotSize || '',
           d.propertyType || '', d.yearBuilt ? 'Built ' + d.yearBuilt : ''
         ].filter(Boolean).map(b => '<span class="badge">' + esc(b) + '</span>').join('');
-        const specs = [
+        const propSpecs = [
           ['Bedrooms', d.beds || '—'], ['Bathrooms', d.baths || '—'],
           ['Living Area', d.sqft ? (+d.sqft).toLocaleString() + ' sq ft' : '—'],
-          ['Year Built', d.yearBuilt || '—'], ['Property Type', d.propertyType || '—'],
+          ['Year Built', d.yearBuilt || '—'], ['Lot Size', d.lotSize || '—'],
+          ['Property Type', d.propertyType || '—']
+        ].map(r => '<tr><td>' + r[0] + '</td><td>' + esc(String(r[1])) + '</td></tr>').join('');
+        const dealSpecs = [
           ['Price', money(d.askPrice)], ['After Repair Value', money(d.arv)],
           ['Est. Repairs', d.repairEst ? money(d.repairEst) : '—']
         ].map(r => '<tr><td>' + r[0] + '</td><td>' + esc(String(r[1])) + '</td></tr>').join('');
@@ -261,12 +265,13 @@
               <div class="card">
                 <div class="section-label">About This Deal</div>
                 <div class="section-title">Property Details</div>
-                <div class="about-text">${esc(d.notes || 'Contact us for full details on this off-market opportunity.')}</div>
+                <table class="spec-table">${propSpecs}</table>
+                <div class="about-text" style="margin-top:14px;">${esc(d.notes || 'Contact us for full details on this off-market opportunity.')}</div>
               </div>
               <div class="card">
                 <div class="section-label">The Numbers</div>
                 <div class="section-title">Deal Breakdown</div>
-                <table class="spec-table">${specs}</table>
+                <table class="spec-table">${dealSpecs}</table>
               </div>
               ${componentsCard(d)}
               ${conditionDetailsCard(d)}

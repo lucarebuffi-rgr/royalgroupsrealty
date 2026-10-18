@@ -181,8 +181,15 @@
         const specs = [
           d.beds ? d.beds + ' bd' : '', d.baths ? d.baths + ' ba' : '',
           d.sqft ? (+d.sqft).toLocaleString() + ' sqft' : '',
+          d.lotSize ? esc(d.lotSize) : '',
           d.propertyType ? esc(d.propertyType) : ''
         ].filter(Boolean).map(s => '<span class="badge">' + s + '</span>').join('');
+        const propSpecs = [
+          ['Bedrooms', d.beds || '—'], ['Bathrooms', d.baths || '—'],
+          ['Living Area', d.sqft ? (+d.sqft).toLocaleString() + ' sq ft' : '—'],
+          ['Year Built', d.yearBuilt || '—'], ['Lot Size', d.lotSize || '—'],
+          ['Property Type', d.propertyType || '—']
+        ].map(r => '<tr><td>' + r[0] + '</td><td>' + esc(String(r[1])) + '</td></tr>').join('');
         root.innerHTML =
           '<div class="hero"><div class="hero-label">' + heroLabel + '</div>' +
           '<h1>' + esc(d.headline || d.address) + '</h1>' +
@@ -197,7 +204,8 @@
           '<a class="view-btn" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(full) + '" target="_blank" rel="noopener"><img src="/static/gmaps-icon.png" alt="Street View" />Street View</a>' +
           '</div>' +
           (specs ? '<div class="sec" style="padding-left:0;padding-right:0;"><div class="specs">' + specs + '</div></div>' : '') +
-          (d.notes ? '<div class="card"><h2>About This Deal</h2><p>' + esc(d.notes).replace(/\n/g, '<br>') + '</p></div>' : '') +
+          '<div class="card"><h2>Property Details</h2><table class="nums">' + propSpecs + '</table>' +
+          (d.notes ? '<p style="margin-top:12px;">' + esc(d.notes).replace(/\n/g, '<br>') + '</p>' : '') + '</div>' +
           '<div class="card"><h2>Deal Breakdown</h2><table class="nums">' +
           '<tr><td>Price</td><td>' + money(d.askPrice) + '</td></tr>' +
           '<tr><td>After-repair value</td><td>' + money(d.arv) + '</td></tr>' +
