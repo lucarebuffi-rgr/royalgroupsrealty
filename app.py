@@ -184,7 +184,7 @@ def _og_for_deal(deal):
     ask_str = "$" + format(int(ap), ",d") if ap else "contact for price"
     return {
         "og_title": full_addr + " | Royal Groups Realty",
-        "og_description": "Off-market investment opportunity: %s — asking %s" % (full_addr, ask_str),
+        "og_description": "Off-market investment opportunity: %s — price %s" % (full_addr, ask_str),
         "og_image": request.host_url.rstrip("/") + "/og-image/" + (deal.get("slug") or deal.get("_id", "")),
     }
 
@@ -235,7 +235,7 @@ def og_image(key):
     if line:
         dr.text((80, y), line, font=f_addr, fill=(255, 255, 255)); y += 88
     if price:
-        dr.text((80, y + 20), "Asking " + price, font=f_price, fill=(232, 184, 75))
+        dr.text((80, y + 20), "Price " + price, font=f_price, fill=(232, 184, 75))
     dr.text((80, H - 100), "Royal Groups Realty", font=f_brand, fill=(160, 170, 185))
     buf = io.BytesIO()
     img.save(buf, "PNG")
