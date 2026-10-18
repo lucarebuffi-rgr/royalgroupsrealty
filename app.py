@@ -1,7 +1,8 @@
 import requests
 import re
 import time
-from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, abort
+import io
+from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, abort, send_file
 
 app = Flask(__name__)
 
@@ -177,14 +178,69 @@ def _og_for_deal(deal):
         return {}
     addr = deal.get("address", "")
     city = ", ".join(x for x in [deal.get("city", ""), deal.get("state", "")] if x)
+    zipc = deal.get("zip", "")
+    full_addr = addr + (", " + city if city else "") + (" " + zipc if zipc else "")
     ap = deal.get("askPrice")
     ask_str = "$" + format(int(ap), ",d") if ap else "contact for price"
     return {
-        "og_title": (deal.get("headline") or addr) + " | Royal Groups Realty",
-        "og_description": "Off-market investment opportunity: %s%s — asking %s" % (
-            addr, (", " + city) if city else "", ask_str),
-        "og_image": deal.get("masterPhoto", ""),
+        "og_title": full_addr + " | Royal Groups Realty",
+        "og_description": "Off-market investment opportunity: %s — asking %s" % (full_addr, ask_str),
+        "og_image": request.host_url.rstrip("/") + "/og-image/" + (deal.get("slug") or deal.get("_id", "")),
     }
+
+@app.route("/og-image/<key>")
+def og_image(key):
+    """Branded 1200x630 thumbnail for link previews (no Drive dependency)."""
+    from PIL import Image, ImageDraw, ImageFont
+    deal = None
+    for d in get_all_deals():
+        addr = d.get("address", "")
+        dslug = (d.get("slug") or "").strip() or re.sub(r"[^a-zA-Z0-9]", "", addr)
+        if dslug == key or d.get("_id") == key:
+            deal = d
+            break
+    W, H = 1200, 630
+    img = Image.new("RGB", (W, H), (13, 27, 42))
+    dr = ImageDraw.Draw(img)
+    # gold top + bottom bars
+    dr.rectangle([0, 0, W, 14], fill=(200, 147, 42))
+    dr.rectangle([0, H - 14, W, H], fill=(200, 147, 42))
+    def font(name, size):
+        for path in (f"/usr/share/fonts/truetype/dejavu/{name}.ttf",):
+            try:
+                return ImageFont.truetype(path, size)
+            except Exception:
+                pass
+        return ImageFont.load_default()
+    f_label = font("DejaVuSans-Bold", 44)
+    f_addr = font("DejaVuSerif-Bold", 72)
+    f_price = font("DejaVuSans-Bold", 96)
+    f_brand = font("DejaVuSans", 40)
+    addr = deal.get("address", "") if deal else ""
+    city = ", ".join(x for x in [deal.get("city", ""), deal.get("state", "")] if x) if deal else ""
+    zipc = deal.get("zip", "") if deal else ""
+    full = addr + (", " + city if city else "") + (" " + zipc if zipc else "")
+    ap = deal.get("askPrice") if deal else None
+    price = "$" + format(int(ap), ",d") if ap else ""
+    dr.text((80, 70), "OFF-MARKET DEAL", font=f_label, fill=(232, 184, 75))
+    # wrap address to fit
+    y = 150
+    words, line = full.split(), ""
+    for w in words:
+        t = (line + " " + w).strip()
+        if dr.textlength(t, font=f_addr) < W - 160:
+            line = t
+        else:
+            dr.text((80, y), line, font=f_addr, fill=(255, 255, 255)); y += 88; line = w
+    if line:
+        dr.text((80, y), line, font=f_addr, fill=(255, 255, 255)); y += 88
+    if price:
+        dr.text((80, y + 20), "Asking " + price, font=f_price, fill=(232, 184, 75))
+    dr.text((80, H - 100), "Royal Groups Realty", font=f_brand, fill=(160, 170, 185))
+    buf = io.BytesIO()
+    img.save(buf, "PNG")
+    buf.seek(0)
+    return send_file(buf, mimetype="image/png")
 
 @app.route("/deals/<deal_id>")
 def deal_page(deal_id):
