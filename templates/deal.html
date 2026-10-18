@@ -43,11 +43,14 @@
     .hero-price .lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.55); }
     .hero-price .val { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; color: var(--gold-light); line-height: 1.1; }
     .hero-price .val.arv { font-size: 1.5rem; color: var(--white); }
-    .badges { display: flex; flex-wrap: wrap; gap: 10px; }
-    .badge { background: rgba(200,147,42,0.2); border: 1px solid var(--gold); color: var(--gold-light); padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em; }
     .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 24px 72px; }
     .gallery { max-width: 620px; margin: 0 auto 36px; }
     .gallery-main { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 12px; box-shadow: 0 16px 40px rgba(0,0,0,0.12); background: var(--light-gray); cursor: pointer; }
+    .gal-main-wrap { position: relative; }
+    .gal-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: none; background: rgba(13,27,42,0.55); color: #fff; font-size: 1.6rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; padding-bottom: 4px; }
+    .gal-arrow:hover { background: rgba(13,27,42,0.85); }
+    .gal-prev { left: 12px; }
+    .gal-next { right: 12px; }
     .gallery-thumbs { display: flex; gap: 10px; overflow-x: auto; margin-top: 10px; padding-bottom: 4px; }
     .gallery-thumbs img { width: 110px; height: 74px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid transparent; flex: 0 0 auto; }
     .gallery-thumbs img.active { border-color: var(--gold); }
@@ -238,12 +241,6 @@
         const streetHref = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(full);
         const headline = d.headline || d.address;
         const addr2 = [d.city, d.state].filter(Boolean).join(', ') + (d.zip ? ' ' + d.zip : '');
-        const badges = [
-          d.beds ? d.beds + ' Beds' : '', d.baths ? d.baths + ' Baths' : '',
-          d.sqft ? (+d.sqft).toLocaleString() + ' Sq Ft' : '',
-          d.lotSize || '',
-          d.propertyType || '', d.yearBuilt ? 'Built ' + d.yearBuilt : ''
-        ].filter(Boolean).map(b => '<span class="badge">' + esc(b) + '</span>').join('');
         const propSpecs = [
           ['Bedrooms', d.beds || '—'], ['Bathrooms', d.baths || '—'],
           ['Living Area', d.sqft ? (+d.sqft).toLocaleString() + ' sq ft' : '—'],
@@ -275,11 +272,14 @@
             <div class="hero-price"><div class="lbl">Price</div><div class="val">${money(d.askPrice)}</div></div>
             <div class="hero-price"><div class="lbl">After Repair Value</div><div class="val arv">${money(d.arv)}</div></div>
           </div>
-          <div class="badges">${badges}</div>
         </div></div>
         <div class="wrap">
           <div class="gallery" id="gallery" style="display:none;">
-            <img class="gallery-main" id="gal-main" alt="Property photo" />
+            <div class="gal-main-wrap">
+              <img class="gallery-main" id="gal-main" alt="Property photo" />
+              <button type="button" class="gal-arrow gal-prev" id="gal-prev" aria-label="Previous photo">‹</button>
+              <button type="button" class="gal-arrow gal-next" id="gal-next" aria-label="Next photo">›</button>
+            </div>
             <div class="gallery-thumbs" id="gal-thumbs"></div>
           </div>
           <div class="view-row">
@@ -363,6 +363,8 @@
       };
       thumbs.innerHTML = urls2.map((u, i) => '<img src="' + u + '" loading="lazy" data-i="' + i + '" class="' + (i === 0 ? 'active' : '') + '" onerror="this.style.display=\'none\'" />').join('');
       thumbs.querySelectorAll('img').forEach(t => t.onclick = () => set(+t.dataset.i));
+      $('gal-prev').onclick = () => set((gi - 1 + urls2.length) % urls2.length);
+      $('gal-next').onclick = () => set((gi + 1) % urls2.length);
       set(0);
     }
     async function submitOffer() {
