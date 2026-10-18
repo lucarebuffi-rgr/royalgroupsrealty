@@ -163,6 +163,7 @@
       const key = DEAL_SLUG || DEAL_ID;
       if (!key) return null;
       const r = await fetch('/api/deal/' + encodeURIComponent(key));
+      if (r.status === 503) throw new Error('service busy');
       if (!r.ok) return null;
       const d = await r.json();
       d.id = d._id;
