@@ -2,6 +2,7 @@ import requests
 import re
 import time
 import io
+import os
 from flask import Flask, render_template, request, jsonify, send_from_directory, redirect, abort, send_file
 
 app = Flask(__name__)
@@ -9,6 +10,7 @@ app = Flask(__name__)
 # Public Firebase client key (same one the templates use client-side) — lets the
 # server fetch a deal's master photo for link-preview meta tags.
 FIREBASE_API_KEY = "AIzaSyDNpa-2O0RduvXa5qmmIfFoioKG4gyoCOs"
+DRIVE_KEY = "AIzaSyBV20moxsKtzMqfg66XdaQ8Q4tGGNAK6I0"
 FIRESTORE_DEALS_URL = "https://firestore.googleapis.com/v1/projects/rgr-crm-941ab/databases/(default)/documents/dispoDeals"
 
 def _fs_val(v, default=""):
@@ -129,6 +131,57 @@ def sitemap():
 def deals_index():
     return render_template("deals_mobile.html" if is_mobile() else "deals.html")
 
+RENTCAST_API_KEY = os.environ.get("RENTCAST_API_KEY", "")
+_RENT_CACHE = {}
+_RENT_TTL = 30 * 24 * 3600  # 30 days — rents move slowly; also conserves the free quota
+
+def _rentcast_property_type(d):
+    t = str(d.get("propertyType") or "").lower()
+    if any(k in t for k in ("mobile", "manufactured", "mh", "mb")):
+        return "Manufactured"
+    if any(k in t for k in ("single", "sfr")):
+        return "SingleFamily"
+    if "condo" in t:
+        return "Condo"
+    if "townh" in t:
+        return "Townhouse"
+    if "multi" in t or "duplex" in t:
+        return "MultiFamily"
+    return "SingleFamily"
+
+def get_rent_estimate(d):
+    """Long-term rent estimate via RentCast, cached 30 days per deal. None on any failure."""
+    key = d.get("_id") or d.get("slug") or ""
+    now = time.time()
+    hit = _RENT_CACHE.get(key)
+    if hit and now - hit[0] < _RENT_TTL:
+        return hit[1]
+    if not RENTCAST_API_KEY:
+        return None
+    try:
+        addr = ", ".join(x for x in (d.get("address"), d.get("city"), d.get("state"), d.get("zip")) if x)
+        if not addr:
+            return None
+        params = {"address": addr, "propertyType": _rentcast_property_type(d), "compCount": 5}
+        for f, rk in (("beds", "bedrooms"), ("baths", "bathrooms"), ("sqft", "squareFootage")):
+            try:
+                if d.get(f) not in (None, ""):
+                    params[rk] = float(d[f])
+            except (TypeError, ValueError):
+                pass
+        r = requests.get("https://api.rentcast.io/v1/avm/rent/long-term",
+                         params=params, headers={"X-Api-Key": RENTCAST_API_KEY, "Accept": "application/json"},
+                         timeout=10)
+        r.raise_for_status()
+        rent = r.json().get("rent")
+        rent = int(rent) if rent else None
+        if rent:
+            _RENT_CACHE[key] = (now, rent)
+        return rent
+    except Exception as e:
+        print("rentcast failed:", e)
+        return None
+
 def get_all_deals():
     """All active deals, cached server-side. Public pages read from here, never Firestore directly."""
     hit = _cache_get("all_deals")
@@ -142,6 +195,7 @@ def get_all_deals():
             d = _flat_fields(doc)
             d["_id"] = doc.get("name", "").split("/")[-1]
             if d.get("stage") not in ("dead", "closed"):
+                d["estRent"] = get_rent_estimate(d)
                 deals.append(d)
         _cache_set("all_deals", deals)
         return deals
@@ -188,9 +242,45 @@ def _og_for_deal(deal):
         "og_image": request.host_url.rstrip("/") + "/og-image/" + (deal.get("slug") or deal.get("_id", "")),
     }
 
+_OGIMG_CACHE = {}
+_OGIMG_TTL = 24 * 3600
+
+def _drive_folder_id(url):
+    m = re.search(r"folders/([a-zA-Z0-9_-]+)", str(url or ""))
+    return m.group(1) if m else ""
+
+def _thumb_base(u):
+    return re.sub(r"=s\d+.*$", "", str(u or ""))
+
+def _og_photo_bytes(deal):
+    """Deal's master photo (matched by thumbnail URL) or first Drive photo, else None."""
+    fid = _drive_folder_id(deal.get("driveFolderUrl"))
+    if not fid:
+        return None
+    try:
+        q = "'%s' in parents and mimeType contains 'image/' and trashed = false" % fid
+        r = requests.get("https://www.googleapis.com/drive/v3/files",
+                         params={"q": q, "key": DRIVE_KEY, "fields": "files(id,thumbnailLink)", "pageSize": 20},
+                         timeout=10)
+        r.raise_for_status()
+        files = r.json().get("files", [])
+        if not files:
+            return None
+        master_base = _thumb_base(deal.get("masterPhoto"))
+        pick = next((f for f in files if master_base and _thumb_base(f.get("thumbnailLink")) == master_base), files[0])
+        tlink = re.sub(r"=s\d+.*$", "=s1600", pick.get("thumbnailLink") or "")
+        if not tlink:
+            return None
+        ir = requests.get(tlink, timeout=15)
+        ir.raise_for_status()
+        return ir.content
+    except Exception as e:
+        print("og photo failed:", e)
+        return None
+
 @app.route("/og-image/<key>")
 def og_image(key):
-    """Branded 1200x630 thumbnail for link previews (no Drive dependency)."""
+    """Link-preview thumbnail: the deal's real photo with a branded strip, else a branded card."""
     from PIL import Image, ImageDraw, ImageFont
     deal = None
     for d in get_all_deals():
@@ -200,6 +290,50 @@ def og_image(key):
             deal = d
             break
     W, H = 1200, 630
+    hit = _OGIMG_CACHE.get(key)
+    if hit and time.time() - hit[0] < _OGIMG_TTL:
+        buf = io.BytesIO(hit[1]); buf.seek(0)
+        return send_file(buf, mimetype="image/png")
+    photo = _og_photo_bytes(deal) if deal else None
+    if photo:
+        try:
+            img = Image.open(io.BytesIO(photo)).convert("RGB")
+            # cover-crop to 1200x630
+            sr = img.width / img.height
+            tr = W / H
+            if sr > tr:
+                nw = int(img.height * tr); x0 = (img.width - nw) // 2
+                img = img.crop((x0, 0, x0 + nw, img.height))
+            else:
+                nh = int(img.width / tr); y0 = (img.height - nh) // 2
+                img = img.crop((0, y0, img.width, y0 + nh))
+            img = img.resize((W, H), Image.LANCZOS)
+            dr = ImageDraw.Draw(img, "RGBA")
+            # bottom branded strip
+            dr.rectangle([0, H - 130, W, H], fill=(13, 27, 42, 235))
+            dr.rectangle([0, H - 130, W, H - 126], fill=(200, 147, 42, 255))
+            def font(name, size):
+                try:
+                    return ImageFont.truetype("/usr/share/fonts/truetype/dejavu/%s.ttf" % name, size)
+                except Exception:
+                    return ImageFont.load_default()
+            addr = deal.get("address", "")
+            city = ", ".join(x for x in [deal.get("city", ""), deal.get("state", "")] if x)
+            full = (addr + (", " + city if city else "")).strip()
+            ap = deal.get("askPrice")
+            price = "$" + format(int(ap), ",d") if ap else ""
+            dr.text((40, H - 112), "OFF-MARKET DEAL" + ("  ·  Price " + price if price else ""),
+                    font=font("DejaVuSans-Bold", 36), fill=(232, 184, 75, 255))
+            dr.text((40, H - 62), full[:60], font=font("DejaVuSerif-Bold", 40), fill=(255, 255, 255, 255))
+            buf = io.BytesIO()
+            img.save(buf, "PNG")
+            data = buf.getvalue()
+            _OGIMG_CACHE[key] = (time.time(), data)
+            buf.seek(0)
+            return send_file(buf, mimetype="image/png")
+        except Exception as e:
+            print("og composite failed:", e)
+    # fallback: branded card (no photo available)
     img = Image.new("RGB", (W, H), (13, 27, 42))
     dr = ImageDraw.Draw(img)
     # gold top + bottom bars
