@@ -213,13 +213,10 @@
         document.title = (d.headline || d.address) + ' | Royal Groups Realty';
         const PH = applyDealPhone(d);
         window.DEAL_PHONE = PH;
-        (function () {
-          const full = [d.address, d.city, d.state, d.zip].filter(Boolean).join(', ');
-          const dashed = full.replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-          $('zillow-btn').href = 'https://www.zillow.com/homes/' + dashed + '_rb/';
-          $('street-btn').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(full);
-          $('view-row').style.display = 'flex';
-        })();
+        const full = [d.address, d.city, d.state, d.zip].filter(Boolean).join(', ');
+        const dashed = full.replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        const zillowHref = 'https://www.zillow.com/homes/' + dashed + '_rb/';
+        const streetHref = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(full);
         const headline = d.headline || d.address;
         const addr2 = [d.city, d.state].filter(Boolean).join(', ') + (d.zip ? ' ' + d.zip : '');
         const badges = [
@@ -255,9 +252,9 @@
             <img class="gallery-main" id="gal-main" alt="Property photo" />
             <div class="gallery-thumbs" id="gal-thumbs"></div>
           </div>
-          <div class="view-row" id="view-row" style="display:none;">
-            <a class="view-btn" id="zillow-btn" href="#" target="_blank" rel="noopener"><img src="/static/zillow-icon.png" alt="Zillow" />Zillow</a>
-            <a class="view-btn" id="street-btn" href="#" target="_blank" rel="noopener"><img src="/static/gmaps-icon.png" alt="Street View" />Street View</a>
+          <div class="view-row">
+            <a class="view-btn" href="${zillowHref}" target="_blank" rel="noopener"><img src="/static/zillow-icon.png" alt="Zillow" />Zillow</a>
+            <a class="view-btn" href="${streetHref}" target="_blank" rel="noopener"><img src="/static/gmaps-icon.png" alt="Street View" />Street View</a>
           </div>
           <div class="cols">
             <div>
