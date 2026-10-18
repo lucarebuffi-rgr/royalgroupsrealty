@@ -271,7 +271,6 @@ def _og_for_deal(deal):
     return {
         "og_title": full_addr,
         "og_description": "Off-market investment opportunity: %s — price %s" % (full_addr, ask_str),
-        "og_image": request.host_url.rstrip("/") + "/og-image/" + (deal.get("slug") or deal.get("_id", "")),
     }
 
 _OGIMG_CACHE = {}
