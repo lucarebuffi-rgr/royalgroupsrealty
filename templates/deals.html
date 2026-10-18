@@ -81,11 +81,12 @@
   <div class="list-head">
     <h1><span class="h-icon">&#128269;</span> Find Your Next Deal</h1>
     <div class="sort-wrap">
-      <label for="sort-sel">Sort</label>
-      <select id="sort-sel">
-        <option value="date">Date</option>
-        <option value="price-asc">Price: Low to High</option>
-        <option value="price-desc">Price: High to Low</option>
+      <label for="type-sel">Property Type</label>
+      <select id="type-sel">
+        <option value="ALL">All Types</option>
+        <option value="SFR">SFR</option>
+        <option value="MH">MH</option>
+        <option value="LAND">Land</option>
       </select>
     </div>
   </div>
@@ -209,14 +210,18 @@
           renderDeals();
         };
         renderDeals();
-        $('sort-sel').onchange = renderDeals;
+        $('type-sel').onchange = renderDeals;
+        const TYPE_BUCKETS = { SFR: ['sfr', 'single family', 'single-family'], MH: ['mh', 'mb', 'mobile', 'manufactured'], LAND: ['land', 'lot', 'acre'] };
+        function typeMatch(d, bucket) {
+          if (!bucket || bucket === 'ALL') return true;
+          const t = String(d.propertyType || '').toLowerCase();
+          return (TYPE_BUCKETS[bucket] || []).some(k => t.includes(k));
+        }
         function renderDeals() {
-          const mode = ($('sort-sel') || {}).value || 'date';
+          const tf = ($('type-sel') || {}).value || 'ALL';
           const sf = window._stateFilter || 'ALL';
-          const list = (window._allDeals || []).filter(d => sf === 'ALL' || String(d.state || '').toUpperCase() === sf).slice();
-          if (mode === 'price-asc') list.sort((a, b) => (+a.askPrice || 0) - (+b.askPrice || 0));
-          else if (mode === 'price-desc') list.sort((a, b) => (+b.askPrice || 0) - (+a.askPrice || 0));
-          else list.sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
+          const list = (window._allDeals || []).filter(d => (sf === 'ALL' || String(d.state || '').toUpperCase() === sf) && typeMatch(d, tf)).slice();
+          list.sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
           if (!list.length) {
             const lbl = sf === 'ALL' ? '' : (sf === 'TX' ? ' in Texas' : ' in Georgia');
             grid.innerHTML = '<div class="empty-state"><h2>No active deals' + lbl + ' right now</h2><p>Check back soon &mdash; new off-market opportunities land here first.</p></div>';
