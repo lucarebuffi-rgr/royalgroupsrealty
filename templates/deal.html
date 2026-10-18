@@ -298,7 +298,7 @@
         const dealSpecsRows = [
           ['Price', money(d.askPrice)],
           ['Est. Flip Rehab', d.rehabFlip ? money(d.rehabFlip) : '—'],
-          ['Est. Rent-Ready Rehab', d.rehabFlip ? money(d.rehabFlip) : '—'],
+          ['Est. Rent-Ready Rehab', d.rehabRentReady ? money(d.rehabRentReady) : '—'],
           ['After Repair Value', money(d.arv)]
         ];
         if (d.estRent) {
