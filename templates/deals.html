@@ -76,7 +76,7 @@
   </style>
 </head>
 <body>
-  <div class="topbar">&#11088; Trusted Home Buyer Since 2020 &nbsp;|&nbsp; Call or Text: <a href="tel:4696658481">469-665-8481</a></div>
+  <div class="topbar">&#128176; Discounted Deals Since 2020 &#128176;</div>
   <header>
     <div class="nav-slim">
       <a href="/"><img src="/static/logo.png" alt="Royal Groups Realty" /></a>
@@ -182,9 +182,9 @@
     async function boot() {
       const grid = $('deal-grid');
       try {
-        const snap = await db.collection('dispoDeals').get();
-        let deals = snap.docs.map(d => ({ id: d.id, ...d.data() }))
-          .filter(d => !['dead', 'closed'].includes(d.stage));
+        const r = await fetch('/api/deals');
+        if (!r.ok) throw new Error('deals API ' + r.status);
+        let deals = (await r.json()).map(d => ({ id: d._id, ...d }));
         deals.sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
         if (!deals.length) {
           grid.innerHTML = '<div class="empty-state"><h2>No active deals right now</h2><p>Check back soon — new off-market opportunities land here first.</p></div>';

@@ -101,7 +101,7 @@
   </style>
 </head>
 <body>
-  <div class="topbar">&#11088; Trusted Home Buyer Since 2020 &nbsp;|&nbsp; Call or Text: <a id="topbar-phone" href="tel:4696063358">(469) 606-3358</a></div>
+  <div class="topbar">&#128176; Discounted Deals Since 2020 &#128176;</div>
   <header>
     <div class="nav-slim">
       <a href="/"><img src="/static/logo.png" alt="Royal Groups Realty" /></a>
@@ -136,7 +136,6 @@
         const el = $(id);
         if (el) { el.href = 'tel:' + ph.tel; el.innerHTML = prefix + ph.display; }
       };
-      set('topbar-phone', '');
       set('nav-phone', '&#128222; ');
       set('footer-phone', '&#128222; ');
       return ph;
@@ -159,24 +158,30 @@
       } catch (e) { return []; }
     }
 
+    async function fetchDeal() {
+      // Reads go through the server's cached API — buyer traffic never touches the Firestore read quota.
+      const key = DEAL_SLUG || DEAL_ID;
+      if (!key) return null;
+      const r = await fetch('/api/deal/' + encodeURIComponent(key));
+      if (!r.ok) return null;
+      const d = await r.json();
+      d.id = d._id;
+      return d;
+    }
     async function boot() {
       const root = $('deal-root');
       try {
-        let d = null;
-        if (DEAL_SLUG) {
-          const snap = await db.collection('dispoDeals').where('slug', '==', DEAL_SLUG).limit(1).get();
-          if (!snap.empty) { const doc = snap.docs[0]; d = { id: doc.id, ...doc.data() }; }
-          if (!d) {
-            // fallback: match slug computed from the address (docs saved before slugs were stored)
-            const all = await db.collection('dispoDeals').get();
-            const hit = all.docs.map(x => ({ id: x.id, ...x.data() })).find(x => dealSlug(x) === DEAL_SLUG);
-            if (hit) d = hit;
-          }
-        } else if (DEAL_ID) {
-          const doc = await db.collection('dispoDeals').doc(DEAL_ID).get();
-          if (doc.exists) d = { id: doc.id, ...doc.data() };
+        let d = null, lastErr = null;
+        for (let attempt = 0; attempt < 4 && !d; attempt++) {
+          try { d = await fetchDeal(); }
+          catch (e) { lastErr = e; console.error('deal load attempt ' + (attempt + 1), e); }
+          if (!d && attempt < 3) await new Promise(r => setTimeout(r, 2500 * (attempt + 1)));
         }
-        if (!d) { root.innerHTML = '<div class="empty-state"><h2>Deal not found</h2><p>This listing is no longer available.</p></div>'; return; }
+        if (!d) {
+          const busy = !!lastErr;
+          root.innerHTML = '<div class="empty-state"><h2>' + (busy ? 'Could not load this deal' : 'Deal not found') + '</h2><p>' + (busy ? 'Our database is temporarily busy &mdash; please refresh in a minute or two.' : 'This listing is no longer available.') + '</p></div>';
+          return;
+        }
         window.RESOLVED_DEAL_ID = d.id;
         if (['dead', 'closed'].includes(d.stage)) { root.innerHTML = '<div class="empty-state"><h2>No longer available</h2><p>This deal has been closed.</p></div>'; return; }
         document.title = (d.headline || d.address) + ' | Royal Groups Realty';
