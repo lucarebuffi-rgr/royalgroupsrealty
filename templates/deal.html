@@ -253,7 +253,7 @@
           ['After Repair Value', money(d.arv)]
         ];
         if (d.estRent) {
-          var rr = (d.estRentLow && d.estRentHigh) ? ' <small>(range ' + money(d.estRentLow) + '–' + money(d.estRentHigh) + ')</small>' : '';
+          var rr = (d.estRentLow && d.estRentHigh) ? ' (range ' + money(d.estRentLow) + '–' + money(d.estRentHigh) + ')' : '';
           dealSpecsRows.push(['Est. Rent Value', money(d.estRent) + '/mo' + rr]);
         }
         const dealSpecs = dealSpecsRows.map(r => '<tr><td>' + r[0] + '</td><td>' + esc(String(r[1])) + '</td></tr>').join('');
