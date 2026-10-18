@@ -191,8 +191,9 @@
       const m = String(url || '').match(/folders\/([a-zA-Z0-9_-]+)/);
       return m ? m[1] : '';
     }
-    async function firstPhoto(folderUrl) {
-      const fid = driveFolderId(folderUrl);
+    async function firstPhoto(deal) {
+      if (deal.masterPhoto) return deal.masterPhoto;
+      const fid = driveFolderId(deal.driveFolderUrl);
       if (!fid) return '';
       try {
         const q = encodeURIComponent("'" + fid + "' in parents and mimeType contains 'image/' and trashed = false");
@@ -256,7 +257,7 @@
           grid.innerHTML = list.map(d => {
             const addr = [d.address, d.city].filter(Boolean).join(', ') + (d.state ? ', ' + d.state : '') + (d.zip ? ' ' + d.zip : '');
             return '<a class="deal-card" href="/' + esc(dealSlug(d)) + '">' +
-              '<div class="deal-photo-wrap"><div class="deal-photo placeholder" data-photofolder="' + esc(d.driveFolderUrl || '') + '">&#127968;</div>' +
+              '<div class="deal-photo-wrap"><div class="deal-photo placeholder" data-photofolder="' + esc(d.driveFolderUrl || '') + '" data-master="' + esc(d.masterPhoto || '') + '">&#127968;</div>' +
               '<span class="status-badge">Active</span></div>' +
               '<div class="deal-body">' +
               '<div class="deal-addr">' + esc(addr) + '</div>' +
@@ -269,7 +270,7 @@
               '</div></div></a>';
           }).join('');
           grid.querySelectorAll('[data-photofolder]').forEach(async el => {
-            const url = await firstPhoto(el.getAttribute('data-photofolder'));
+            const url = await firstPhoto({ masterPhoto: el.getAttribute('data-master'), driveFolderUrl: el.getAttribute('data-photofolder') });
             if (url) {
               const img = document.createElement('img');
               img.className = 'deal-photo'; img.loading = 'lazy'; img.src = url; img.alt = 'Property photo';

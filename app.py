@@ -3,6 +3,45 @@ from flask import Flask, render_template, request, jsonify, send_from_directory,
 
 app = Flask(__name__)
 
+# Public Firebase client key (same one the templates use client-side) — lets the
+# server fetch a deal's master photo for link-preview meta tags.
+FIREBASE_API_KEY = "AIzaSyDNpa-2O0RduvXa5qmmIfFoioKG4gyoCOs"
+FIRESTORE_DEALS_URL = "https://firestore.googleapis.com/v1/projects/rgr-crm-941ab/databases/(default)/documents/dispoDeals"
+
+def _fs_str(v, default=""):
+    return v.get("stringValue", v.get("integerValue", default)) if isinstance(v, dict) else default
+
+def _flat_fields(doc):
+    f = doc.get("fields", {})
+    return {k: _fs_str(v) for k, v in f.items()}
+
+def get_deal_by_id(deal_id):
+    """Fetch a single deal doc by ID for server-rendered meta tags."""
+    try:
+        r = requests.get(FIRESTORE_DEALS_URL + "/" + deal_id, params={"key": FIREBASE_API_KEY}, timeout=8)
+        if r.status_code == 404:
+            return None
+        r.raise_for_status()
+        return _flat_fields(r.json())
+    except Exception as e:
+        print("deal lookup failed:", e)
+    return None
+
+def get_deal_by_slug(slug):
+    """Fetch a deal doc by its slug for server-rendered meta tags. Returns a flat dict or None."""
+    try:
+        r = requests.get(FIRESTORE_DEALS_URL, params={"key": FIREBASE_API_KEY, "pageSize": 100}, timeout=8)
+        r.raise_for_status()
+        for doc in r.json().get("documents", []):
+            f = doc.get("fields", {})
+            addr = _fs_str(f.get("address", {}))
+            dslug = _fs_str(f.get("slug", {})) or re.sub(r"[^a-zA-Z0-9]", "", addr)
+            if dslug == slug and _fs_str(f.get("stage", {})) not in ("dead", "closed"):
+                return {k: _fs_str(v) for k, v in f.items()}
+    except Exception as e:
+        print("deal lookup failed:", e)
+    return None
+
 # Make.com webhook URL
 MAKE_WEBHOOK = "https://hook.us2.make.com/xa7uddev8m89ceqd97d9iurxyquirtn7"
 
@@ -65,9 +104,22 @@ def sitemap():
 def deals_index():
     return render_template("deals.html")
 
+def _og_for_deal(deal):
+    if not deal:
+        return {}
+    addr = deal.get("address", "")
+    city = ", ".join(x for x in [deal.get("city", ""), deal.get("state", "")] if x)
+    return {
+        "og_title": (deal.get("headline") or addr) + " | Royal Groups Realty",
+        "og_description": "Off-market investment opportunity: %s%s — asking %s" % (
+            addr, (", " + city) if city else "",
+            ("$" + deal["askPrice"]) if deal.get("askPrice") else "contact for price"),
+        "og_image": deal.get("masterPhoto", ""),
+    }
+
 @app.route("/deals/<deal_id>")
 def deal_page(deal_id):
-    return render_template("deal.html", deal_id=deal_id)
+    return render_template("deal.html", deal_id=deal_id, **_og_for_deal(get_deal_by_id(deal_id)))
 
 # Pretty deal URLs: royalgroupsrealty.com/63SVillaRd (slug from the street address).
 # Registered after every specific route so /about, /contact, /blog, etc. still win.
@@ -75,7 +127,7 @@ def deal_page(deal_id):
 def deal_page_slug(slug):
     if "." in slug:
         abort(404)
-    return render_template("deal.html", deal_slug=slug)
+    return render_template("deal.html", deal_slug=slug, **_og_for_deal(get_deal_by_slug(slug)))
 
 # Texas County Pages
 @app.route("/counties/cooke-county-tx")
