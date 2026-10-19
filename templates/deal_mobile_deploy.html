@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0d1b2a" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Off-Market Deal | Royal Groups Realty</title>
+  <meta name="description" content="Off-market investment opportunity from Royal Groups Realty." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Royal Groups Realty" />
+  {% if og_title %}<meta property="og:title" content="{{ og_title }}" />{% endif %}
+  {% if og_description %}<meta property="og:description" content="{{ og_description }}" />{% endif %}
+  {% if og_image %}<meta property="og:image" content="{{ og_image }}" />{% endif %}
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>@font-face{font-family:'Playfair Display';font-weight:700;font-style:normal;font-display:swap;src:url('/static/fonts/playfair-display-latin-700-normal.woff2') format('woff2');}@font-face{font-family:'Playfair Display';font-weight:900;font-style:normal;font-display:swap;src:url('/static/fonts/playfair-display-latin-900-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:400;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:500;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:600;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-600-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:700;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-700-normal.woff2') format('woff2');}</style>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    :root {
+      --navy: #0d1b2a; --gold: #c8932a; --gold-light: #e8b84b;
+      --gold-accessible: #8a5c14;
+      --cream: #faf8f3; --white: #ffffff; --gray: #6b7280;
+      --light-gray: #f3f4f6; --green: #16a34a; --red: #c0392b;
+    }
+    html { font-size: 17px; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--navy); background: var(--cream); line-height: 1.55; padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+    .topbar { background: var(--navy); color: var(--white); text-align: center; padding: 12px 16px; font-size: 0.9rem; font-weight: 600; position: sticky; top: 0; z-index: 50; padding-top: calc(12px + env(safe-area-inset-top)); }
+    .topbar-deals { display: block; margin-top: 3px; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-light); text-decoration: none; font-weight: 600; }
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, #1a3050 60%, #0d2035 100%); color: var(--white); padding: 26px 20px 24px; }
+    .hero-label { text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.7rem; font-weight: 600; color: var(--gold-light); margin-bottom: 8px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 1.65rem; font-weight: 900; line-height: 1.2; }
+    .hero .addr { color: rgba(255,255,255,0.7); font-size: 0.92rem; margin-top: 6px; }
+    .hero-prices { display: flex; gap: 28px; margin-top: 16px; }
+    .hero-prices .lbl { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.55); }
+    .hero-prices .ask { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 900; color: var(--gold-light); }
+    .hero-prices .arv { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: #fff; }
+    .page { max-width: 560px; margin: 0 auto; }
+    .sec { padding: 20px 16px; }
+    .gallery-main { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 14px; background: var(--light-gray); display: block; }
+    .gallery-strip { display: flex; gap: 10px; overflow-x: auto; margin-top: 10px; padding: 2px 2px 8px; -webkit-overflow-scrolling: touch; }
+    .gallery-strip img { width: 96px; height: 72px; object-fit: cover; border-radius: 10px; flex: 0 0 auto; border: 2px solid transparent; }
+    .gallery-strip img.active { border-color: var(--gold); }
+    .sv-wrap { position: relative; }
+    .sv-banner { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%) rotate(-5deg); text-align: center; font-weight: 700; font-size: 1rem; letter-spacing: 0.3em; color: rgba(255,255,255,0.75); background: rgba(13,27,42,0.28); padding: 8px 0; pointer-events: none; }
+    .view-row { display: flex; gap: 12px; margin-top: 14px; }
+    .view-btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--white); border: 1px solid #e2e5ea; border-radius: 14px; padding: 12px 8px; text-decoration: none; color: var(--navy); font-weight: 700; font-size: 1rem; min-height: 60px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .view-btn img { width: 38px; height: 38px; border-radius: 8px; }
+    .specs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .badge { background: rgba(200,147,42,0.14); border: 1px solid rgba(200,147,42,0.55); color: var(--gold-accessible); padding: 8px 14px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; }
+    .card { background: var(--white); border-radius: 16px; padding: 22px 18px; box-shadow: 0 4px 18px rgba(0,0,0,0.06); margin-top: 16px; }
+    .card h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; }
+    .card p { color: #374151; font-size: 0.98rem; }
+    .nums { width: 100%; border-collapse: collapse; margin-top: 4px; }
+    .nums td { padding: 12px 4px; border-bottom: 1px solid var(--light-gray); font-size: 0.98rem; }
+    .nums td:last-child { text-align: right; font-weight: 700; }
+    .nums tr:last-child td { border-bottom: none; }
+    .agent { display: flex; gap: 14px; align-items: center; }
+    .agent img { width: 68px; height: 68px; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold); flex: 0 0 auto; }
+    .agent .nm { font-weight: 700; font-size: 1.05rem; }
+    .agent .co { color: var(--gray); font-size: 0.88rem; }
+    .agent .ph a { color: var(--gold-accessible); font-weight: 700; text-decoration: none; font-size: 1.05rem; }
+    .offer-form input { width: 100%; font-size: 16px; padding: 15px 14px; border: 1.5px solid #d1d5db; border-radius: 12px; margin-bottom: 12px; font-family: 'DM Sans', sans-serif; min-height: 52px; }
+    .offer-form input:focus { outline: none; border-color: var(--gold); }
+    .btn-submit { width: 100%; background: var(--gold-accessible); color: #fff; font-weight: 700; font-size: 1.1rem; padding: 16px; border: none; border-radius: 12px; min-height: 56px; }
+    .btn-submit:disabled { opacity: 0.6; }
+    .msg { margin-top: 12px; font-size: 0.95rem; display: none; }
+    .msg.ok { display: block; color: var(--green); font-weight: 600; }
+    .msg.error { display: block; color: var(--red); font-weight: 600; }
+    .sticky-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; display: flex; gap: 10px; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: rgba(255,255,255,0.97); border-top: 1px solid #e5e7eb; box-shadow: 0 -4px 20px rgba(0,0,0,0.08); }
+    .sticky-bar a, .sticky-bar button { flex: 1; text-align: center; font-weight: 700; font-size: 1.05rem; padding: 15px 8px; border-radius: 12px; min-height: 54px; text-decoration: none; border: none; font-family: 'DM Sans', sans-serif; }
+    .sticky-call { background: var(--white); color: var(--navy); border: 2px solid var(--navy) !important; }
+    .sticky-offer { background: var(--gold-accessible); color: #fff; }
+    .empty-state { text-align: center; padding: 80px 24px; color: var(--gray); }
+    .empty-state h2 { font-family: 'Playfair Display', serif; color: var(--navy); margin-bottom: 8px; }
+    .comp-row { padding: 14px 0; border-bottom: 1px solid var(--light-gray); }
+    .comp-row:last-child { border-bottom: none; }
+    .comp-name { font-size: 0.98rem; font-weight: 600; margin-bottom: 8px; }
+    .comp-pill { text-align: center; padding: 11px; border-radius: 10px; font-weight: 700; font-size: 1rem; }
+    .comp-good { background: #dcfce7; color: #166534; }
+    .comp-fair { background: #fef3c7; color: #92400e; }
+    .comp-poor { background: #fee2e2; color: #991b1b; }
+    .cond-row { padding: 12px 0; border-bottom: 1px solid var(--light-gray); }
+    .cond-row:last-child { border-bottom: none; }
+    .cond-name { font-weight: 700; font-size: 0.98rem; margin-bottom: 4px; }
+    .cond-text { color: #374151; font-size: 0.95rem; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <div class="topbar"><div>&#128176; Discounted Deals Since 2020 &#128176;</div><a class="topbar-deals" href="/deals">View All Active Deals</a></div>
+  <div class="page" id="deal-root"><div class="empty-state"><h2>Loading deal…</h2></div></div>
+  <div class="sticky-bar" id="sticky-bar" style="display:none;">
+    <a class="sticky-call" id="sticky-call" href="#">&#128222; Call</a>
+    <button class="sticky-offer" id="sticky-offer">Make an Offer</button>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+    const DEAL_SLUG = {{ deal_slug|tojson if deal_slug is defined else 'null' }};
+    const DEAL_ID = {{ deal_id|tojson if deal_id is defined else 'null' }};
+    firebase.initializeApp({ apiKey: "AIzaSyDNpa-2O0RduvXa5qmmIfFoioKG4gyoCOs", authDomain: "rgr-crm-941ab.firebaseapp.com", projectId: "rgr-crm-941ab" });
+    const db = firebase.firestore();
+    const DRIVE_KEY = "AIzaSyBV20moxsKtzMqfg66XdaQ8Q4tGGNAK6I0";
+    function masterPhotoUrl(d) {
+      if (d.masterPhotoId) return 'https://drive.google.com/thumbnail?id=' + d.masterPhotoId + '&sz=s1200';
+      return d.masterPhoto || '';
+    }
+    const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    // Analytics: track views, clicks, time on page
+    const _track = (() => {
+      const params = new URLSearchParams(location.search);
+      const buyerId = params.get('b') || null;
+      const sessionId = 's' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+      const startTime = Date.now();
+      let dealId = null;
+      const log = (type, data) => {
+        try {
+          db.collection('dispoPageViews').add({
+            dealId, buyerId, sessionId, type,
+            ...data,
+            ua: navigator.userAgent.slice(0, 200),
+            ref: document.referrer.slice(0, 200),
+            at: new Date().toISOString()
+          });
+        } catch (e) {}
+      };
+      const setDeal = id => { dealId = id; log('view', {}); };
+      window.addEventListener('beforeunload', () => {
+        const secs = Math.round((Date.now() - startTime) / 1000);
+        if (dealId && secs > 3) {
+          try {
+            db.collection('dispoPageViews').add({
+              dealId, buyerId, sessionId, type: 'time',
+              seconds: secs, at: new Date().toISOString()
+            });
+          } catch (e) {}
+        }
+      });
+      return { log, setDeal, get buyerId() { return buyerId; } };
+    })();
+    document.addEventListener('click', e => {
+      const t = e.target.closest('a, button');
+      if (!t) return;
+      const href = t.getAttribute('href') || '';
+      if (href.startsWith('tel:')) _track.log('click', { action: 'phone_tap' });
+      else if (href.includes('zillow.com')) _track.log('click', { action: 'zillow' });
+      else if (href.includes('google.com/maps')) _track.log('click', { action: 'streetview' });
+      else if (t.id === 'of-btn') _track.log('click', { action: 'offer_submit_attempt' });
+    }, true);
+    const money = n => (n === '' || n == null || isNaN(+n)) ? '—' : '$' + (+n).toLocaleString();
+    const $ = id => document.getElementById(id);
+    function dealPhone(d) {
+      return String(d.state || '').toUpperCase() === 'GA'
+        ? { display: '(770) 762-5598', tel: '7707625598' }
+        : { display: '(469) 606-3358', tel: '4696063358' };
+    }
+    const COMP_META = [['compRoof', 'Roof', '&#127968;'], ['compHvac', 'HVAC', '&#10052;'], ['compPlumbing', 'Plumbing', '&#128736;'], ['compCosmetic', 'Cosmetic Quality', '&#127912;']];
+    const COND_META = [['condRoof', 'Roof'], ['condHvac', 'HVAC'], ['condPlumbing', 'Plumbing'], ['condElectrical', 'Electrical'], ['condFoundation', 'Foundation'], ['condInterior', 'Interior'], ['condOther', 'Other Property Details']];
+    const TRANS_META = [['transWalkthrough', 'Walkthrough Date'], ['transClosing', 'Closing Date'], ['transOccupancy', 'Occupancy'], ['transAccess', 'Access Instructions'], ['transTitle', 'Title Company'], ['transEmd', 'EMD Required'], ['transPof', 'Proof of Funds Required']];
+    function transactionDetailsCard(d) {
+      const rows = TRANS_META.filter(m => (d[m[0]] || '').trim()).map(m =>
+        '<div class="cond-row"><div class="cond-name">' + m[1] + '</div><div class="cond-text">' + esc(d[m[0]]).replace(/\n/g, '<br>') + '</div></div>').join('');
+      return rows ? '<div class="card"><h2>Transaction Details</h2>' + rows + '</div>' : '';
+    }
+    function conditionDetailsCard(d) {
+      const rows = COND_META.filter(m => (d[m[0]] || '').trim()).map(m =>
+        '<div class="cond-row"><div class="cond-name">' + m[1] + '</div><div class="cond-text">' + esc(d[m[0]]).replace(/\n/g, '<br>') + '</div></div>').join('');
+      return rows ? '<div class="card"><h2>Condition Details</h2>' + rows + '</div>' : '';
+    }
+    function compClass(r) { r = String(r).toLowerCase(); return r === 'good' ? 'comp-good' : r === 'fair' ? 'comp-fair' : r === 'poor' ? 'comp-poor' : ''; }
+    function componentsCard(d) {
+      const rows = COMP_META.filter(m => d[m[0]]).map(m =>
+        '<div class="comp-row"><div class="comp-name">' + m[2] + ' ' + m[1] + '</div>' +
+        '<div class="comp-pill ' + compClass(d[m[0]]) + '">' + esc(d[m[0]]) + '</div></div>').join('');
+      return rows ? '<div class="card"><h2>Components</h2>' + rows + '</div>' : '';
+    }
+    async function photoURLs(folderUrl, masterPhoto) {
+      const urls = masterPhoto ? [masterPhoto] : [];
+      const m = String(folderUrl || '').match(/folders\/([a-zA-Z0-9_-]+)/);
+      if (!m) return urls;
+      try {
+        const q = encodeURIComponent("'" + m[1] + "' in parents and mimeType contains 'image/' and trashed = false");
+        const r = await fetch('https://www.googleapis.com/drive/v3/files?q=' + q + '&key=' + DRIVE_KEY + '&fields=files(thumbnailLink)&pageSize=24');
+        const j = await r.json();
+        for (const f of (j.files || [])) {
+          const u = (f.thumbnailLink || '').replace(/=s\d+.*$/, '=s1200');
+          if (u && !urls.includes(u)) urls.push(u);
+        }
+      } catch (e) {}
+      return urls;
+    }
+    function streetViewUrl(d) {
+      const addr = [d.address, d.city, d.state, d.zip].filter(Boolean).join(', ');
+      return 'https://maps.googleapis.com/maps/api/streetview?size=1200x800&location=' + encodeURIComponent(addr) + '&key=' + STREETVIEW_KEY;
+    }
+    function showStreetView(d) {
+      const gal = $('gallery');
+      gal.style.display = 'block';
+      gal.innerHTML = '<div class="sv-wrap"><img class="gallery-main" src="' + streetViewUrl(d) + '" alt="Street view of property" onerror="document.getElementById(\'gallery\').style.display=\'none\'" /><div class="sv-banner">PICTURES STILL PENDING</div></div>';
+    }
+    async function fetchDeal() {
+      const key = DEAL_SLUG || DEAL_ID;
+      if (!key) return null;
+      const r = await fetch('/api/deal/' + encodeURIComponent(key));
+      if (r.status === 503) throw new Error('service busy');
+      if (!r.ok) return null;
+      const d = await r.json();
+      d.id = d._id;
+      return d;
+    }
+    async function boot() {
+      const root = $('deal-root');
+      try {
+        let d = null, lastErr = null;
+        for (let attempt = 0; attempt < 4 && !d; attempt++) {
+          try { d = await fetchDeal(); }
+          catch (e) { lastErr = e; }
+          if (!d && attempt < 3) await new Promise(r => setTimeout(r, 2500 * (attempt + 1)));
+        }
+        if (!d) {
+          root.innerHTML = '<div class="empty-state"><h2>' + (lastErr ? 'Could not load this deal' : 'Deal not found') + '</h2><p>' + (lastErr ? 'Our database is temporarily busy &mdash; please refresh in a minute or two.' : 'This listing is no longer available.') + '</p></div>';
+          return;
+        }
+        window.RESOLVED_DEAL_ID = d.id;
+        _track.setDeal(d.id);
+        if (['dead', 'closed'].includes(d.stage)) { root.innerHTML = '<div class="empty-state"><h2>No longer available</h2><p>This deal has been closed.</p></div>'; return; }
+        document.title = (d.headline || d.address) + ' | Royal Groups Realty';
+        const PH = dealPhone(d);
+        window.DEAL_PHONE = PH;
+        const countyName = String(d.county || '').replace(/\s*county$/i, '').trim();
+        const heroLabel = countyName
+          ? '&#128205; ' + esc(countyName.toUpperCase()) + ' COUNTY, ' + esc(String(d.state || '').toUpperCase()) + ' OFF MARKET OPPORTUNITY'
+          : 'Off-Market Investment Opportunity';
+        const full = [d.address, d.city, d.state, d.zip].filter(Boolean).join(', ');
+        const dashed = full.replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        const specs = [
+          d.beds ? d.beds + ' bd' : '', d.baths ? d.baths + ' ba' : '',
+          d.sqft ? (+d.sqft).toLocaleString() + ' sqft' : '',
+          d.lotSize ? esc(d.lotSize) : '',
+          d.propertyType ? esc(d.propertyType) : ''
+        ].filter(Boolean).map(s => '<span class="badge">' + s + '</span>').join('');
+        const propSpecs = [
+          ['Bedrooms', d.beds || '—'], ['Bathrooms', d.baths || '—'],
+          ['Living Area', d.sqft ? (+d.sqft).toLocaleString() + ' sq ft' : '—'],
+          ['Year Built', d.yearBuilt || '—'], ['Lot Size', d.lotSize || '—'],
+          ['Property Type', d.propertyType || '—']
+        ].map(r => '<tr><td>' + r[0] + '</td><td>' + esc(String(r[1])) + '</td></tr>').join('');
+        root.innerHTML =
+          '<div class="hero"><div class="hero-label">' + heroLabel + '</div>' +
+          '<div class="addr" style="font-size:1.25rem;font-weight:600;color:#fff;">' + esc(full) + '</div>' +
+          '<div class="hero-prices"><div><div class="lbl">Price</div><div class="ask">' + money(d.askPrice) + '</div></div>' +
+          '<div><div class="lbl">ARV</div><div class="arv">' + money(d.arv) + '</div></div></div>' +
+          '</div>' +
+          '<div class="sec"><div class="gallery" id="gallery" style="display:none;position:relative;">' +
+          '<img class="gallery-main" id="gal-main" alt="Property photo" />' +
+          '<button id="gal-prev" aria-label="Previous photo" style="position:absolute;left:10px;top:40%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:none;background:rgba(13,27,42,0.65);color:#fff;font-size:20px;">‹</button>' +
+          '<button id="gal-next" aria-label="Next photo" style="position:absolute;right:10px;top:40%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:none;background:rgba(13,27,42,0.65);color:#fff;font-size:20px;">›</button>' +
+          '<div class="gallery-strip" id="gal-strip"></div></div>' +
+          '<div class="view-row" id="view-row" style="display:none;">' +
+          '<a class="view-btn" href="https://www.zillow.com/homes/' + dashed + '_rb/" target="_blank" rel="noopener"><img src="/static/zillow-icon.png" alt="Zillow" />Zillow</a>' +
+          '<a class="view-btn" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(full) + '" target="_blank" rel="noopener"><img src="/static/gmaps-icon.png" alt="Street View" />Street View</a>' +
+          '</div>' +
+          '<div class="card"><h2>Property Details</h2><table class="nums">' + propSpecs + '</table>' +
+          (d.notes ? '<p style="margin-top:12px;">' + esc(d.notes).replace(/\n/g, '<br>') + '</p>' : '') + '</div>' +
+          '<div class="card"><h2>Deal Breakdown</h2><table class="nums">' +
+          '<tr><td>Price</td><td>' + money(d.askPrice) + '</td></tr>' +
+          '<tr><td>Est. flip rehab</td><td>' + (d.rehabFlip ? money(d.rehabFlip) : '—') + '</td></tr>' +
+          '<tr><td>Est. rent-ready rehab</td><td>' + (d.rehabRentReady ? money(d.rehabRentReady) : '—') + '</td></tr>' +
+          '<tr><td>After-repair value</td><td>' + money(d.arv) + '</td></tr>' +
+          (d.estRent ? '<tr><td>Est. rent value</td><td>' + money(d.estRent) + '/mo' + ((d.estRentLow && d.estRentHigh) ? ' (range ' + money(d.estRentLow) + '–' + money(d.estRentHigh) + ')' : '') + '</td></tr>' : '') +
+          '</table></div>' +
+          componentsCard(d) +
+          conditionDetailsCard(d) +
+          transactionDetailsCard(d) +
+          '<div class="card" id="offer-card"><h2>Make an Offer</h2>' +
+          '<div class="offer-form">' +
+          '<input id="of-name" placeholder="Your Name" autocomplete="name" />' +
+          '<input id="of-phone" placeholder="Phone number" inputmode="tel" autocomplete="tel" />' +
+          '<input id="of-email" placeholder="Email address" type="email" inputmode="email" autocomplete="email" />' +
+          '<input id="of-amount" placeholder="Offer Amount ($)" inputmode="decimal" />' +
+          '<button class="btn-submit" id="of-btn" onclick="submitOffer()">Submit Offer</button>' +
+          '<div class="msg" id="offer-msg"></div>' +
+          '<div class="card"><div class="agent"><img src="/static/luca.webp" alt="Luca Rebuffi" />' +
+          '<div><div class="nm">Luca Rebuffi</div>' +
+          '<div class="ph"><a href="tel:' + PH.tel + '">&#128222; ' + PH.display + '</a></div></div></div>' +
+          '<p style="font-size:0.9rem;color:var(--gray);margin-top:12px;">Questions? Call or text ' + PH.display + ' — serious cash buyers only.</p></div>' +
+          '</div></div></div>';
+        if (d.driveFolderUrl || masterPhotoUrl(d)) {
+          const urls = await photoURLs(d.driveFolderUrl, masterPhotoUrl(d));
+          if (urls.length) {
+            $('gallery').style.display = 'block';
+            const main = $('gal-main'), strip = $('gal-strip');
+            let gi = 0;
+            const set = i => { gi = i; main.src = urls[i]; strip.querySelectorAll('img').forEach((t, j) => t.classList.toggle('active', i === j)); };
+            main.onerror = () => {
+              const imgs = strip.querySelectorAll('img');
+              if (imgs[gi]) imgs[gi].style.display = 'none';
+              if (gi + 1 < urls.length) set(gi + 1);
+              else showStreetView(d);
+            };
+            strip.innerHTML = urls.map((u, i) => '<img src="' + u + '" loading="lazy" class="' + (i === 0 ? 'active' : '') + '" data-i="' + i + '" alt="Property photo" onerror="this.style.display=\'none\'" />').join('');
+            strip.querySelectorAll('img').forEach(t => t.onclick = () => set(+t.dataset.i));
+            $('gal-prev').onclick = e => { e.stopPropagation(); set((gi - 1 + urls.length) % urls.length); };
+            $('gal-next').onclick = e => { e.stopPropagation(); set((gi + 1) % urls.length); };
+            set(0);
+          } else {
+            showStreetView(d);
+          }
+        } else {
+          showStreetView(d);
+        }
+        $('view-row').style.display = 'flex';
+        $('sticky-call').href = 'tel:' + PH.tel;
+        $('sticky-bar').style.display = 'flex';
+        $('sticky-offer').onclick = () => { $('offer-card').scrollIntoView({ behavior: 'smooth' }); setTimeout(() => $('of-name').focus({ preventScroll: true }), 600); };
+      } catch (e) { console.error(e); root.innerHTML = '<div class="empty-state"><h2>Could not load this deal</h2><p>Please refresh and try again.</p></div>'; }
+    }
+    async function submitOffer() {
+      const name = ($('of-name').value || '').trim();
+      const phone = ($('of-phone').value || '').trim();
+      const email = ($('of-email').value || '').trim();
+      const amount = +(($('of-amount').value || '').replace(/[^0-9.]/g, '') || 0);
+      const msg = $('offer-msg');
+      if (!name || !phone || !amount) { msg.className = 'msg error'; msg.textContent = 'Name, phone, and offer amount are required.'; return; }
+      const btn = $('of-btn'); btn.disabled = true; btn.textContent = 'Submitting…';
+      try {
+        // Smart matching: find existing buyer by phone, or create one
+        const phoneDigits = phone.replace(/\D/g, '');
+        let buyerId = null;
+        let buyerName = name;
+        try {
+          const bsnap = await db.collection('dispoBuyers').get();
+          const match = bsnap.docs.find(doc => {
+            const p = (doc.data().phone || '').replace(/\D/g, '');
+            return p && (p === phoneDigits || p.endsWith(phoneDigits.slice(-10)) || phoneDigits.endsWith(p.slice(-10)));
+          });
+          if (match) {
+            buyerId = match.id;
+            buyerName = match.data().name || name;
+          } else {
+            const newBuyer = await db.collection('dispoBuyers').add({
+              name, phone, email,
+              source: 'web_offer', dealId: window.RESOLVED_DEAL_ID,
+              createdAt: new Date().toISOString()
+            });
+            buyerId = newBuyer.id;
+          }
+        } catch (e) { console.error('buyer match failed', e); }
+        // Auto-update buyer's per-deal pipeline to Offer Submitted
+        try {
+          const _dp = {};
+          _dp[window.RESOLVED_DEAL_ID] = 'offer';
+          await db.collection('dispoBuyers').doc(buyerId).set({ dealPipeline: _dp, status: 'active' }, { merge: true });
+        } catch (e) { console.error('pipeline update failed', e); }
+        await db.collection('dispoOffers').add({
+          dealId: window.RESOLVED_DEAL_ID, buyerId, buyerName: buyerName + ' (web)', buyerPhone: phone, buyerEmail: email,
+          offerAmount: amount, source: 'landing_page', createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        try { await db.collection('dispoActivity').add({ dealId: window.RESOLVED_DEAL_ID, type: 'offer', text: '🌐 Web offer: ' + name + ' — $' + amount.toLocaleString(), createdAt: firebase.firestore.FieldValue.serverTimestamp() }); } catch (e) {}
+        msg.className = 'msg ok'; msg.textContent = 'Offer received! Luca will be in touch shortly.';
+        $('of-name').value = ''; $('of-phone').value = ''; $('of-email').value = ''; $('of-amount').value = '';
+      } catch (e) { msg.className = 'msg error'; msg.textContent = 'Could not submit — please call ' + ((window.DEAL_PHONE || {}).display || '(469) 606-3358') + ' instead.'; }
+      btn.disabled = false; btn.textContent = 'Submit Offer';
+    }
+    boot();
+  </script>
+</body>
+</html>
