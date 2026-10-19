@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Investment Opportunity | Royal Groups Realty</title>
+  <meta name="description" content="Off-market investment opportunity from Royal Groups Realty." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Royal Groups Realty" />
+  {% if og_title %}<meta property="og:title" content="{{ og_title }}" />{% endif %}
+  {% if og_description %}<meta property="og:description" content="{{ og_description }}" />{% endif %}
+  {% if og_image %}<meta property="og:image" content="{{ og_image }}" />{% endif %}
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <style>@font-face{font-family:'Playfair Display';font-weight:700;font-style:normal;font-display:swap;src:url('/static/fonts/playfair-display-latin-700-normal.woff2') format('woff2');}@font-face{font-family:'Playfair Display';font-weight:900;font-style:normal;font-display:swap;src:url('/static/fonts/playfair-display-latin-900-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:400;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-400-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:500;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-500-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:600;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-600-normal.woff2') format('woff2');}@font-face{font-family:'DM Sans';font-weight:700;font-style:normal;font-display:swap;src:url('/static/fonts/dm-sans-latin-700-normal.woff2') format('woff2');}</style>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d1b2a; --gold: #c8932a; --gold-light: #e8b84b;
+      --gold-accessible: #8a5c14;
+      --cream: #faf8f3; --white: #ffffff; --gray: #6b7280;
+      --light-gray: #f3f4f6; --red: #c0392b; --green: #16a34a;
+    }
+    body { font-family: 'DM Sans', sans-serif; color: var(--navy); background: var(--cream); line-height: 1.6; }
+    .topbar { background: var(--navy); color: var(--white); text-align: center; padding: 8px 16px; font-size: 0.85rem; letter-spacing: 0.03em; }
+    .topbar a { color: var(--gold-light); text-decoration: none; font-weight: 600; }
+    .topbar-deals { display: block; margin-top: 3px; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-light) !important; text-decoration: none; font-weight: 600; }
+    .topbar-deals:hover { text-decoration: underline; }
+    header { background: var(--white); box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+    .nav-slim { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 12px 24px; }
+    .nav-slim img { height: 72px; width: auto; }
+    .nav-phone { background: var(--gold-accessible); color: var(--white); padding: 10px 20px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 0.95rem; }
+    .nav-phone:hover { background: var(--gold); }
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, #1a3050 60%, #0d2035 100%); color: var(--white); padding: 32px 24px 28px; }
+    .hero-inner { max-width: 1100px; margin: 0 auto; }
+    .hero-label { text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.75rem; font-weight: 600; color: var(--gold-light); margin-bottom: 8px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.15; margin-bottom: 6px; }
+    .hero-addr { color: rgba(255,255,255,0.7); font-size: 1.05rem; margin-bottom: 14px; }
+    .hero-price-row { display: flex; gap: 36px; flex-wrap: wrap; align-items: flex-end; }
+    .hero-price .lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.55); }
+    .hero-price .val { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; color: var(--gold-light); line-height: 1.1; }
+    .hero-price .val.arv { font-size: 1.5rem; color: var(--white); }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; }
+    .badge { background: rgba(200,147,42,0.2); border: 1px solid var(--gold); color: var(--gold-light); padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 24px 72px; }
+    .gallery { max-width: 620px; margin: 0 auto 36px; }
+    .gallery-main { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 12px; box-shadow: 0 16px 40px rgba(0,0,0,0.12); background: var(--light-gray); cursor: pointer; }
+    .gallery-thumbs { display: flex; gap: 10px; overflow-x: auto; margin-top: 10px; padding-bottom: 4px; }
+    .gallery-thumbs img { width: 110px; height: 74px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 2px solid transparent; flex: 0 0 auto; }
+    .gallery-thumbs img.active { border-color: var(--gold); }
+    .sv-wrap { position: relative; }
+    .sv-wrap .gallery-main { cursor: default; }
+    .sv-banner { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%) rotate(-5deg); text-align: center; font-weight: 700; font-size: 1.15rem; letter-spacing: 0.3em; color: rgba(255,255,255,0.75); background: rgba(13,27,42,0.28); padding: 8px 0; pointer-events: none; }
+    .view-row { display: flex; gap: 12px; margin: 0 auto 36px; max-width: 620px; justify-content: center; flex-wrap: wrap; }
+    .view-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--white); border: 1px solid #e2e5ea; border-radius: 12px; padding: 10px 18px 10px 10px; text-decoration: none; color: var(--navy); font-weight: 700; font-size: 0.95rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+    .view-btn:hover { border-color: var(--gold); }
+    .view-btn img { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
+    .cols { display: grid; grid-template-columns: 1fr 380px; gap: 36px; align-items: start; }
+    .card { background: var(--white); border-radius: 12px; padding: 32px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 28px; }
+    .section-label { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.78rem; font-weight: 600; color: var(--gold-accessible); margin-bottom: 10px; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 14px; }
+    .about-text { color: #374151; font-size: 0.98rem; white-space: pre-wrap; line-height: 1.75; }
+    .spec-table { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
+    .spec-table td { padding: 10px 0; border-bottom: 1px solid var(--light-gray); }
+    .spec-table td:first-child { color: var(--gray); }
+    .spec-table td:last-child { text-align: right; font-weight: 600; }
+    .agent { display: flex; gap: 18px; align-items: center; }
+    .agent img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold); }
+    .agent .nm { font-weight: 700; font-size: 1.05rem; }
+    .agent .co { color: var(--gray); font-size: 0.88rem; }
+    .agent .ph a { color: var(--gold-accessible); font-weight: 700; text-decoration: none; font-size: 1rem; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; }
+    .form-group input, .form-group textarea { width: 100%; border: 1.5px solid #d1d5db; border-radius: 6px; padding: 12px 14px; font-size: 0.95rem; font-family: 'DM Sans', sans-serif; outline: none; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { min-height: 84px; resize: vertical; }
+    .btn-submit { width: 100%; background: var(--gold-accessible); color: var(--white); border: none; padding: 15px; border-radius: 6px; font-size: 1.05rem; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; letter-spacing: 0.03em; }
+    .btn-submit:hover { background: var(--gold); }
+    .btn-submit:disabled { opacity: 0.6; cursor: default; }
+    #offer-msg { margin-top: 12px; font-size: 0.9rem; font-weight: 600; text-align: center; }
+    #offer-msg.success { color: var(--green); }
+    #offer-msg.error { color: var(--red); }
+    .offer-done { text-align: center; padding: 24px 0; }
+    .offer-done .big { font-size: 2.6rem; }
+    .offer-done h3 { font-family: 'Playfair Display', serif; margin: 8px 0 4px; }
+    .offer-done p { color: var(--gray); font-size: 0.92rem; }
+    .sticky-side { position: sticky; top: 24px; }
+    footer { background: var(--navy); color: rgba(255,255,255,0.6); padding: 48px 24px 30px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 32px; }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.7; }
+    footer h3 { color: var(--white); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+    footer ul { list-style: none; display: grid; gap: 10px; }
+    footer ul a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 0.9rem; }
+    footer .phone { color: var(--gold-light); font-size: 1.15rem; font-weight: 600; }
+    .footer-bottom { max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; text-align: center; font-size: 0.83rem; }
+    .empty-state { text-align: center; padding: 100px 24px; color: var(--gray); }
+    @media (max-width: 900px) {
+      .cols { grid-template-columns: 1fr; }
+      .sticky-side { position: static; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .nav-slim img { height: 56px; }
+    }
+    .comp-row { padding: 12px 0; border-bottom: 1px solid var(--light-gray); }
+    .comp-row:last-child { border-bottom: none; }
+    .comp-name { font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; }
+    .comp-pill { text-align: center; padding: 10px; border-radius: 10px; font-weight: 700; }
+    .comp-good { background: #dcfce7; color: #166534; }
+    .comp-fair { background: #fef3c7; color: #92400e; }
+    .comp-poor { background: #fee2e2; color: #991b1b; }
+    .cond-row { padding: 12px 0; border-bottom: 1px solid var(--light-gray); }
+    .cond-row:last-child { border-bottom: none; }
+    .cond-name { font-weight: 700; font-size: 0.98rem; margin-bottom: 4px; }
+    .cond-text { color: #374151; font-size: 0.95rem; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <div class="topbar"><div>&#128176; Discounted Deals Since 2020 &#128176;</div><a class="topbar-deals" href="/deals">View All Active Deals</a></div>
+
+  <div id="deal-root"><div class="empty-state">Loading deal…</div></div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script>
+    const DEAL_SLUG = {{ deal_slug|tojson if deal_slug is defined else 'null' }};
+    const DEAL_ID = {{ deal_id|tojson if deal_id is defined else 'null' }};
+    function dealSlug(d) { return String(d.slug || '').trim() || String(d.address || '').replace(/[^a-zA-Z0-9]/g, '') || d.id; }
+    firebase.initializeApp({
+      apiKey: "AIzaSyDNpa-2O0RduvXa5qmmIfFoioKG4gyoCOs",
+      authDomain: "rgr-crm-941ab.firebaseapp.com",
+      projectId: "rgr-crm-941ab"
+    });
+    const db = firebase.firestore();
+    const DRIVE_KEY="AIzaSyBV20moxsKtzMqfg66XdaQ8Q4tGGNAK6I0"
+    function masterPhotoUrl(d) {
+      if (d.masterPhotoId) return 'https://drive.google.com/thumbnail?id=' + d.masterPhotoId + '&sz=s1200';
+      return d.masterPhoto || '';
+    }
+    const esc = s => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    // Analytics: track views, clicks, time on page
+    const _track = (() => {
+      const params = new URLSearchParams(location.search);
+      const buyerId = params.get('b') || null;
+      const sessionId = 's' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+      const startTime = Date.now();
+      let dealId = null;
+      const log = (type, data) => {
+        try {
+          db.collection('dispoPageViews').add({
+            dealId, buyerId, sessionId, type,
+            ...data,
+            ua: navigator.userAgent.slice(0, 200),
+            ref: document.referrer.slice(0, 200),
+            at: new Date().toISOString()
+          });
+        } catch (e) {}
+      };
+      const setDeal = id => { dealId = id; log('view', {}); };
+      // Time on page — send on unload
+      window.addEventListener('beforeunload', () => {
+        const secs = Math.round((Date.now() - startTime) / 1000);
+        if (dealId && secs > 3) {
+          // Use sendBeacon for reliability on unload
+          try {
+            db.collection('dispoPageViews').add({
+              dealId, buyerId, sessionId, type: 'time',
+              seconds: secs, at: new Date().toISOString()
+            });
+          } catch (e) {}
+        }
+      });
+      return { log, setDeal, get buyerId() { return buyerId; } };
+    })();
+    // Delegated click tracking for key actions
+    document.addEventListener('click', e => {
+      const t = e.target.closest('a, button');
+      if (!t) return;
+      const href = t.getAttribute('href') || '';
+      if (href.startsWith('tel:')) _track.log('click', { action: 'phone_tap' });
+      else if (href.includes('zillow.com')) _track.log('click', { action: 'zillow' });
+      else if (href.includes('google.com/maps')) _track.log('click', { action: 'streetview' });
+      else if (t.id === 'of-btn') _track.log('click', { action: 'offer_submit_attempt' });
+    }, true);
+    function dealPhone(d) {
+      return String(d.state || '').toUpperCase() === 'GA'
+        ? { display: '(770) 762-5598', tel: '7707625598' }
+        : { display: '(469) 606-3358', tel: '4696063358' };
+    }
+    function applyDealPhone(d) {
+      const ph = dealPhone(d);
+      const set = (id, prefix) => {
+        const el = $(id);
+        if (el) { el.href = 'tel:' + ph.tel; el.innerHTML = prefix + ph.display; }
+      };
+      set('nav-phone', '&#128222; ');
+      set('footer-phone', '&#128222; ');
+      return ph;
+    }
+    const money = n => (n === '' || n == null || isNaN(+n)) ? '—' : '$' + (+n).toLocaleString();
+    const $ = id => document.getElementById(id);
+
+    function driveFolderId(url) {
+      const m = String(url || '').match(/folders\/([a-zA-Z0-9_-]+)/);
+      return m ? m[1] : '';
+    }
+    async function photoURLs(folderUrl) {
+      const fid = driveFolderId(folderUrl);
+      if (!fid) return [];
+      try {
+        const q = encodeURIComponent("'" + fid + "' in parents and mimeType contains 'image/' and trashed = false");
+        const r = await fetch('https://www.googleapis.com/drive/v3/files?q=' + q + '&key=' + DRIVE_KEY + '&fields=files(id,thumbnailLink)&pageSize=24');
+        const j = await r.json();
+        return (j.files || []).map(f => (f.thumbnailLink || '').replace(/=s\d+.*$/, '=s1200'));
+      } catch (e) { return []; }
+    }
+    function streetViewUrl(d) {
+      const addr = [d.address, d.city, d.state, d.zip].filter(Boolean).join(', ');
+      return 'https://maps.googleapis.com/maps/api/streetview?size=1200x800&location=' + encodeURIComponent(addr) + '&key=' + STREETVIEW_KEY;
+    }
+    function showStreetView(d) {
+      const gal = $('gallery');
+      gal.style.display = 'block';
+      gal.innerHTML = '<div class="sv-wrap"><img class="gallery-main" src="' + streetViewUrl(d) + '" alt="Street view of property" onerror="document.getElementById(\'gallery\').style.display=\'none\'" /><div class="sv-banner">PICTURES STILL PENDING</div></div>';
+    }
+
+    async function fetchDeal() {
+      // Reads go through the server's cached API — buyer traffic never touches the Firestore read quota.
+      const key = DEAL_SLUG || DEAL_ID;
+      if (!key) return null;
+      const r = await fetch('/api/deal/' + encodeURIComponent(key));
+      if (r.status === 503) throw new Error('service busy');
+      if (!r.ok) return null;
+      const d = await r.json();
+      d.id = d._id;
+      return d;
+    }
+    const COND_META = [['condRoof', 'Roof'], ['condHvac', 'HVAC'], ['condPlumbing', 'Plumbing'], ['condElectrical', 'Electrical'], ['condFoundation', 'Foundation'], ['condInterior', 'Interior'], ['condOther', 'Other Property Details']];
+    const TRANS_META = [['transWalkthrough', 'Walkthrough Date'], ['transClosing', 'Closing Date'], ['transOccupancy', 'Occupancy'], ['transAccess', 'Access Instructions'], ['transTitle', 'Title Company'], ['transEmd', 'EMD Required'], ['transPof', 'Proof of Funds Required']];
+    function transactionDetailsCard(d) {
+      const rows = TRANS_META.filter(m => (d[m[0]] || '').trim()).map(m =>
+        '<div class="cond-row"><div class="cond-name">' + m[1] + '</div><div class="cond-text">' + esc(d[m[0]]).replace(/\n/g, '<br>') + '</div></div>').join('');
+      return rows ? '<div class="card"><h2>Transaction Details</h2>' + rows + '</div>' : '';
+    }
+    function conditionDetailsCard(d) {
+      const rows = COND_META.filter(m => (d[m[0]] || '').trim()).map(m =>
+        '<div class="cond-row"><div class="cond-name">' + m[1] + '</div><div class="cond-text">' + esc(d[m[0]]).replace(/\n/g, '<br>') + '</div></div>').join('');
+      return rows ? '<div class="card"><h2>Condition Details</h2>' + rows + '</div>' : '';
+    }
+    const COMP_META = [['compRoof', 'Roof', '&#127968;'], ['compHvac', 'HVAC', '&#10052;'], ['compPlumbing', 'Plumbing', '&#128736;'], ['compCosmetic', 'Cosmetic Quality', '&#127912;']];
+    function compClass(r) { r = String(r).toLowerCase(); return r === 'good' ? 'comp-good' : r === 'fair' ? 'comp-fair' : r === 'poor' ? 'comp-poor' : ''; }
+    function componentsCard(d) {
+      const rows = COMP_META.filter(m => d[m[0]]).map(m =>
+        '<div class="comp-row"><div class="comp-name">' + m[2] + ' ' + m[1] + '</div>' +
+        '<div class="comp-pill ' + compClass(d[m[0]]) + '">' + esc(d[m[0]]) + '</div></div>').join('');
+      return rows ? `<div class="card"><div class="section-label">Condition</div><div class="section-title">Components</div>${rows}</div>` : '';
+    }
+    async function boot() {
+      const root = $('deal-root');
+      try {
+        let d = null, lastErr = null;
+        for (let attempt = 0; attempt < 4 && !d; attempt++) {
+          try { d = await fetchDeal(); }
+          catch (e) { lastErr = e; console.error('deal load attempt ' + (attempt + 1), e); }
+          if (!d && attempt < 3) await new Promise(r => setTimeout(r, 2500 * (attempt + 1)));
+        }
+        if (!d) {
+          const busy = !!lastErr;
+          root.innerHTML = '<div class="empty-state"><h2>' + (busy ? 'Could not load this deal' : 'Deal not found') + '</h2><p>' + (busy ? 'Our database is temporarily busy &mdash; please refresh in a minute or two.' : 'This listing is no longer available.') + '</p></div>';
+          return;
+        }
+        window.RESOLVED_DEAL_ID = d.id;
+        _track.setDeal(d.id);
+        if (['dead', 'closed'].includes(d.stage)) { root.innerHTML = '<div class="empty-state"><h2>No longer available</h2><p>This deal has been closed.</p></div>'; return; }
+        document.title = (d.headline || d.address) + ' | Royal Groups Realty';
+        const PH = applyDealPhone(d);
+        window.DEAL_PHONE = PH;
+        const full = [d.address, d.city, d.state, d.zip].filter(Boolean).join(', ');
+        const dashed = full.replace(/[^a-zA-Z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        const zillowHref = 'https://www.zillow.com/homes/' + dashed + '_rb/';
+        const streetHref = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(full);
+        const headline = d.headline || d.address;
+        const addr2 = [d.city, d.state].filter(Boolean).join(', ') + (d.zip ? ' ' + d.zip : '');
+        const badges = [
+          d.beds ? d.beds + ' Beds' : '', d.baths ? d.baths + ' Baths' : '',
+          d.sqft ? (+d.sqft).toLocaleString() + ' Sq Ft' : '',
+          d.lotSize || '',
+          d.propertyType || '', d.yearBuilt ? 'Built ' + d.yearBuilt : ''
+        ].filter(Boolean).map(b => '<span class="badge">' + esc(b) + '</span>').join('');
+        const propSpecs = [
+          ['Bedrooms', d.beds || '—'], ['Bathrooms', d.baths || '—'],
+          ['Living Area', d.sqft ? (+d.sqft).toLocaleString() + ' sq ft' : '—'],
+          ['Year Built', d.yearBuilt || '—'], ['Lot Size', d.lotSize || '—'],
+          ['Property Type', d.propertyType || '—']
+        ].map(r => '<tr><td>' + r[0] + '</td><td>' + esc(String(r[1])) + '</td></tr>').join('');
+        const dealSpecsRows = [
+          ['Price', money(d.askPrice)],
+          ['Est. Flip Rehab', d.rehabFlip ? money(d.rehabFlip) : '—'],
+          ['Est. Rent-Ready Rehab', d.rehabRentReady ? money(d.rehabRentReady) : '—'],
+          ['After Repair Value', money(d.arv)]
+        ];
+        if (d.estRent) {
+          var rr = (d.estRentLow && d.estRentHigh) ? ' (range ' + money(d.estRentLow) + '–' + money(d.estRentHigh) + ')' : '';
+          dealSpecsRows.push(['Est. Rent Value', money(d.estRent) + '/mo' + rr]);
+        }
+        const dealSpecs = dealSpecsRows.map(r => '<tr><td>' + r[0] + '</td><td>' + esc(String(r[1])) + '</td></tr>').join('');
+
+        const countyName = String(d.county || '').replace(/\s*county$/i, '').trim();
+        const heroLabel = countyName
+          ? `&#128205; ${esc(countyName.toUpperCase())} COUNTY, ${esc(String(d.state || '').toUpperCase())} OFF MARKET OPPORTUNITY`
+          : 'Off-Market Investment Opportunity';
+        root.innerHTML = `
+        <div class="hero"><div class="hero-inner">
+          <div class="hero-label">${heroLabel}</div>
+          <div class="hero-addr" style="font-size:1.35rem;font-weight:600;color:#fff;">${esc(d.address || '')}${addr2 ? ' · ' + esc(addr2) : ''}</div>
+          <div class="hero-price-row">
+            <div class="hero-price"><div class="lbl">Price</div><div class="val">${money(d.askPrice)}</div></div>
+            <div class="hero-price"><div class="lbl">After Repair Value</div><div class="val arv">${money(d.arv)}</div></div>
+          </div>
+        </div></div>
+        <div class="wrap">
+          <div class="gallery" id="gallery" style="display:none;">
+            <div style="position:relative;">
+              <img class="gallery-main" id="gal-main" alt="Property photo" />
+              <button id="gal-prev" aria-label="Previous photo" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:none;background:rgba(13,27,42,0.65);color:#fff;font-size:22px;cursor:pointer;backdrop-filter:blur(4px);">‹</button>
+              <button id="gal-next" aria-label="Next photo" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:none;background:rgba(13,27,42,0.65);color:#fff;font-size:22px;cursor:pointer;backdrop-filter:blur(4px);">›</button>
+            </div>
+            <div class="gallery-thumbs" id="gal-thumbs"></div>
+          </div>
+          <div class="view-row">
+            <a class="view-btn" href="${zillowHref}" target="_blank" rel="noopener"><img src="/static/zillow-icon.png" alt="Zillow" />Zillow</a>
+            <a class="view-btn" href="${streetHref}" target="_blank" rel="noopener"><img src="/static/gmaps-icon.png" alt="Street View" />Street View</a>
+          </div>
+          <div class="cols">
+            <div>
+              <div class="card">
+                <div class="section-label">About This Deal</div>
+                <div class="section-title">Property Details</div>
+                <table class="spec-table">${propSpecs}</table>
+                ${d.notes ? `<div class="about-text" style="margin-top:14px;">${esc(d.notes)}</div>` : ''}
+              </div>
+              <div class="card">
+                <div class="section-label">The Numbers</div>
+                <div class="section-title">Deal Breakdown</div>
+                <table class="spec-table">${dealSpecs}</table>
+              </div>
+              ${componentsCard(d)}
+              ${conditionDetailsCard(d)}
+              ${transactionDetailsCard(d)}
+            </div>
+            <div class="sticky-side">
+              <div class="card" id="offer-card">
+                <div class="section-label">Make An Offer</div>
+                <div class="section-title">Submit Your Offer</div>
+                <div id="offer-form">
+                  <div class="form-group"><label>Your Name *</label><input id="of-name" autocomplete="name" /></div>
+                  <div class="form-group"><label>Phone *</label><input id="of-phone" type="tel" autocomplete="tel" /></div>
+                  <div class="form-group"><label>Email</label><input id="of-email" type="email" autocomplete="email" /></div>
+                  <div class="form-group"><label>Offer Amount $ *</label><input id="of-amount" type="number" min="1" /></div>
+                  <div class="form-group"><label>Notes</label><textarea id="of-msg" placeholder="Any notes you want to include w/ your offer?"></textarea></div>
+                  <button class="btn-submit" id="of-btn" onclick="submitOffer()">Submit Offer</button>
+                  <div id="offer-msg"></div>
+                </div>
+                <div id="offer-done" class="offer-done" style="display:none;">
+                  <div class="big">✅</div>
+                  <h3>Offer received!</h3>
+                  <p>We'll review it and reach out shortly.</p>
+                </div>
+              </div>
+            </div>
+              <div class="card">
+                <div class="agent">
+                  <img src="/static/luca.webp" alt="Luca Rebuffi" loading="lazy" />
+                  <div>
+                    <div class="nm">Luca Rebuffi</div>
+                    <div class="ph"><a href="tel:${PH.tel}">&#128222; ${PH.display}</a></div>
+                  </div>
+                </div>
+                <p style="font-size:0.88rem;color:var(--gray);margin-top:14px;">Questions about this deal? Call or text ${PH.display} — serious cash buyers only.</p>
+              </div>
+          </div>
+        </div>`;
+        window.scrollTo(0, 0);
+        if (d.driveFolderUrl || masterPhotoUrl(d)) loadGallery(d, d.driveFolderUrl, masterPhotoUrl(d));
+        else showStreetView(d);
+      } catch (e) {
+        console.error(e);
+        root.innerHTML = '<div class="empty-state"><h2>Could not load this deal</h2><p>Please try again or call (469) 606-3358.</p></div>';
+      }
+    }
+    async function loadGallery(d, folderUrl, masterPhoto) {
+      const urls = await photoURLs(folderUrl);
+      const ordered = masterPhoto ? [masterPhoto].concat(urls.filter(u => u !== masterPhoto)) : urls;
+      if (!ordered.length) { showStreetView(d); return; }
+      const urls2 = ordered;
+      $('gallery').style.display = 'block';
+      const main = $('gal-main'), thumbs = $('gal-thumbs');
+      let gi = 0;
+      const set = i => {
+        gi = i;
+        main.src = urls2[i];
+        thumbs.querySelectorAll('img').forEach((t, j) => t.classList.toggle('active', i === j));
+      };
+      main.onerror = () => {
+        const imgs = thumbs.querySelectorAll('img');
+        if (imgs[gi]) imgs[gi].style.display = 'none';
+        if (gi + 1 < urls2.length) set(gi + 1);
+        else $('gallery').style.display = 'none';
+      };
+      thumbs.innerHTML = urls2.map((u, i) => '<img src="' + u + '" loading="lazy" data-i="' + i + '" class="' + (i === 0 ? 'active' : '') + '" onerror="this.style.display=\'none\'" />').join('');
+      thumbs.querySelectorAll('img').forEach(t => t.onclick = () => set(+t.dataset.i));
+      $('gal-prev').onclick = e => { e.stopPropagation(); set((gi - 1 + urls2.length) % urls2.length); };
+      $('gal-next').onclick = e => { e.stopPropagation(); set((gi + 1) % urls2.length); };
+      set(0);
+    }
+    async function submitOffer() {
+      const name = ($('of-name').value || '').trim();
+      const phone = ($('of-phone').value || '').trim();
+      const email = ($('of-email').value || '').trim();
+      const amount = +(($('of-amount').value || '').replace(/[^0-9.]/g, '') || 0);
+      const msg = $('offer-msg');
+      if (!name || !phone || !amount) { msg.className = 'error'; msg.textContent = 'Name, phone, and offer amount are required.'; return; }
+      const btn = $('of-btn'); btn.disabled = true; btn.textContent = 'Submitting…';
+      try {
+        // Smart matching: find existing buyer by phone, or create one
+        const phoneDigits = phone.replace(/\D/g, '');
+        let buyerId = null;
+        let buyerName = name;
+        try {
+          const bsnap = await db.collection('dispoBuyers').get();
+          const match = bsnap.docs.find(doc => {
+            const p = (doc.data().phone || '').replace(/\D/g, '');
+            return p && (p === phoneDigits || p.endsWith(phoneDigits.slice(-10)) || phoneDigits.endsWith(p.slice(-10)));
+          });
+          if (match) {
+            buyerId = match.id;
+            buyerName = match.data().name || name;
+          } else {
+            // New buyer — create record so Luca can follow up
+            const newBuyer = await db.collection('dispoBuyers').add({
+              name, phone, email,
+              source: 'web_offer', dealId: window.RESOLVED_DEAL_ID,
+              createdAt: new Date().toISOString()
+            });
+            buyerId = newBuyer.id;
+          }
+        } catch (e) { console.error('buyer match failed', e); }
+        // Auto-update buyer's per-deal pipeline to Offer Submitted
+        try {
+          const _dp = {};
+          _dp[window.RESOLVED_DEAL_ID] = 'offer';
+          await db.collection('dispoBuyers').doc(buyerId).set({ dealPipeline: _dp, status: 'active' }, { merge: true });
+        } catch (e) { console.error('pipeline update failed', e); }
+        await db.collection('dispoOffers').add({
+          dealId: window.RESOLVED_DEAL_ID, buyerId, buyerName: buyerName + ' (web)', buyerPhone: phone,
+          buyerEmail: email, amount,
+          notes: ($('of-msg').value || '').trim(), status: 'pending',
+          source: 'landing_page', createdAt: new Date().toISOString()
+        });
+        await db.collection('dispoActivity').add({ dealId: window.RESOLVED_DEAL_ID, text: '🌐 Web offer: $' + amount.toLocaleString() + ' from ' + name, at: new Date().toISOString() });
+        $('offer-form').style.display = 'none';
+        $('offer-done').style.display = 'block';
+      } catch (e) {
+        console.error(e);
+        msg.className = 'error'; msg.textContent = 'Could not submit — please call ' + ((window.DEAL_PHONE || {}).display || '(469) 606-3358') + ' instead.';
+        btn.disabled = false; btn.textContent = 'Submit Offer';
+      }
+    }
+    boot();
+  </script>
+</body>
+</html>
