@@ -71,6 +71,66 @@ def get_deal_by_slug(slug):
             return d
     return None
 
+
+# ── Private team apps, served under this domain ────────────────────────────
+# The CRMs live on GitHub Pages; these routes proxy them so the team uses
+# royalgroupsrealty.com addresses instead. Every response carries an
+# X-Robots-Tag noindex header plus an injected meta robots tag, and the paths
+# are linked from nowhere on the public site — unlisted by design. Access
+# control stays in the apps themselves (Firebase sign-in + Firestore rules).
+CRM_PROXY = {
+    "gap": "https://lucarebuffi-rgr.github.io/crm/",
+    "gas&z": "https://lucarebuffi-rgr.github.io/ga-stacked-and-zombies-crm/",
+    "gasz": "https://lucarebuffi-rgr.github.io/ga-stacked-and-zombies-crm/",
+    "dispohub": "https://lucarebuffi-rgr.github.io/dispo-hub/",
+}
+_CRM_CACHE = {}
+_CRM_CACHE_TTL = 120
+
+def _crm_page(key):
+    hit = _CRM_CACHE.get(key)
+    if hit and hit[1] > time.time():
+        return hit[0]
+    r = requests.get(CRM_PROXY[key], timeout=15, headers={"User-Agent": "RGR-CRM-Proxy"})
+    r.raise_for_status()
+    html = r.text
+    if 'name="robots"' not in html:
+        html = html.replace("<head>", '<head>\n<meta name="robots" content="noindex, nofollow, noarchive">', 1)
+    _CRM_CACHE[key] = (html, time.time() + _CRM_CACHE_TTL)
+    return html
+
+def _crm_response(key):
+    try:
+        html = _crm_page(key)
+    except Exception:
+        stale = _CRM_CACHE.get(key)
+        if stale:
+            html = stale[0]
+        else:
+            abort(502)
+    resp = app.make_response(html)
+    resp.headers["Content-Type"] = "text/html; charset=utf-8"
+    resp.headers["X-Robots-Tag"] = "noindex, nofollow, noarchive"
+    resp.headers["Cache-Control"] = "private, max-age=300"
+    return resp
+
+@app.route("/gap")
+@app.route("/gap/")
+def crm_gap():
+    return _crm_response("gap")
+
+@app.route("/gas&z")
+@app.route("/gas&z/")
+@app.route("/gasz")
+@app.route("/gasz/")
+def crm_gasz():
+    return _crm_response("gas&z")
+
+@app.route("/dispohub")
+@app.route("/dispohub/")
+def crm_dispohub():
+    return _crm_response("dispohub")
+
 # Make.com webhook URL
 MAKE_WEBHOOK = "https://hook.us2.make.com/xa7uddev8m89ceqd97d9iurxyquirtn7"
 
@@ -123,6 +183,14 @@ def terms():
 @app.route("/blog")
 def blog():
     return render_template("blog.html")
+
+
+@app.route("/robots.txt")
+def robots_txt():
+    body = "User-agent: *\nAllow: /\n\nSitemap: https://www.royalgroupsrealty.com/sitemap.xml\n"
+    resp = app.make_response(body)
+    resp.headers["Content-Type"] = "text/plain; charset=utf-8"
+    return resp
 
 @app.route("/sitemap.xml")
 def sitemap():
