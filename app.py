@@ -896,6 +896,10 @@ def blog_mold_water_damage():
 def blog_reverse_mortgage():
     return render_template('blog/sell-house-with-reverse-mortgage.html')
 
+@app.route('/blog/sell-house-fast-columbus-ga')
+def blog_columbus():
+    return render_template('blog/sell-house-fast-columbus-ga.html')
+
 # Lead Form Submission
 @app.route("/submit", methods=["POST"])
 def submit():
