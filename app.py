@@ -12,7 +12,7 @@ app = Flask(__name__)
 # server fetch a deal's master photo for link-preview meta tags.
 FIREBASE_API_KEY = "AIzaSyDNpa-2O0RduvXa5qmmIfFoioKG4gyoCOs"
 DRIVE_KEY = "AIzaSyBV20moxsKtzMqfg66XdaQ8Q4tGGNAK6I0"
-STREETVIEW_KEY = "AIzaSyC2jM_NVkTgo2d0nAQTOSpgMd53gBintEc"
+STREETVIEW_KEY = "AIzaSyBsxegZGHFuX7eYh7nyaKe2KNJk268v7rM"
 FIRESTORE_DEALS_URL = "https://firestore.googleapis.com/v1/projects/rgr-crm-941ab/databases/(default)/documents/dispoDeals"
 
 def _fs_val(v, default=""):
