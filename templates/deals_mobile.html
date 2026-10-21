@@ -50,6 +50,7 @@
     .deal-photo { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: var(--light-gray); display: block; }
     .deal-photo.placeholder { display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.85); font-size: 2.6rem; background: linear-gradient(135deg, #1a3050, #0d1b2a); }
     .status-badge { position: absolute; top: 12px; right: 12px; background: #dcfce7; color: #166534; font-size: 0.75rem; font-weight: 700; padding: 6px 14px; border-radius: 20px; }
+    .type-badge { position: absolute; top: 12px; left: 12px; background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; font-size: 0.75rem; font-weight: 800; padding: 6px 14px; border-radius: 20px; letter-spacing: 0.06em; text-transform: uppercase; }
     .deal-body { padding: 18px 18px 20px; }
     .deal-addr { font-weight: 700; font-size: 1.1rem; margin-bottom: 2px; }
     .deal-sub { color: var(--gray); font-size: 0.9rem; margin-bottom: 14px; }
@@ -116,6 +117,19 @@
       return d.masterPhoto || '';
     }
     const STREETVIEW_KEY = "AIzaSyBsxegZGHFuX7eYh7nyaKe2KNJk268v7rM";
+
+    function isLandOnly(d) {
+      const t = String(d.propertyType || '').toLowerCase();
+      return (t.includes('land') || t.includes('lot')) && !(t.includes('mh') || t.includes('mobile') || t.includes('manufactured') || t.includes('sfr') || t.includes('single'));
+    }
+    function lotSqft(d) {
+      const s = String(d.lotSize || '');
+      const n = parseFloat(s.replace(/,/g, ''));
+      if (!isFinite(n)) return '';
+      if (/acre/i.test(s)) return Math.round(n * 43560).toLocaleString('en-US');
+      if (/sq/i.test(s)) return Math.round(n).toLocaleString('en-US');
+      return '';
+    }
     async function firstPhoto(deal) {
       if (masterPhotoUrl(deal)) return masterPhotoUrl(deal);
       const fid = driveFolderId(deal.driveFolderUrl);
@@ -161,18 +175,19 @@
           list.sort((a, b) => String(b.createdAt || '').localeCompare(String(a.createdAt || '')));
           if (!list.length) { grid.innerHTML = '<div class="empty-state"><h2>No deals here right now</h2><p>Check back soon.</p></div>'; return; }
           grid.innerHTML = list.map(d => {
+            const land = isLandOnly(d); const lsq = lotSqft(d);
             const addr = [d.address, d.city].filter(Boolean).join(', ') + (d.state ? ', ' + d.state : '') + (d.zip ? ' ' + d.zip : '');
             return '<div class="deal-card">' +
               '<div class="deal-photo-wrap"><div class="deal-photo placeholder" data-photofolder="' + esc(d.driveFolderUrl || '') + '" data-master="' + esc(masterPhotoUrl(d) || '') + '" data-addr="' + esc(addr) + '">&#127968;</div>' +
-              '<span class="status-badge">Active</span></div>' +
+              '<span class="status-badge">Active</span>' + (land ? '<span class="type-badge">Land</span>' : '') + '</div>' +
               '<div class="deal-body">' +
               '<div class="deal-addr">' + esc(addr) + '</div>' +
               '<div class="deal-sub">' + esc(d.headline || '') + '</div>' +
               '<div class="deal-stats">' +
               '<div><div class="lbl">Price</div><div class="val ask">' + money(d.askPrice) + '</div></div>' +
-              '<div><div class="lbl">Beds</div><div class="val">' + esc(d.beds || '&mdash;') + '</div></div>' +
-              '<div><div class="lbl">Baths</div><div class="val">' + esc(d.baths || '&mdash;') + '</div></div>' +
-              '<div><div class="lbl">Sqft</div><div class="val">' + (d.sqft ? (+d.sqft).toLocaleString() : '&mdash;') + '</div></div>' +
+              '<div><div class="lbl">Beds</div><div class="val">' + (land ? 'N/A' : esc(d.beds || '&mdash;')) + '</div></div>' +
+              '<div><div class="lbl">Baths</div><div class="val">' + (land ? 'N/A' : esc(d.baths || '&mdash;')) + '</div></div>' +
+              '<div><div class="lbl">' + (land ? 'Lot SqFt' : 'Sqft') + '</div><div class="val">' + (land ? (lsq || '&mdash;') : (d.sqft ? (+d.sqft).toLocaleString() : '&mdash;')) + '</div></div>' +
               '</div>' +
               '<a class="view-deal" href="/' + esc(dealSlug(d)) + '">View This Deal</a>' +
               '</div></div>';

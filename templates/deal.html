@@ -45,6 +45,7 @@
     .hero-price .val.arv { font-size: 1.5rem; color: var(--white); }
     .badges { display: flex; flex-wrap: wrap; gap: 10px; }
     .badge { background: rgba(200,147,42,0.2); border: 1px solid var(--gold); color: var(--gold-light); padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em; }
+    .badge-land { background: var(--gold); border-color: var(--gold); color: #0d1b2a; font-weight: 800; letter-spacing: 0.08em; }
     .wrap { max-width: 1100px; margin: 0 auto; padding: 40px 24px 72px; }
     .gallery { max-width: 620px; margin: 0 auto 36px; }
     .gallery-main { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 12px; box-shadow: 0 16px 40px rgba(0,0,0,0.12); background: var(--light-gray); cursor: pointer; }
@@ -127,6 +128,19 @@
     const DEAL_SLUG = {{ deal_slug|tojson if deal_slug is defined else 'null' }};
     const DEAL_ID = {{ deal_id|tojson if deal_id is defined else 'null' }};
     const STREETVIEW_KEY = "AIzaSyBsxegZGHFuX7eYh7nyaKe2KNJk268v7rM";
+
+    function isLandOnly(d) {
+      const t = String(d.propertyType || '').toLowerCase();
+      return (t.includes('land') || t.includes('lot')) && !(t.includes('mh') || t.includes('mobile') || t.includes('manufactured') || t.includes('sfr') || t.includes('single'));
+    }
+    function lotSqft(d) {
+      const s = String(d.lotSize || '');
+      const n = parseFloat(s.replace(/,/g, ''));
+      if (!isFinite(n)) return '';
+      if (/acre/i.test(s)) return Math.round(n * 43560).toLocaleString('en-US');
+      if (/sq/i.test(s)) return Math.round(n).toLocaleString('en-US');
+      return '';
+    }
     function dealSlug(d) { return String(d.slug || '').trim() || String(d.address || '').replace(/[^a-zA-Z0-9]/g, '') || d.id; }
     firebase.initializeApp({
       apiKey: "AIzaSyDNpa-2O0RduvXa5qmmIfFoioKG4gyoCOs",
@@ -283,6 +297,7 @@
         const streetHref = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(full);
         const headline = d.headline || d.address;
         const addr2 = [d.city, d.state].filter(Boolean).join(', ') + (d.zip ? ' ' + d.zip : '');
+        const land = isLandOnly(d); const lsq = lotSqft(d);
         const badges = [
           d.beds ? d.beds + ' Beds' : '', d.baths ? d.baths + ' Baths' : '',
           d.sqft ? (+d.sqft).toLocaleString() + ' Sq Ft' : '',
@@ -290,8 +305,8 @@
           d.propertyType || '', d.yearBuilt ? 'Built ' + d.yearBuilt : ''
         ].filter(Boolean).map(b => '<span class="badge">' + esc(b) + '</span>').join('');
         const propSpecs = [
-          ['Bedrooms', d.beds || '—'], ['Bathrooms', d.baths || '—'],
-          ['Living Area', d.sqft ? (+d.sqft).toLocaleString() + ' sq ft' : '—'],
+          ['Bedrooms', land ? 'N/A' : (d.beds || '—')], ['Bathrooms', land ? 'N/A' : (d.baths || '—')],
+          land ? ['Lot SqFt', lsq ? lsq + ' sq ft' : '—'] : ['Living Area', d.sqft ? (+d.sqft).toLocaleString() + ' sq ft' : '—'],
           ['Year Built', d.yearBuilt || '—'], ['Lot Size', d.lotSize || '—'],
           ['Property Type', d.propertyType || '—']
         ].map(r => '<tr><td>' + r[0] + '</td><td>' + esc(String(r[1])) + '</td></tr>').join('');
@@ -315,6 +330,7 @@
         <div class="hero"><div class="hero-inner">
           <div class="hero-label">${heroLabel}</div>
           <div class="hero-addr" style="font-size:1.35rem;font-weight:600;color:#fff;">${esc(d.address || '')}${addr2 ? ' · ' + esc(addr2) : ''}</div>
+          ${land ? '<div style="margin-top:10px;"><span class="badge badge-land">LAND</span></div>' : ''}
           <div class="hero-price-row">
             <div class="hero-price"><div class="lbl">Price</div><div class="val">${money(d.askPrice)}</div></div>
             <div class="hero-price"><div class="lbl">After Repair Value</div><div class="val arv">${money(d.arv)}</div></div>
