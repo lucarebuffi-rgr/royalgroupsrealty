@@ -126,7 +126,7 @@
   <script>
     const DEAL_SLUG = {{ deal_slug|tojson if deal_slug is defined else 'null' }};
     const DEAL_ID = {{ deal_id|tojson if deal_id is defined else 'null' }};
-    const STREETVIEW_KEY = "AIzaSyC2jM_NVkTgo2d0nAQTOSpgMd53gBintEc";
+    const STREETVIEW_KEY = "AIzaSyBsxegZGHFuX7eYh7nyaKe2KNJk268v7rM";
     function dealSlug(d) { return String(d.slug || '').trim() || String(d.address || '').replace(/[^a-zA-Z0-9]/g, '') || d.id; }
     firebase.initializeApp({
       apiKey: "AIzaSyDNpa-2O0RduvXa5qmmIfFoioKG4gyoCOs",
