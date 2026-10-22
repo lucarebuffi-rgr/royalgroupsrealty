@@ -133,6 +133,19 @@
       const t = String(d.propertyType || '').toLowerCase();
       return (t.includes('land') || t.includes('lot')) && !(t.includes('mh') || t.includes('mobile') || t.includes('manufactured') || t.includes('sfr') || t.includes('single'));
     }
+    // Strict land-ONLY check (mirrors _is_land_only in app.py): the deal's type
+    // set must be exactly {land}. Land + any other type is a normal deal.
+    function typeTokenSet(d) {
+      const canon = t => {
+        if (t === 'sfr' || t === 'single' || t === 'single family' || t === 'single-family') return 'sfr';
+        if (t === 'mh' || t === 'mb' || t === 'mobile' || t === 'mobile home' || t === 'manufactured' || t === 'manufactured home' || t === 'manufactured housing') return 'mobile';
+        if (t === 'multi' || t === 'multi-family' || t === 'multifamily' || t === 'multi family' || t === 'duplex' || t === 'triplex' || t === 'quad' || t === 'quadplex') return 'multi';
+        if (t === 'land' || t === 'lot' || t === 'vacant land' || t === 'vacant lot') return 'land';
+        return t;
+      };
+      return new Set(String(d.propertyType || '').toLowerCase().split(/[,/+&;]|\band\b/).map(s => canon(s.trim().replace(/\s+/g, ' '))).filter(Boolean));
+    }
+    function isLandStrict(d) { const s = typeTokenSet(d); return s.size === 1 && s.has('land'); }
     function lotSqft(d) {
       const s = String(d.lotSize || '');
       const n = parseFloat(s.replace(/,/g, ''));
@@ -316,7 +329,9 @@
           ['Est. Rent-Ready Rehab', d.rehabRentReady ? money(d.rehabRentReady) : '—'],
           ['After Repair Value', money(d.arv)]
         ];
-        if (d.estRent) {
+        if (isLandStrict(d)) {
+          dealSpecsRows.push(['Est. Rent Value', '—']);
+        } else if (d.estRent) {
           var rr = (d.estRentLow && d.estRentHigh) ? ' (range ' + money(d.estRentLow) + '–' + money(d.estRentHigh) + ')' : '';
           dealSpecsRows.push(['Est. Rent Value', money(d.estRent) + '/mo' + rr]);
         }
@@ -361,7 +376,7 @@
                 <div class="section-title">Deal Breakdown</div>
                 <table class="spec-table">${dealSpecs}</table>
               </div>
-              ${componentsCard(d)}
+              ${isLandStrict(d) ? '' : componentsCard(d)}
               ${conditionDetailsCard(d)}
               ${transactionDetailsCard(d)}
             </div>
