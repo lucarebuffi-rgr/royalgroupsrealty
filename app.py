@@ -226,6 +226,35 @@ def _save_rent_cache():
 
 _load_rent_cache()
 
+def _type_tokens(d):
+    """Canonical property-type token set for a deal. Deals store ONE string
+    field (propertyType); multi-type deals join their types into it
+    (', ' from DispoHub's buyer-search prefill, or hand-typed separators)."""
+    raw = str(d.get("propertyType") or "").lower()
+    out = set()
+    for part in re.split(r"[,/+&;]|\band\b", raw):
+        p = " ".join(part.split())
+        if not p:
+            continue
+        if p in ("sfr", "single", "single family", "single-family"):
+            out.add("sfr")
+        elif p in ("mh", "mb", "mobile", "mobile home", "manufactured",
+                   "manufactured home", "manufactured housing"):
+            out.add("mobile")
+        elif p in ("multi", "multi-family", "multifamily", "multi family",
+                   "duplex", "triplex", "quad", "quadplex"):
+            out.add("multi")
+        elif p in ("land", "lot", "vacant land", "vacant lot"):
+            out.add("land")
+        else:
+            out.add(p)
+    return out
+
+def _is_land_only(d):
+    """True ONLY when Land is the deal's sole property type.
+    Land + anything else (MH+Land, SFR+Land, …) is a normal deal."""
+    return _type_tokens(d) == {"land"}
+
 def _rentcast_property_type(d):
     t = str(d.get("propertyType") or "").lower()
     if any(k in t for k in ("mobile", "manufactured", "mh", "mb")):
@@ -242,6 +271,9 @@ def _rentcast_property_type(d):
 
 def get_rent_estimate(d):
     """(rent, low, high) via RentCast long-term AVM, cached 30 days. All None on any failure."""
+    if _is_land_only(d):
+        # Land-only has no rent: never call RentCast, never serve a cached value.
+        return (None, None, None)
     key = d.get("_id") or d.get("slug") or ""
     now = time.time()
     hit = _RENT_CACHE.get(key)
@@ -289,10 +321,14 @@ def get_all_deals():
             d = _flat_fields(doc)
             d["_id"] = doc.get("name", "").split("/")[-1]
             if d.get("stage") not in ("dead", "closed"):
-                rent, rent_low, rent_high = get_rent_estimate(d)
-                d["estRent"] = rent
-                d["estRentLow"] = rent_low
-                d["estRentHigh"] = rent_high
+                if _is_land_only(d):
+                    # Land-only deals never carry a rent estimate (templates show "—").
+                    d["estRent"] = d["estRentLow"] = d["estRentHigh"] = None
+                else:
+                    rent, rent_low, rent_high = get_rent_estimate(d)
+                    d["estRent"] = rent
+                    d["estRentLow"] = rent_low
+                    d["estRentHigh"] = rent_high
                 # Resolve masterPhotoId to a stable URL for clients that don't know the new field yet.
                 if d.get("masterPhotoId") and not d.get("masterPhoto"):
                     d["masterPhoto"] = "https://drive.google.com/thumbnail?id=" + str(d["masterPhotoId"]) + "&sz=s1200"
