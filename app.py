@@ -159,6 +159,18 @@ def home_redirect():
 def terms_of_service_redirect():
     return redirect("/terms", code=301)
 
+@app.route("/sell-my-house-fast-parker-county-tx")
+def redirect_parker_county_tx():
+    return redirect("/counties/parker-county-tx", code=301)
+
+@app.route("/sell-my-house-fast-jackson-county-ga")
+def redirect_jackson_county_ga():
+    return redirect("/counties/jackson-county-ga", code=301)
+
+@app.route("/sell-my-house-fast-walton-county-ga")
+def redirect_walton_county_ga():
+    return redirect("/counties/walton-county-ga", code=301)
+
 # Core Pages
 @app.route("/")
 def index():
