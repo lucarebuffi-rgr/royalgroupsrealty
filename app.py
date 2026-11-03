@@ -171,6 +171,42 @@ def redirect_jackson_county_ga():
 def redirect_walton_county_ga():
     return redirect("/counties/walton-county-ga", code=301)
 
+@app.route("/sell-my-house-fast-bexar-county-tx")
+def redirect_bexar_county_tx():
+    return redirect("/counties/bexar-county-tx", code=301)
+
+@app.route("/sell-my-house-fast-jack-county-tx")
+def redirect_jack_county_tx():
+    return redirect("/counties/jack-county-tx", code=301)
+
+@app.route("/sell-my-house-fast-angelina-county-tx")
+def redirect_angelina_county_tx():
+    return redirect("/counties/angelina-county-tx", code=301)
+
+@app.route("/sell-my-house-fast-wise-county-tx")
+def redirect_wise_county_tx():
+    return redirect("/counties/wise-county-tx", code=301)
+
+@app.route("/sell-my-house-fast-henderson-county-tx")
+def redirect_henderson_county_tx():
+    return redirect("/counties/henderson-county-tx", code=301)
+
+@app.route("/sell-my-house-fast-carroll-county-ga")
+def redirect_carroll_county_ga():
+    return redirect("/counties/carroll-county-ga", code=301)
+
+@app.route("/sell-my-house-fast-lamar-county-tx")
+def redirect_lamar_county_tx():
+    return redirect("/counties/lamar-county-tx", code=301)
+
+@app.route("/sell-my-house-fast-meriwether-county-ga")
+def redirect_meriwether_county_ga():
+    return redirect("/counties/meriwether-county-ga", code=301)
+
+@app.route("/sell-my-house-fast-ellis-county-tx")
+def redirect_ellis_county_tx():
+    return redirect("/counties/ellis-county-tx", code=301)
+
 # Core Pages
 @app.route("/")
 def index():
@@ -199,7 +235,7 @@ def blog():
 
 @app.route("/robots.txt")
 def robots_txt():
-    body = "User-agent: *\nAllow: /\n\nSitemap: https://www.royalgroupsrealty.com/sitemap.xml\n"
+    body = "User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: https://www.royalgroupsrealty.com/sitemap.xml\n"
     resp = app.make_response(body)
     resp.headers["Content-Type"] = "text/plain; charset=utf-8"
     return resp
