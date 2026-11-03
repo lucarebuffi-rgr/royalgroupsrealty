@@ -1016,6 +1016,10 @@ def blog_reverse_mortgage():
 def blog_columbus():
     return render_template('blog/sell-house-fast-columbus-ga.html')
 
+@app.route('/blog/house-not-selling-expired-listing')
+def blog_house_not_selling():
+    return render_template('blog/house-not-selling-expired-listing.html')
+
 # Lead Form Submission
 @app.route("/submit", methods=["POST"])
 def submit():
