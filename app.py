@@ -159,54 +159,6 @@ def home_redirect():
 def terms_of_service_redirect():
     return redirect("/terms", code=301)
 
-@app.route("/sell-my-house-fast-parker-county-tx")
-def redirect_parker_county_tx():
-    return redirect("/counties/parker-county-tx", code=301)
-
-@app.route("/sell-my-house-fast-jackson-county-ga")
-def redirect_jackson_county_ga():
-    return redirect("/counties/jackson-county-ga", code=301)
-
-@app.route("/sell-my-house-fast-walton-county-ga")
-def redirect_walton_county_ga():
-    return redirect("/counties/walton-county-ga", code=301)
-
-@app.route("/sell-my-house-fast-bexar-county-tx")
-def redirect_bexar_county_tx():
-    return redirect("/counties/bexar-county-tx", code=301)
-
-@app.route("/sell-my-house-fast-jack-county-tx")
-def redirect_jack_county_tx():
-    return redirect("/counties/jack-county-tx", code=301)
-
-@app.route("/sell-my-house-fast-angelina-county-tx")
-def redirect_angelina_county_tx():
-    return redirect("/counties/angelina-county-tx", code=301)
-
-@app.route("/sell-my-house-fast-wise-county-tx")
-def redirect_wise_county_tx():
-    return redirect("/counties/wise-county-tx", code=301)
-
-@app.route("/sell-my-house-fast-henderson-county-tx")
-def redirect_henderson_county_tx():
-    return redirect("/counties/henderson-county-tx", code=301)
-
-@app.route("/sell-my-house-fast-carroll-county-ga")
-def redirect_carroll_county_ga():
-    return redirect("/counties/carroll-county-ga", code=301)
-
-@app.route("/sell-my-house-fast-lamar-county-tx")
-def redirect_lamar_county_tx():
-    return redirect("/counties/lamar-county-tx", code=301)
-
-@app.route("/sell-my-house-fast-meriwether-county-ga")
-def redirect_meriwether_county_ga():
-    return redirect("/counties/meriwether-county-ga", code=301)
-
-@app.route("/sell-my-house-fast-ellis-county-tx")
-def redirect_ellis_county_tx():
-    return redirect("/counties/ellis-county-tx", code=301)
-
 # Core Pages
 @app.route("/")
 def index():
@@ -235,7 +187,7 @@ def blog():
 
 @app.route("/robots.txt")
 def robots_txt():
-    body = "User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: https://www.royalgroupsrealty.com/sitemap.xml\n"
+    body = "User-agent: *\nAllow: /\n\nSitemap: https://www.royalgroupsrealty.com/sitemap.xml\n"
     resp = app.make_response(body)
     resp.headers["Content-Type"] = "text/plain; charset=utf-8"
     return resp
@@ -322,6 +274,18 @@ def get_rent_estimate(d):
     if _is_land_only(d):
         # Land-only has no rent: never call RentCast, never serve a cached value.
         return (None, None, None)
+    # MANUAL OVERRIDE (set in DispoHub as rentLow/rentHigh): beats the cache
+    # and RentCast, never burns quota. Both ends required; a single end
+    # falls through to the normal path. Headline rent is the midpoint.
+    try:
+        o_low = int(float(d.get("rentLow"))) if d.get("rentLow") not in (None, "") else None
+        o_high = int(float(d.get("rentHigh"))) if d.get("rentHigh") not in (None, "") else None
+    except (TypeError, ValueError):
+        o_low = o_high = None
+    if o_low and o_high:
+        if o_low > o_high:
+            o_low, o_high = o_high, o_low
+        return ((o_low + o_high) // 2, o_low, o_high)
     key = d.get("_id") or d.get("slug") or ""
     now = time.time()
     hit = _RENT_CACHE.get(key)
@@ -1051,10 +1015,6 @@ def blog_reverse_mortgage():
 @app.route('/blog/sell-house-fast-columbus-ga')
 def blog_columbus():
     return render_template('blog/sell-house-fast-columbus-ga.html')
-
-@app.route('/blog/house-not-selling-expired-listing')
-def blog_house_not_selling():
-    return render_template('blog/house-not-selling-expired-listing.html')
 
 # Lead Form Submission
 @app.route("/submit", methods=["POST"])
