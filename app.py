@@ -83,6 +83,8 @@ CRM_PROXY = {
     "gas&z": "https://lucarebuffi-rgr.github.io/ga-stacked-and-zombies-crm/",
     "gasz": "https://lucarebuffi-rgr.github.io/ga-stacked-and-zombies-crm/",
     "dispohub": "https://lucarebuffi-rgr.github.io/dispo-hub/",
+    "txs&z": "https://lucarebuffi-rgr.github.io/tx-stacked-and-zombies-crm/",
+    "txsz": "https://lucarebuffi-rgr.github.io/tx-stacked-and-zombies-crm/",
 }
 _CRM_CACHE = {}
 _CRM_CACHE_TTL = 120
@@ -131,6 +133,13 @@ def crm_gasz():
 def crm_dispohub():
     return _crm_response("dispohub")
 
+@app.route("/txs&z")
+@app.route("/txs&z/")
+@app.route("/txsz")
+@app.route("/txsz/")
+def crm_txsz():
+        return _crm_response("txs&z")
+                            
 # Make.com webhook URL
 MAKE_WEBHOOK = "https://hook.us2.make.com/xa7uddev8m89ceqd97d9iurxyquirtn7"
 
