@@ -603,8 +603,15 @@ def deal_page(deal_id):
 def deal_page_slug(slug):
     if "." in slug:
         abort(404)
+    deal = get_deal_by_slug(slug)
+    # Real 404 for URLs that aren't a deal (typos, old Squarespace links, junk).
+    # Without this, every unknown one-segment URL returned a 200 "deal" page,
+    # which Google reports as a Soft 404. If Firestore is unreachable (no deals
+    # loaded at all) we still render, so real deal links never break.
+    if deal is None and get_all_deals():
+        abort(404)
     tpl = "deal_mobile.html" if is_mobile() else "deal.html"
-    return render_template(tpl, deal_slug=slug, **_og_for_deal(get_deal_by_slug(slug)))
+    return render_template(tpl, deal_slug=slug, **_og_for_deal(deal))
 
 # Texas County Pages
 @app.route("/counties/cooke-county-tx")
@@ -1084,25 +1091,25 @@ def blog_roof_hail_damage():
 # Lead Form Submission
 @app.route("/submit", methods=["POST"])
 def submit():
-    data     = request.get_json()
-    honeypot = data.get("website", "").strip()
+    data     = request.get_json(silent=True) or {}
+    honeypot = str(data.get("website", "")).strip()
     if honeypot:
         return jsonify({"success": False, "message": "Invalid submission."}), 400
-    name    = data.get("name", "").strip()
-    phone   = data.get("phone", "").strip()
-    address = data.get("address", "").strip()
-    email   = data.get("email", "").strip()
+    name    = str(data.get("name", "")).strip()
+    phone   = str(data.get("phone", "")).strip()
+    address = str(data.get("address", "")).strip()
+    email   = str(data.get("email", "")).strip()
 
     if not all([name, phone, address, email]):
         return jsonify({"success": False, "message": "All fields are required."}), 400
 
+    # Forward EVERY field the form sends (asking price, page_source, consent,
+    # etc.) — not just the four required ones. Only the honeypot is dropped.
+    payload = {k: (v.strip() if isinstance(v, str) else v)
+               for k, v in data.items() if k != "website"}
+
     try:
-        requests.post(MAKE_WEBHOOK, json={
-            "name":    name,
-            "phone":   phone,
-            "address": address,
-            "email":   email
-        })
+        requests.post(MAKE_WEBHOOK, json=payload, timeout=10)
     except Exception as e:
         print(f"Make.com error: {e}")
 
