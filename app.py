@@ -1077,6 +1077,10 @@ def blog_columbus():
 def blog_house_not_selling():
     return render_template('blog/house-not-selling-expired-listing.html')
 
+@app.route('/blog/sell-house-roof-hail-storm-damage')
+def blog_roof_hail_damage():
+    return render_template('blog/sell-house-roof-hail-storm-damage.html')
+
 # Lead Form Submission
 @app.route("/submit", methods=["POST"])
 def submit():
